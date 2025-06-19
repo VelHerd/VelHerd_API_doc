@@ -25,6 +25,7 @@ jobs:
         run: |
           mkdir -p docs
           redoc-cli bundle velherd_openapi.yaml -o docs/index.html
+          touch docs/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
