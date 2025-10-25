@@ -59,6 +59,127 @@
 			"name": "API endpoints",
 			"item": [
 				{
+					"name": "Base Units",
+					"item": [
+						{
+							"name": "get_base_units",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/base_units",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"base_units"
+									]
+								},
+								"description": "## API Endpoint: Get Farm Units\n\n### Purpose\n\nThis endpoint retrieves a list of farm units from the server. It is useful for clients that need to display or process information related to various farm units available in the system.\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/farm_units\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **status**: Indicates the success or failure of the request (e.g., \"success\" or \"error\").\n    \n- **data**: An array of farm unit objects, where each object contains:\n    \n    - **id**: Unique identifier for the farm unit.\n        \n    - **name**: Name of the farm unit.\n        \n    - **description**: Description for the farm unit.\n        \n    - **external_id**: External ID for the farm unit.\n        \n    - **active**: Active status. Can be `true` or `false`\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"farm_unit\",\n            \"attributes\": {\n                \"id\": 1,\n                \"name\": \"Farm Unit A\",\n                \"description\": null,\n                \"external_id\": null,\n                \"active\": false,\n                \"created_at\": \"2025-06-12T11:43:22.597+03:00\",\n                \"updated_at\": \"2025-06-12T11:43:22.597+03:00\"\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"farm_unit\",\n            \"attributes\": {\n                \"id\": 2,\n                \"name\": \"Farm Unit B\",\n                \"description\": \"Some Description\",\n                \"external_id\": 123,\n                \"active\": true,\n                \"created_at\": \"2025-06-12T12:08:15.653+03:00\",\n                \"updated_at\": \"2025-06-12T14:17:34.497+03:00\"\n            }\n        }\n    ]\n}\n\n ```\n\nThis response provides a structured overview of the farm units, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_base_unit_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/base_units/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"base_units",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_base_unit",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/base_units/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"base_units",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_base_units_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"is_base\": true\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/base_units",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"base_units"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "{{baseUrl}}/api/{{apiVersion}}/base_units\n\n---\n\n### BaseUnit has next parameters\n\n- (readonly) `id` — VelHerd ID of BaseUnit\n    \n- (readonly) `name` — name of BaseUnit\n    \n- (readonly) `symbol` — symbol of BaseUnit\n    \n- (readonly) `key` — key of BaseUnit\n    \n- (readonly) `unit_type` — unit_type of BaseUnit\n    \n- (readonly) `base_ratio` — base_ratio of BaseUnit\n    \n- (readonly) `description` — description of BaseUnit\n    \n- (readonly) `external_id` — an optional identifier used to reference this resource in an external system\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Acceptable methods\n\n- `Ids`\n    \n- `Changes`\n    \n- `Single Resource`\n    \n\n### Filters by\n\n`id`, `name`, `is_base`, `external_id`\n\n### Order by\n\n`id`, `is_base`"
+				},
+				{
 					"name": "Farm Units",
 					"item": [
 						{
@@ -73,15 +194,13 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:3000/api/v1/farm_units",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/farm_units",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
-										"v1",
+										"{{apiVersion}}",
 										"farm_units"
 									]
 								},
@@ -101,15 +220,13 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:3000/api/v1/farm_units/ids",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/farm_units/ids",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
-										"v1",
+										"{{apiVersion}}",
 										"farm_units",
 										"ids"
 									]
@@ -129,15 +246,13 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:3000/api/v1/farm_units/1",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/farm_units/1",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
-										"v1",
+										"{{apiVersion}}",
 										"farm_units",
 										"1"
 									]
@@ -169,15 +284,13 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/v1/farm_units",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/farm_units",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
-										"v1",
+										"{{apiVersion}}",
 										"farm_units"
 									]
 								}
@@ -208,15 +321,13 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/v1/farm_units",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/farm_units",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
-										"v1",
+										"{{apiVersion}}",
 										"farm_units"
 									]
 								}
@@ -244,15 +355,13 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/v1/farm_units",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/farm_units",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
-										"v1",
+										"{{apiVersion}}",
 										"farm_units"
 									]
 								}
@@ -280,15 +389,13 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/v1/farm_units/2",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/farm_units/2",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
-										"v1",
+										"{{apiVersion}}",
 										"farm_units",
 										"2"
 									]
@@ -308,15 +415,13 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:3000/api/v1/farm_units/3",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/farm_units/3",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
-										"v1",
+										"{{apiVersion}}",
 										"farm_units",
 										"3"
 									]
@@ -325,7 +430,7 @@
 							"response": []
 						}
 					],
-					"description": "{{baseUrl}}/api/{{apiVersion}}/farm_units\n\n---\n\n### FarmUnit has next parameters\n\n- (readonly) `id` — VelHerd ID of FarmUnit\n    \n- `name` — name of FarmUnit\n    \n- `description` — country_code of AdminRegion\n    \n- `external_id` — фn optional identifier used to reference this resource in an external system\n    \n- `active` — does FarmUnit is active and shows in list\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Acceptable methods\n\n- `Ids`\n    \n- `Changes`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `name`, `active`, `external_id`\n\n### Order by\n\n`id`, `name`"
+					"description": "{{baseUrl}}/api/{{apiVersion}}/farm_units\n\n---\n\n### FarmUnit has next parameters\n\n- (readonly) `id` — VelHerd ID of FarmUnit\n    \n- `name` — name of FarmUnit\n    \n- `description` — country_code of AdminRegion\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `active` — does FarmUnit is active and shows in list\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Acceptable methods\n\n- `Ids`\n    \n- `Changes`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `name`, `active`, `external_id`\n\n### Order by\n\n`id`, `name`"
 				}
 			],
 			"description": "### List of VelHerd API endpoints"
