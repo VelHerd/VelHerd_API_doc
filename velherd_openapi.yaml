@@ -143,7 +143,7 @@ tags:
 
 
       You can generate USER_API_TOKEN on the user settings page
-      (http://https://velherd.com/users/ID/edit_user) in the VelHerd system.
+      (https://velherd.com/users/ID/edit_user) in the VelHerd system.
 
 
       <img
@@ -195,6 +195,59 @@ tags:
       eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJjb21wYW55X2lkIjoyLCJleHAiOjE3NTAyNDk2NzZ9.b3uTIBUYOEHwVFmVkrbWOAXRX9u-0osG0fBPVqU0Q1A`
   - name: API endpoints
     description: '### List of VelHerd API endpoints'
+  - name: API endpoints > Base Units
+    description: >-
+      https://velherd.com/api/v1/base_units
+
+
+      ---
+
+
+      ### BaseUnit has next parameters
+
+
+      - (readonly) `id` — VelHerd ID of BaseUnit
+          
+      - (readonly) `name` — name of BaseUnit
+          
+      - (readonly) `symbol` — symbol of BaseUnit
+          
+      - (readonly) `key` — key of BaseUnit
+          
+      - (readonly) `unit_type` — unit_type of BaseUnit
+          
+      - (readonly) `base_ratio` — base_ratio of BaseUnit
+          
+      - (readonly) `description` — description of BaseUnit
+          
+      - (readonly) `external_id` — an optional identifier used to reference this
+      resource in an external system
+          
+      - (readonly) `created_at`
+          
+      - (readonly) `updated_at`
+          
+
+      ### Acceptable methods
+
+
+      - `Ids`
+          
+      - `Changes`
+          
+      - `Single Resource`
+          
+
+      ### Filters by
+
+
+      `id`, `name`, `is_base`, `external_id`
+
+
+      ### Order by
+
+
+      `id`, `is_base`
   - name: API endpoints > Farm Units
     description: >-
       https://velherd.com/api/v1/farm_units
@@ -212,7 +265,7 @@ tags:
           
       - `description` — country_code of AdminRegion
           
-      - `external_id` — фn optional identifier used to reference this resource
+      - `external_id` — an optional identifier used to reference this resource
       in an external system
           
       - `active` — does FarmUnit is active and shows in list
@@ -267,6 +320,69 @@ paths:
           description: Successful response
           content:
             application/json: {}
+  /api/v1/base_units:
+    get:
+      tags:
+        - API endpoints > Base Units
+      summary: get_base_units_with_filter
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer JWToken
+        - name: apiVersion
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/base_units/ids:
+    get:
+      tags:
+        - API endpoints > Base Units
+      summary: get_base_unit_ids
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer JWToken
+        - name: apiVersion
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/base_units/1:
+    get:
+      tags:
+        - API endpoints > Base Units
+      summary: get_base_unit
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer JWToken
+        - name: apiVersion
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
   /api/v1/farm_units:
     get:
       tags:
@@ -278,6 +394,11 @@ paths:
           schema:
             type: string
           example: Bearer JWToken
+        - name: apiVersion
+          in: path
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successful response
@@ -304,6 +425,11 @@ paths:
           schema:
             type: string
           example: Bearer JWToken
+        - name: apiVersion
+          in: path
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successful response
@@ -320,6 +446,11 @@ paths:
           schema:
             type: string
           example: Bearer JWToken
+        - name: apiVersion
+          in: path
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successful response
@@ -336,6 +467,11 @@ paths:
           schema:
             type: string
           example: Bearer JWToken
+        - name: apiVersion
+          in: path
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successful response
@@ -360,6 +496,11 @@ paths:
           schema:
             type: string
           example: Bearer JWToken
+        - name: apiVersion
+          in: path
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successful response
@@ -376,6 +517,11 @@ paths:
           schema:
             type: string
           example: Bearer JWToken
+        - name: apiVersion
+          in: path
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successful response
