@@ -5,6 +5,7 @@ info:
   description: You can use VelHerd API if you have account on VelHerd web site.
 servers:
   - url: 'https://velherd.com'
+  - url: ''
 paths:
   /api/access_tokens:
     post:
@@ -25,7 +26,7 @@ paths:
                     token:
                       type: string
   /:
-    options:
+    head:
       summary: introduction
       tags:
         - API endpoints
@@ -195,151 +196,6 @@ paths:
          ```
 
         This response provides a structured overview of the base units, enabling
-        clients to easily access and utilize the information.
-    get:
-      summary: introduction
-      tags:
-        - API endpoints
-        - Farm Units
-      responses: {}
-      description: >-
-        ## API Endpoint: Get Farm Units
-
-
-        ### Purpose
-
-
-        This endpoint retrieves a list of farm units from the server. It is
-        useful for clients that need to display or process information related
-        to various farm units available in the system.
-
-
-        ---
-
-
-        ### FarmUnit has next parameters
-
-
-        - (readonly) `id` — VelHerd ID of FarmUnit
-            
-        - `name` — name of FarmUnit
-            
-        - `description` — country_code of AdminRegion
-            
-        - `external_id` — an optional identifier used to reference this resource
-        in an external system
-            
-        - `active` — does FarmUnit is active and shows in list
-            
-        - (readonly) `created_at`
-            
-        - (readonly) `updated_at`
-            
-
-        ### Acceptable methods
-
-
-        - `Ids`
-            
-        - `Changes`
-            
-        - `Single Resource`
-            
-        - `Create Resource`
-            
-        - `Update Resource`
-            
-        - `Delete Resource`
-            
-
-        ### Filters by
-
-
-        `id`, `name`, `active`, `external_id`
-
-
-        ### Order by
-
-
-        `id`, `name`
-
-
-        ---
-
-
-        ### Request Format
-
-
-        - **Method**: GET
-            
-        - **URL**: https://velherd.com/api/v1/farm_units
-            
-
-        ### Response Structure
-
-
-        The response will contain a JSON object with the following structure:
-
-
-        - **status**: Indicates the success or failure of the request (e.g.,
-        "success" or "error").
-            
-        - **data**: An array of farm unit objects, where each object contains:
-            
-            - **id**: Unique identifier for the farm unit.
-                
-            - **name**: Name of the farm unit.
-                
-            - **description**: Description for the farm unit.
-                
-            - **external_id**: External ID for the farm unit.
-                
-            - **active**: Active status. Can be `true` or `false`
-                
-            - **created_at**: Created time
-                
-            - **updated_at**: Updated time
-                
-
-        ### Example Response
-
-
-        ``` json
-
-        {
-            "data": [
-                {
-                    "id": "1",
-                    "type": "farm_unit",
-                    "attributes": {
-                        "id": 1,
-                        "name": "Farm Unit A",
-                        "description": null,
-                        "external_id": null,
-                        "active": false,
-                        "created_at": "2025-06-12T11:43:22.597+03:00",
-                        "updated_at": "2025-06-12T11:43:22.597+03:00"
-                    }
-                },
-                {
-                    "id": "2",
-                    "type": "farm_unit",
-                    "attributes": {
-                        "id": 2,
-                        "name": "Farm Unit B",
-                        "description": "Some Description",
-                        "external_id": 123,
-                        "active": true,
-                        "created_at": "2025-06-12T12:08:15.653+03:00",
-                        "updated_at": "2025-06-12T14:17:34.497+03:00"
-                    }
-                }
-            ]
-        }
-
-         ```
-
-        This response provides a structured overview of the farm units, enabling
         clients to easily access and utilize the information.
   /api/v1/base_units:
     get:
