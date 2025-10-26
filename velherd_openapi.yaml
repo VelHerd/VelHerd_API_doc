@@ -24,23 +24,76 @@ paths:
                   properties:
                     token:
                       type: string
-  /api/{apiVersion}/base_units:
-    get:
-      summary: get_base_units
+  /:
+    options:
+      summary: introduction
       tags:
         - API endpoints
         - Base Units
       responses: {}
       description: >-
-        ## API Endpoint: Get Farm Units
+        ## API Endpoint: Base Units
 
 
         ### Purpose
 
 
-        This endpoint retrieves a list of farm units from the server. It is
+        This endpoint retrieves a list of base units from the server. It is
         useful for clients that need to display or process information related
-        to various farm units available in the system.
+        to various base units available in the system.
+
+
+        ---
+
+
+        ### BaseUnit has next parameters
+
+
+        - (readonly) `id` — VelHerd ID of BaseUnit
+            
+        - (readonly) `name` — name of BaseUnit
+            
+        - (readonly) `symbol` — symbol of BaseUnit
+            
+        - (readonly) `key` — key of BaseUnit
+            
+        - (readonly) `unit_type` — unit_type of BaseUnit
+            
+        - (readonly) `base_ratio` — base_ratio of BaseUnit
+            
+        - (readonly) `description` — description of BaseUnit
+            
+        - (readonly) `external_id` — an optional identifier used to reference
+        this resource in an external system
+            
+        - (readonly) `created_at`
+            
+        - (readonly) `updated_at`
+            
+
+        ### Acceptable methods
+
+
+        - `Ids`
+            
+        - `Changes`
+            
+        - `Single Resource`
+            
+
+        ### Filters by
+
+
+        `id`, `name`, `is_base`, `external_id`
+
+
+        ### Order by
+
+
+        `id`, `is_base`
+
+
+        ---
 
 
         ### Request Format
@@ -48,7 +101,7 @@ paths:
 
         - **Method**: GET
             
-        - **URL**: https://velherd.com/api/v1/farm_units
+        - **URL**: https://velherd.com/api/v1/base_units
             
 
         ### Response Structure
@@ -60,17 +113,25 @@ paths:
         - **status**: Indicates the success or failure of the request (e.g.,
         "success" or "error").
             
-        - **data**: An array of farm unit objects, where each object contains:
+        - **data**: An array of base unit objects, where each object contains:
             
-            - **id**: Unique identifier for the farm unit.
+            - **id**: Unique identifier for the base unit.
                 
-            - **name**: Name of the farm unit.
+            - **name**: Names of the base unit. Object where key is language, value is name in language. For setting name in same language use `name_` with language prefix. For example `name_en` - for an english unit name.
+                
+            - **symbol**: Symbols of base unit, Object where key is language, value is symbol in language. For setting name in same language use `symbol_` with language prefix. For example `symbol_en` - for an english unit symbol.
+                
+            - **key:** Key for the farm unit.
+                
+            - **unit_type**: Unit type for the farm unit. Can be one of `mass`, `volume`, `length`, `area`, `count`, `energy`, `pressure`, `temperature`, `time`, `useful`.
+                
+            - **base_ratio**: Base ratio for the farm unit.
+                
+            - **is_base**: Is it a base unit. Can be `true` or `false`
                 
             - **description**: Description for the farm unit.
                 
             - **external_id**: External ID for the farm unit.
-                
-            - **active**: Active status. Can be `true` or `false`
                 
             - **created_at**: Created time
                 
@@ -86,28 +147,46 @@ paths:
             "data": [
                 {
                     "id": "1",
-                    "type": "farm_unit",
+                    "type": "base_unit",
                     "attributes": {
                         "id": 1,
-                        "name": "Farm Unit A",
+                        "key": "kg",
+                        "unit_type": "mass",
+                        "base_ratio": 1.0,
                         "description": null,
                         "external_id": null,
-                        "active": false,
-                        "created_at": "2025-06-12T11:43:22.597+03:00",
-                        "updated_at": "2025-06-12T11:43:22.597+03:00"
+                        "created_at": "2025-10-23T21:29:17.760+03:00",
+                        "updated_at": "2025-10-23T21:29:17.760+03:00",
+                        "name": {
+                            "en": "Kilogram",
+                            "uk": "Кілограм"
+                        },
+                        "symbol": {
+                            "en": "kg",
+                            "uk": "кг"
+                        }
                     }
                 },
                 {
                     "id": "2",
-                    "type": "farm_unit",
+                    "type": "base_unit",
                     "attributes": {
                         "id": 2,
-                        "name": "Farm Unit B",
-                        "description": "Some Description",
-                        "external_id": 123,
-                        "active": true,
-                        "created_at": "2025-06-12T12:08:15.653+03:00",
-                        "updated_at": "2025-06-12T14:17:34.497+03:00"
+                        "key": "g",
+                        "unit_type": "mass",
+                        "base_ratio": 0.001,
+                        "description": null,
+                        "external_id": null,
+                        "created_at": "2025-10-23T21:29:17.768+03:00",
+                        "updated_at": "2025-10-23T21:29:17.768+03:00",
+                        "name": {
+                            "en": "Gram",
+                            "uk": "Грам"
+                        },
+                        "symbol": {
+                            "en": "g",
+                            "uk": "г"
+                        }
                     }
                 }
             ]
@@ -115,43 +194,10 @@ paths:
 
          ```
 
-        This response provides a structured overview of the farm units, enabling
+        This response provides a structured overview of the base units, enabling
         clients to easily access and utilize the information.
-    parameters:
-      - name: apiVersion
-        in: path
-        required: true
-        schema:
-          type: string
-  /api/{apiVersion}/base_units/ids:
     get:
-      summary: get_base_unit_ids
-      tags:
-        - API endpoints
-        - Base Units
-      responses: {}
-    parameters:
-      - name: apiVersion
-        in: path
-        required: true
-        schema:
-          type: string
-  /api/{apiVersion}/base_units/1:
-    get:
-      summary: get_base_unit
-      tags:
-        - API endpoints
-        - Base Units
-      responses: {}
-    parameters:
-      - name: apiVersion
-        in: path
-        required: true
-        schema:
-          type: string
-  /api/{apiVersion}/farm_units:
-    get:
-      summary: get_farm_units
+      summary: introduction
       tags:
         - API endpoints
         - Farm Units
@@ -168,6 +214,59 @@ paths:
         to various farm units available in the system.
 
 
+        ---
+
+
+        ### FarmUnit has next parameters
+
+
+        - (readonly) `id` — VelHerd ID of FarmUnit
+            
+        - `name` — name of FarmUnit
+            
+        - `description` — country_code of AdminRegion
+            
+        - `external_id` — an optional identifier used to reference this resource
+        in an external system
+            
+        - `active` — does FarmUnit is active and shows in list
+            
+        - (readonly) `created_at`
+            
+        - (readonly) `updated_at`
+            
+
+        ### Acceptable methods
+
+
+        - `Ids`
+            
+        - `Changes`
+            
+        - `Single Resource`
+            
+        - `Create Resource`
+            
+        - `Update Resource`
+            
+        - `Delete Resource`
+            
+
+        ### Filters by
+
+
+        `id`, `name`, `active`, `external_id`
+
+
+        ### Order by
+
+
+        `id`, `name`
+
+
+        ---
+
+
         ### Request Format
 
 
@@ -242,6 +341,52 @@ paths:
 
         This response provides a structured overview of the farm units, enabling
         clients to easily access and utilize the information.
+  /api/v1/base_units:
+    get:
+      summary: get_base_units
+      tags:
+        - API endpoints
+        - Base Units
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/base_units/ids:
+    get:
+      summary: get_base_unit_ids
+      tags:
+        - API endpoints
+        - Base Units
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/base_units/1:
+    get:
+      summary: get_base_unit
+      tags:
+        - API endpoints
+        - Base Units
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/farm_units:
+    get:
+      summary: get_farm_units
+      tags:
+        - API endpoints
+        - Farm Units
+      responses: {}
     parameters:
       - name: apiVersion
         in: path
@@ -271,7 +416,7 @@ paths:
                       type: integer
                     active:
                       type: boolean
-  /api/{apiVersion}/farm_units/ids:
+  /api/v1/farm_units/ids:
     get:
       summary: get_farm_unit_ids
       tags:
@@ -284,7 +429,7 @@ paths:
         required: true
         schema:
           type: string
-  /api/{apiVersion}/farm_units/1:
+  /api/v1/farm_units/1:
     get:
       summary: get_farm_unit
       tags:
@@ -297,7 +442,7 @@ paths:
         required: true
         schema:
           type: string
-  /api/{apiVersion}/farm_units/2:
+  /api/v1/farm_units/2:
     put:
       summary: update_farm_unit
       tags:
@@ -321,7 +466,7 @@ paths:
         required: true
         schema:
           type: string
-  /api/{apiVersion}/farm_units/3:
+  /api/v1/farm_units/3:
     delete:
       summary: destroy_farm_unit
       tags:
@@ -334,99 +479,13 @@ paths:
         required: true
         schema:
           type: string
-  /api/{apiVersion}/units:
+  /api/v1/units:
     get:
       summary: get_units
       tags:
         - API endpoints
         - Units
       responses: {}
-      description: >-
-        ## API Endpoint: Get Farm Units
-
-
-        ### Purpose
-
-
-        This endpoint retrieves a list of farm units from the server. It is
-        useful for clients that need to display or process information related
-        to various farm units available in the system.
-
-
-        ### Request Format
-
-
-        - **Method**: GET
-            
-        - **URL**: https://velherd.com/api/v1/farm_units
-            
-
-        ### Response Structure
-
-
-        The response will contain a JSON object with the following structure:
-
-
-        - **status**: Indicates the success or failure of the request (e.g.,
-        "success" or "error").
-            
-        - **data**: An array of farm unit objects, where each object contains:
-            
-            - **id**: Unique identifier for the farm unit.
-                
-            - **name**: Name of the farm unit.
-                
-            - **description**: Description for the farm unit.
-                
-            - **external_id**: External ID for the farm unit.
-                
-            - **active**: Active status. Can be `true` or `false`
-                
-            - **created_at**: Created time
-                
-            - **updated_at**: Updated time
-                
-
-        ### Example Response
-
-
-        ``` json
-
-        {
-            "data": [
-                {
-                    "id": "1",
-                    "type": "farm_unit",
-                    "attributes": {
-                        "id": 1,
-                        "name": "Farm Unit A",
-                        "description": null,
-                        "external_id": null,
-                        "active": false,
-                        "created_at": "2025-06-12T11:43:22.597+03:00",
-                        "updated_at": "2025-06-12T11:43:22.597+03:00"
-                    }
-                },
-                {
-                    "id": "2",
-                    "type": "farm_unit",
-                    "attributes": {
-                        "id": 2,
-                        "name": "Farm Unit B",
-                        "description": "Some Description",
-                        "external_id": 123,
-                        "active": true,
-                        "created_at": "2025-06-12T12:08:15.653+03:00",
-                        "updated_at": "2025-06-12T14:17:34.497+03:00"
-                    }
-                }
-            ]
-        }
-
-         ```
-
-        This response provides a structured overview of the farm units, enabling
-        clients to easily access and utilize the information.
     parameters:
       - name: apiVersion
         in: path
@@ -456,7 +515,7 @@ paths:
                       type: integer
                     active:
                       type: boolean
-  /api/{apiVersion}/units/ids:
+  /api/v1/units/ids:
     get:
       summary: get_unit_ids
       tags:
@@ -469,7 +528,7 @@ paths:
         required: true
         schema:
           type: string
-  /api/{apiVersion}/units/1:
+  /api/v1/units/1:
     get:
       summary: get_unit
       tags:
@@ -499,7 +558,7 @@ paths:
                   properties:
                     description:
                       type: string
-  /api/{apiVersion}/units/3:
+  /api/v1/units/3:
     delete:
       summary: destroy_unit
       tags:
