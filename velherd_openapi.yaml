@@ -1,529 +1,514 @@
 openapi: 3.0.0
 info:
   title: VelHerd - API documentation
-  description: You can use VelHerd API if you have account on VelHerd web site.
   version: 1.0.0
+  description: You can use VelHerd API if you have account on VelHerd web site.
 servers:
-  - url: https://velherd.com
-
-tags:
-  - name: Reference
-  - name: Reference > Introduction
-    description: >-
-      ## General info
-
-
-      You can use VelHerd API if you have account on VelHerd web site.
-
-
-      VelHerd API is HTTP JSON API. That means all requests and responses are
-      sent via HTTP protocol (secured with SSL). All data in requests and
-      responses present in HTTP Body in
-      [JSON](http://en.wikipedia.org/wiki/JSON) format.
-
-
-      VelHerd API is based on
-      [REST](http://en.wikipedia.org/wiki/Representational_state_transfer)
-      principles. You have to be authenticated and call the simple HTTPs request
-      on the URLs specified below. The following documentation covers core
-      resources that are used to manipulate the main entities. First of all,
-      read basic instructions to start using the API.
-
-
-      ## Very basics of HTTP REST concepts
-
-
-      ### Allowed HTTPs request typesemail
-
-
-      - `GET` — Get a resource or list of resources
-          
-      - `POST` — To create or update resource
-          
-      - `PUT` — To create or update resource
-          
-      - `DELETE` — To delete resource
-          
-
-      ### Usual [HTTP response
-      codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
-
-
-      - `200 OK` — the request was successful.
-          
-      - `201 Created` — the request was successful and a resource was created.
-          
-      - `204 No Content` — the request was successful but there is no
-      representation to return (i.e. the response is empty).
-          
-      - `400 Bad Request` — the request could not be understood or was missing
-      required parameters.
-          
-      - `401 Unauthorized` — authentication failed or user doesn't have
-      permissions for requested operation.
-          
-      - `403 Forbidden` — access denied.
-          
-      - `404 Not Found` — resource was not found.
-          
-      - `422 Unprocessable Entity` - the request was well-formed but was unable
-      to be followed due to semantic errors.
-          
-      - `503 Service Unavailable` — service is temporary unavailable (e.g.
-      scheduled Platform Maintenance). Try again later.
-          
-
-      ### Methods
-
-
-      - `Resources collection` => `GET` https://velherd.com/api/v1/OBJECTS —
-      get list of objects.
-          
-      - `Ids` => `GET`
-      [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)[/OBJECTS/ids](https://velherd.com/api/v1/OBJECTS/ids)
-      — get list of ids for all objects.
-          
-      - `Single Resource` => `GET`
-      [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)[/OBJECT/ID](https://velherd.com/api/v1/OBJECT/ID)
-      — get one object by ID.
-          
-      - `Create Resource` => `POST`
-      [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)[/OBJECTS](https://operations.cropwise.com/api/v3/OBJECTS)
-      — create new object.
-          
-      - `Update Resource` => `PUT/PATCH`
-      [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)[/OBJECTS/ID](https://operations.cropwise.com/api/v3/OBJECTS/ID)
-      — update object by ID.
-          
-      - `Delete Resource` => `DELETE`
-      [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)[/OBJECTS/ID](https://operations.cropwise.com/api/v3/OBJECTS/ID)
-      — delete object by ID.
-          
-
-      ### Useful tools
-
-
-      - Postman ([https://www.getpostman.com](https://www.getpostman.com/)) —
-      multi-platform REST client for API testing.
-          
-      - Paw ([https://paw.cloud](https://paw.cloud/)) — beautiful (but MacOS
-      only) REST client.
-          
-      - ApiDog ([https://apidog.com](https://apidog.com/)) — a real design-first
-      API development platform.
-          
-
-      # Important notice! — read before start using API
-
-
-      1. You should add HTTP Header `Content-Type: application/json` for all
-      `POST` and `PUT` requests. Else, request would be dropped.
-          
-      2. VelHerd API works only via HTTPS (SSL). **Important!** — check that you
-      use `https://` in all requests (especially in Authorization request).
-          
-      3. In case of wrong request or data, API gives you response with HTTP
-      Error Code and detailed error description (if available). Please read it
-      carefully.
-          
-      4. Naming convention for OBJECT in requests: you need to use plural object
-      name in `snake_case`:
-          
-
-      -
-      [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)`/animals`
-          
-      -
-      [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)`/company_units`
-  - name: Reference > Authentication
-    description: >-
-      The user should obtain a USER_API_TOKEN token that is required for all
-      subsequent requests. USER_API_TOKEN is a string, that should be used to
-      generate a JSON Web Token (JWT).
-
-
-      You can generate USER_API_TOKEN on the user settings page
-      (https://velherd.com/users/ID/edit_user) in the VelHerd system.
-
-
-      <img
-      src="https://content.pstmn.io/0c53717c-e0a0-4026-a521-35c3efe19187/MS5wbmc="
-      alt=""><img
-      src="https://content.pstmn.io/5e113891-4c01-4820-9c37-40eb78898adb/0JfQvdGW0LzQvtC6INC10LrRgNCw0L3QsCAyMDI1LTA2LTE5INC+IDA0LjQ0LjU1LnBuZw=="
-      alt="">
-
-
-      When you generate a token, you must copy it and save it for future use.
-
-
-      <img
-      src="https://content.pstmn.io/4ef2527e-af04-48d2-97cd-3145245859d0/Mi5wbmc="
-      alt="">
-
-
-      After generating USER_API_TOKEN you can use it to generate a JWT.
-  - name: Reference > Authorization
-    description: >-
-      For authorization, you must generate a JWT. Send a request to
-      https://velherd.com/api/access_tokens with USER_API_TOKEN in body.
-
-
-      `{"integration_token": {"token": "`USER_API_TOKEN`"}}`
-
-
-      In response, you will have a JWT (access_token) that is available for some
-      time (expires_in).
-
-
-      ``` json
-
-      {
-          "access_token": 
-      "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJjb21wYW55X2lkIjoyLCJleHAiOjE3NTAyNDk2NzZ9.b3uTIBUYOEHwVFmVkrbWOAXRX9u-0osG0fBPVqU0Q1A", 
-          "expires_time": 7200,
-          "expires_in": "2025-06-18T15:27:56.000+03:00"
-      }
-
-       ```
-
-      After generating a JWT (access_token), you can use it in your request. In
-      the header, you must have `Authorization` or `X-Authorization` with value
-      `Bearer access_token`
-
-
-      `Authorization: Bearer
-      eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJjb21wYW55X2lkIjoyLCJleHAiOjE3NTAyNDk2NzZ9.b3uTIBUYOEHwVFmVkrbWOAXRX9u-0osG0fBPVqU0Q1A`
-  - name: API endpoints
-    description: '### List of VelHerd API endpoints'
-  - name: API endpoints > Base Units
-    description: >-
-      https://velherd.com/api/v1/base_units
-
-
-      ---
-
-
-      ### BaseUnit has next parameters
-
-
-      - (readonly) `id` — VelHerd ID of BaseUnit
-          
-      - (readonly) `name` — name of BaseUnit
-          
-      - (readonly) `symbol` — symbol of BaseUnit
-          
-      - (readonly) `key` — key of BaseUnit
-          
-      - (readonly) `unit_type` — unit_type of BaseUnit
-          
-      - (readonly) `base_ratio` — base_ratio of BaseUnit
-          
-      - (readonly) `description` — description of BaseUnit
-          
-      - (readonly) `external_id` — an optional identifier used to reference this
-      resource in an external system
-          
-      - (readonly) `created_at`
-          
-      - (readonly) `updated_at`
-          
-
-      ### Acceptable methods
-
-
-      - `Ids`
-          
-      - `Changes`
-          
-      - `Single Resource`
-          
-
-      ### Filters by
-
-
-      `id`, `name`, `is_base`, `external_id`
-
-
-      ### Order by
-
-
-      `id`, `is_base`
-  - name: API endpoints > Farm Units
-    description: >-
-      https://velherd.com/api/v1/farm_units
-
-
-      ---
-
-
-      ### FarmUnit has next parameters
-
-
-      - (readonly) `id` — VelHerd ID of FarmUnit
-          
-      - `name` — name of FarmUnit
-          
-      - `description` — country_code of AdminRegion
-          
-      - `external_id` — an optional identifier used to reference this resource
-      in an external system
-          
-      - `active` — does FarmUnit is active and shows in list
-          
-      - (readonly) `created_at`
-          
-      - (readonly) `updated_at`
-          
-
-      ### Acceptable methods
-
-
-      - `Ids`
-          
-      - `Changes`
-          
-      - `Single Resource`
-          
-      - `Create Resource`
-          
-      - `Update Resource`
-          
-      - `Delete Resource`
-          
-
-      ### Filters by
-
-
-      `id`, `name`, `active`, `external_id`
-
-
-      ### Order by
-
-
-      `id`, `name`
+  - url: 'https://velherd.com'
 paths:
   /api/access_tokens:
     post:
-      tags:
-        - Reference > Authorization
       summary: JWToken
+      tags:
+        - Reference
+        - Authorization
+      responses: {}
       requestBody:
         content:
           application/json:
             schema:
               type: object
-              example:
+              properties:
                 integration_token:
-                  token: 'USER_API_TOKEN'
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/v1/base_units:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+  /api/{apiVersion}/base_units:
     get:
+      summary: get_base_units
       tags:
-        - API endpoints > Base Units
-      summary: get_base_units_with_filter
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer JWToken
-        - name: apiVersion
-          in: path
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/v1/base_units/ids:
+        - API endpoints
+        - Base Units
+      responses: {}
+      description: >-
+        ## API Endpoint: Get Farm Units
+
+
+        ### Purpose
+
+
+        This endpoint retrieves a list of farm units from the server. It is
+        useful for clients that need to display or process information related
+        to various farm units available in the system.
+
+
+        ### Request Format
+
+
+        - **Method**: GET
+            
+        - **URL**: https://velherd.com/api/v1/farm_units
+            
+
+        ### Response Structure
+
+
+        The response will contain a JSON object with the following structure:
+
+
+        - **status**: Indicates the success or failure of the request (e.g.,
+        "success" or "error").
+            
+        - **data**: An array of farm unit objects, where each object contains:
+            
+            - **id**: Unique identifier for the farm unit.
+                
+            - **name**: Name of the farm unit.
+                
+            - **description**: Description for the farm unit.
+                
+            - **external_id**: External ID for the farm unit.
+                
+            - **active**: Active status. Can be `true` or `false`
+                
+            - **created_at**: Created time
+                
+            - **updated_at**: Updated time
+                
+
+        ### Example Response
+
+
+        ``` json
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "farm_unit",
+                    "attributes": {
+                        "id": 1,
+                        "name": "Farm Unit A",
+                        "description": null,
+                        "external_id": null,
+                        "active": false,
+                        "created_at": "2025-06-12T11:43:22.597+03:00",
+                        "updated_at": "2025-06-12T11:43:22.597+03:00"
+                    }
+                },
+                {
+                    "id": "2",
+                    "type": "farm_unit",
+                    "attributes": {
+                        "id": 2,
+                        "name": "Farm Unit B",
+                        "description": "Some Description",
+                        "external_id": 123,
+                        "active": true,
+                        "created_at": "2025-06-12T12:08:15.653+03:00",
+                        "updated_at": "2025-06-12T14:17:34.497+03:00"
+                    }
+                }
+            ]
+        }
+
+         ```
+
+        This response provides a structured overview of the farm units, enabling
+        clients to easily access and utilize the information.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/{apiVersion}/base_units/ids:
     get:
-      tags:
-        - API endpoints > Base Units
       summary: get_base_unit_ids
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer JWToken
-        - name: apiVersion
-          in: path
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/v1/base_units/1:
-    get:
       tags:
-        - API endpoints > Base Units
+        - API endpoints
+        - Base Units
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/{apiVersion}/base_units/1:
+    get:
       summary: get_base_unit
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer JWToken
-        - name: apiVersion
-          in: path
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/v1/farm_units:
-    get:
       tags:
-        - API endpoints > Farm Units
-      summary: get_farm_units_with_filter
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer JWToken
-        - name: apiVersion
-          in: path
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
+        - API endpoints
+        - Base Units
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/{apiVersion}/farm_units:
+    get:
+      summary: get_farm_units
+      tags:
+        - API endpoints
+        - Farm Units
+      responses: {}
+      description: >-
+        ## API Endpoint: Get Farm Units
+
+
+        ### Purpose
+
+
+        This endpoint retrieves a list of farm units from the server. It is
+        useful for clients that need to display or process information related
+        to various farm units available in the system.
+
+
+        ### Request Format
+
+
+        - **Method**: GET
+            
+        - **URL**: https://velherd.com/api/v1/farm_units
+            
+
+        ### Response Structure
+
+
+        The response will contain a JSON object with the following structure:
+
+
+        - **status**: Indicates the success or failure of the request (e.g.,
+        "success" or "error").
+            
+        - **data**: An array of farm unit objects, where each object contains:
+            
+            - **id**: Unique identifier for the farm unit.
+                
+            - **name**: Name of the farm unit.
+                
+            - **description**: Description for the farm unit.
+                
+            - **external_id**: External ID for the farm unit.
+                
+            - **active**: Active status. Can be `true` or `false`
+                
+            - **created_at**: Created time
+                
+            - **updated_at**: Updated time
+                
+
+        ### Example Response
+
+
+        ``` json
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "farm_unit",
+                    "attributes": {
+                        "id": 1,
+                        "name": "Farm Unit A",
+                        "description": null,
+                        "external_id": null,
+                        "active": false,
+                        "created_at": "2025-06-12T11:43:22.597+03:00",
+                        "updated_at": "2025-06-12T11:43:22.597+03:00"
+                    }
+                },
+                {
+                    "id": "2",
+                    "type": "farm_unit",
+                    "attributes": {
+                        "id": 2,
+                        "name": "Farm Unit B",
+                        "description": "Some Description",
+                        "external_id": 123,
+                        "active": true,
+                        "created_at": "2025-06-12T12:08:15.653+03:00",
+                        "updated_at": "2025-06-12T14:17:34.497+03:00"
+                    }
+                }
+            ]
+        }
+
+         ```
+
+        This response provides a structured overview of the farm units, enabling
+        clients to easily access and utilize the information.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
     post:
-      tags:
-        - API endpoints > Farm Units
       summary: create_farm_unit
+      tags:
+        - API endpoints
+        - Farm Units
+      responses: {}
       requestBody:
         content:
           application/json:
             schema:
               type: object
-              example:
+              properties:
                 data:
-                  name: Test 3
-                  description: Some Description
-                  external_id: 123
-                  active: false
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer JWToken
-        - name: apiVersion
-          in: path
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/v1/farm_units/ids:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    external_id:
+                      type: integer
+                    active:
+                      type: boolean
+  /api/{apiVersion}/farm_units/ids:
     get:
-      tags:
-        - API endpoints > Farm Units
       summary: get_farm_unit_ids
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer JWToken
-        - name: apiVersion
-          in: path
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/v1/farm_units/1:
+      tags:
+        - API endpoints
+        - Farm Units
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/{apiVersion}/farm_units/1:
     get:
-      tags:
-        - API endpoints > Farm Units
       summary: get_farm_unit
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer JWToken
-        - name: apiVersion
-          in: path
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/v1/farm_units/2:
-    put:
       tags:
-        - API endpoints > Farm Units
+        - API endpoints
+        - Farm Units
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/{apiVersion}/farm_units/2:
+    put:
       summary: update_farm_unit
+      tags:
+        - API endpoints
+        - Farm Units
+      responses: {}
       requestBody:
         content:
           application/json:
             schema:
               type: object
-              example:
+              properties:
                 data:
-                  description: Some Description
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer JWToken
-        - name: apiVersion
-          in: path
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/v1/farm_units/3:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/{apiVersion}/farm_units/3:
     delete:
-      tags:
-        - API endpoints > Farm Units
       summary: destroy_farm_unit
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Bearer JWToken
-        - name: apiVersion
-          in: path
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
+      tags:
+        - API endpoints
+        - Farm Units
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/{apiVersion}/units:
+    get:
+      summary: get_units
+      tags:
+        - API endpoints
+        - Units
+      responses: {}
+      description: >-
+        ## API Endpoint: Get Farm Units
+
+
+        ### Purpose
+
+
+        This endpoint retrieves a list of farm units from the server. It is
+        useful for clients that need to display or process information related
+        to various farm units available in the system.
+
+
+        ### Request Format
+
+
+        - **Method**: GET
+            
+        - **URL**: https://velherd.com/api/v1/farm_units
+            
+
+        ### Response Structure
+
+
+        The response will contain a JSON object with the following structure:
+
+
+        - **status**: Indicates the success or failure of the request (e.g.,
+        "success" or "error").
+            
+        - **data**: An array of farm unit objects, where each object contains:
+            
+            - **id**: Unique identifier for the farm unit.
+                
+            - **name**: Name of the farm unit.
+                
+            - **description**: Description for the farm unit.
+                
+            - **external_id**: External ID for the farm unit.
+                
+            - **active**: Active status. Can be `true` or `false`
+                
+            - **created_at**: Created time
+                
+            - **updated_at**: Updated time
+                
+
+        ### Example Response
+
+
+        ``` json
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "farm_unit",
+                    "attributes": {
+                        "id": 1,
+                        "name": "Farm Unit A",
+                        "description": null,
+                        "external_id": null,
+                        "active": false,
+                        "created_at": "2025-06-12T11:43:22.597+03:00",
+                        "updated_at": "2025-06-12T11:43:22.597+03:00"
+                    }
+                },
+                {
+                    "id": "2",
+                    "type": "farm_unit",
+                    "attributes": {
+                        "id": 2,
+                        "name": "Farm Unit B",
+                        "description": "Some Description",
+                        "external_id": 123,
+                        "active": true,
+                        "created_at": "2025-06-12T12:08:15.653+03:00",
+                        "updated_at": "2025-06-12T14:17:34.497+03:00"
+                    }
+                }
+            ]
+        }
+
+         ```
+
+        This response provides a structured overview of the farm units, enabling
+        clients to easily access and utilize the information.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      summary: create_unit
+      tags:
+        - API endpoints
+        - Units
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    external_id:
+                      type: integer
+                    active:
+                      type: boolean
+  /api/{apiVersion}/units/ids:
+    get:
+      summary: get_unit_ids
+      tags:
+        - API endpoints
+        - Units
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/{apiVersion}/units/1:
+    get:
+      summary: get_unit
+      tags:
+        - API endpoints
+        - Units
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+    put:
+      summary: update_unit
+      tags:
+        - API endpoints
+        - Units
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+  /api/{apiVersion}/units/3:
+    delete:
+      summary: destroy_unit
+      tags:
+        - API endpoints
+        - Units
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
