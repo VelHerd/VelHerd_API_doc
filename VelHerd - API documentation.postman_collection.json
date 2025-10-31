@@ -27,12 +27,18 @@
 							"name": "JWToken",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"integration_token\": {\n        \"token\": \"{{userApiToken}}\"\n    }\n}",
+									"raw": "{\n  \"integration_token\": {\n    \"token\": \"<string>\"\n  }\n}",
 									"options": {
 										"raw": {
+											"headerFamily": "json",
 											"language": "json"
 										}
 									}
@@ -50,8 +56,7 @@
 							},
 							"response": []
 						}
-					],
-					"description": "For authorization, you must generate a JWT. Send a request to {{baseUrl}}/api/access_tokens with USER_API_TOKEN in body.\n\n`{\"integration_token\": {\"token\": \"`USER_API_TOKEN`\"}}`\n\nIn response, you will have a JWT (access_token) that is available for some time (expires_in).\n\n``` json\n{\n    \"access_token\": \n\"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJjb21wYW55X2lkIjoyLCJleHAiOjE3NTAyNDk2NzZ9.b3uTIBUYOEHwVFmVkrbWOAXRX9u-0osG0fBPVqU0Q1A\", \n    \"expires_time\": 7200,\n    \"expires_in\": \"2025-06-18T15:27:56.000+03:00\"\n}\n\n ```\n\nAfter generating a JWT (access_token), you can use it in your request. In the header, you must have `Authorization` or `X-Authorization` with value `Bearer access_token`\n\n`Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJjb21wYW55X2lkIjoyLCJleHAiOjE3NTAyNDk2NzZ9.b3uTIBUYOEHwVFmVkrbWOAXRX9u-0osG0fBPVqU0Q1A`"
+					]
 				}
 			]
 		},
@@ -62,14 +67,14 @@
 					"name": "Base Units",
 					"item": [
 						{
-							"name": "get_base_units",
+							"name": "introduction BaseUnit",
 							"request": {
-								"method": "GET",
+								"method": "HEAD",
 								"header": [
 									{
 										"key": "Authorization",
 										"value": "Bearer {{accessToken}}",
-										"type": "text"
+										"disabled": true
 									}
 								],
 								"url": {
@@ -83,7 +88,31 @@
 										"base_units"
 									]
 								},
-								"description": "## API Endpoint: Get Farm Units\n\n### Purpose\n\nThis endpoint retrieves a list of farm units from the server. It is useful for clients that need to display or process information related to various farm units available in the system.\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/farm_units\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **status**: Indicates the success or failure of the request (e.g., \"success\" or \"error\").\n    \n- **data**: An array of farm unit objects, where each object contains:\n    \n    - **id**: Unique identifier for the farm unit.\n        \n    - **name**: Name of the farm unit.\n        \n    - **description**: Description for the farm unit.\n        \n    - **external_id**: External ID for the farm unit.\n        \n    - **active**: Active status. Can be `true` or `false`\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"farm_unit\",\n            \"attributes\": {\n                \"id\": 1,\n                \"name\": \"Farm Unit A\",\n                \"description\": null,\n                \"external_id\": null,\n                \"active\": false,\n                \"created_at\": \"2025-06-12T11:43:22.597+03:00\",\n                \"updated_at\": \"2025-06-12T11:43:22.597+03:00\"\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"farm_unit\",\n            \"attributes\": {\n                \"id\": 2,\n                \"name\": \"Farm Unit B\",\n                \"description\": \"Some Description\",\n                \"external_id\": 123,\n                \"active\": true,\n                \"created_at\": \"2025-06-12T12:08:15.653+03:00\",\n                \"updated_at\": \"2025-06-12T14:17:34.497+03:00\"\n            }\n        }\n    ]\n}\n\n ```\n\nThis response provides a structured overview of the farm units, enabling clients to easily access and utilize the information."
+								"description": "## API Endpoint: Base Units\n\n### Purpose\n\nThis endpoint retrieves a list of base units from the server. It is useful for clients that need to display or process information related to various base units available in the system.\n\n---\n\n### BaseUnit has next parameters\n\n- (readonly) `id` — VelHerd ID of BaseUnit\n    \n- (readonly) `name` — name of BaseUnit\n    \n- (readonly) `symbol` — symbol of BaseUnit\n    \n- (readonly) `key` — key of BaseUnit\n    \n- (readonly) `unit_type` — unit_type of BaseUnit\n    \n- (readonly) `base_ratio` — base_ratio of BaseUnit\n    \n- (readonly) `description` — description of BaseUnit\n    \n- (readonly) `external_id` — an optional identifier used to reference this resource in an external system\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Acceptable methods\n\n- `Ids`\n    \n- `Changes`\n    \n- `Single Resource`\n    \n\n### Filters by\n\n`id`, `name`, `is_base`, `external_id`\n\n### Order by\n\n`id`, `is_base`\n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/base_units\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **status**: Indicates the success or failure of the request (e.g., \"success\" or \"error\").\n    \n- **data**: An array of base unit objects, where each object contains:\n    \n    - **id**: Unique identifier for the base unit.\n        \n    - **name**: Names of the base unit. Object where key is language, value is name in language. For setting name in same language use `name_` with language prefix. For example `name_en` - for an english unit name.\n        \n    - **symbol**: Symbols of base unit, Object where key is language, value is symbol in language. For setting name in same language use `symbol_` with language prefix. For example `symbol_en` - for an english unit symbol.\n        \n    - **key:** Key for the base unit.\n        \n    - **unit_type**: Unit type for the base unit. Can be one of `mass`, `volume`, `length`, `area`, `count`, `energy`, `pressure`, `temperature`, `time`, `useful`.\n        \n    - **base_ratio**: Base ratio for the base unit.\n        \n    - **is_base**: Is it a base unit. Can be `true` or `false`\n        \n    - **description**: Description for the base unit.\n        \n    - **external_id**: External ID for the base unit.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"base_unit\",\n            \"attributes\": {\n                \"id\": 1,\n                \"key\": \"kg\",\n                \"unit_type\": \"mass\",\n                \"base_ratio\": 1.0,\n                \"description\": null,\n                \"external_id\": null,\n                \"created_at\": \"2025-10-23T21:29:17.760+03:00\",\n                \"updated_at\": \"2025-10-23T21:29:17.760+03:00\",\n                \"name\": {\n                    \"en\": \"Kilogram\",\n                    \"uk\": \"Кілограм\"\n                },\n                \"symbol\": {\n                    \"en\": \"kg\",\n                    \"uk\": \"кг\"\n                }\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"base_unit\",\n            \"attributes\": {\n                \"id\": 2,\n                \"key\": \"g\",\n                \"unit_type\": \"mass\",\n                \"base_ratio\": 0.001,\n                \"description\": null,\n                \"external_id\": null,\n                \"created_at\": \"2025-10-23T21:29:17.768+03:00\",\n                \"updated_at\": \"2025-10-23T21:29:17.768+03:00\",\n                \"name\": {\n                    \"en\": \"Gram\",\n                    \"uk\": \"Грам\"\n                },\n                \"symbol\": {\n                    \"en\": \"g\",\n                    \"uk\": \"г\"\n                }\n            }\n        }\n    ]\n}\n\n ```\n\nThis response provides a structured overview of the base units, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_base_units",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/base_units",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"base_units"
+									]
+								}
 							},
 							"response": []
 						},
@@ -94,8 +123,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{accessToken}}",
-										"type": "text"
+										"value": "Bearer {{accessToken}}"
 									}
 								],
 								"url": {
@@ -120,8 +148,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{accessToken}}",
-										"type": "text"
+										"value": "Bearer {{accessToken}}"
 									}
 								],
 								"url": {
@@ -149,8 +176,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{accessToken}}",
-										"type": "text"
+										"value": "Bearer {{accessToken}}"
 									}
 								],
 								"body": {
@@ -176,21 +202,160 @@
 							},
 							"response": []
 						}
-					],
-					"description": "{{baseUrl}}/api/{{apiVersion}}/base_units\n\n---\n\n### BaseUnit has next parameters\n\n- (readonly) `id` — VelHerd ID of BaseUnit\n    \n- (readonly) `name` — name of BaseUnit\n    \n- (readonly) `symbol` — symbol of BaseUnit\n    \n- (readonly) `key` — key of BaseUnit\n    \n- (readonly) `unit_type` — unit_type of BaseUnit\n    \n- (readonly) `base_ratio` — base_ratio of BaseUnit\n    \n- (readonly) `description` — description of BaseUnit\n    \n- (readonly) `external_id` — an optional identifier used to reference this resource in an external system\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Acceptable methods\n\n- `Ids`\n    \n- `Changes`\n    \n- `Single Resource`\n    \n\n### Filters by\n\n`id`, `name`, `is_base`, `external_id`\n\n### Order by\n\n`id`, `is_base`"
+					]
 				},
 				{
-					"name": "Farm Units",
+					"name": "Base Crops",
 					"item": [
 						{
-							"name": "get_farm_units",
+							"name": "introduction BaseUnit",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/base_crops",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"base_crops"
+									]
+								},
+								"description": "## API Endpoint: Base Crops\n\n### Purpose\n\nThis endpoint retrieves a list of base crops from the server. It is useful for clients that need to display or process information related to various base crops available in the system.\n\n---\n\n### BaseUnit has next parameters\n\n- (readonly) `id` — VelHerd ID of BaseCrop\n    \n- (readonly) `name` — names of BaseCrop\n    \n- (readonly) `category` — category of BaseCrop\n    \n- (readonly) `code` — code of BaseCrop\n    \n- (readonly) `eppo_code` — eppo_code of BaseCrop\n    \n- (readonly) `growth_type` — growth_type of BaseCrop\n    \n- (readonly) `season_type` — season_type of BaseCrop\n    \n- (readonly) `default_cycle_length` — default_cycle_length of BaseCrop\n    \n- (readonly) `active` — active of BaseCrop\n    \n- (readonly) `description` — description of BaseCrop\n    \n- (readonly) `external_id` — an optional identifier used to reference this resource in an external system\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Acceptable methods\n\n- `Ids`\n    \n- `Single Resource`\n    \n\n### Filters by\n\n`id`, `category`, `eppo_code`, `external_id`, `season_type`, `default_cycle_length`, `active`\n\n### Order by\n\n`id`, `category`, `active`\n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/base_crops\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **status**: Indicates the success or failure of the request (e.g., \"success\" or \"error\").\n    \n- **data**: An array of base unit objects, where each object contains:\n    \n    - **id**: Unique identifier for the base unit.\n        \n    - **name**: Names of the base crop. Object where key is language, value is name in language. For setting name in same language use `name_` with language prefix. For example `name_en` - for an english crop name.\n        \n    - **category:** Category for the base crop. p. Can be one of `cereals`, `oilseeds`, `legumes`, `root_crops`, `tuber_crops`, `forage`, `vegetables`, `fruit`, `berry`, `industrial`, `herbs`, `greens`, `nursery`, `other`\n        \n    - **code:** Code for the base crop.\n        \n    - **eppo_code:** Eppo code for the base crop.\n        \n    - **growth_type:** Growth type for the base crop. Can be one of `annual`, `perennial`\n        \n    - **season_type:** Season type for the base crop. Can be one of `spring`, `winter`\n        \n    - **default_cycle_length:** Default cycle length for the base crop.\n        \n    - **active**: Is it an active base crop. Can be `true` or `false`\n        \n    - **description**: Description for the base crop.\n        \n    - **external_id**: External ID for the base crop.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"19\",\n            \"type\": \"base_crop\",\n            \"attributes\": {\n                \"id\": 19,\n                \"category\": \"cereals\",\n                \"code\": \"wheat_spring\",\n                \"eppo_code\": \"TRZAX\",\n                \"growth_type\": \"annual\",\n                \"season_type\": \"spring\",\n                \"default_cycle_length\": 220,\n                \"active\": true,\n                \"description\": null,\n                \"external_id\": null,\n                \"created_at\": \"2025-10-30T18:33:31.276+02:00\",\n                \"updated_at\": \"2025-10-30T18:33:31.276+02:00\",\n                \"name\": {\n                    \"en\": \"Wheat\",\n                    \"ru\": \"Пшеница\",\n                    \"uk\": \"Пшениця\"\n                }\n            }\n        }\n    ]\n}\n\n ```\n\nThis response provides a structured overview of the base crops, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_base_crops",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{accessToken}}",
-										"type": "text"
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/base_crops",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"base_crops"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_base_crop_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/base_crops/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"base_crops",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_base_crop",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/base_crops/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"base_crops",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_base_crops_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"is_base\": true\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/base_crops",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"base_crops"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Farm Units",
+					"item": [
+						{
+							"name": "introduction FarmUnit",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
 									}
 								],
 								"url": {
@@ -204,7 +369,31 @@
 										"farm_units"
 									]
 								},
-								"description": "## API Endpoint: Get Farm Units\n\n### Purpose\n\nThis endpoint retrieves a list of farm units from the server. It is useful for clients that need to display or process information related to various farm units available in the system.\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/farm_units\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **status**: Indicates the success or failure of the request (e.g., \"success\" or \"error\").\n    \n- **data**: An array of farm unit objects, where each object contains:\n    \n    - **id**: Unique identifier for the farm unit.\n        \n    - **name**: Name of the farm unit.\n        \n    - **description**: Description for the farm unit.\n        \n    - **external_id**: External ID for the farm unit.\n        \n    - **active**: Active status. Can be `true` or `false`\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"farm_unit\",\n            \"attributes\": {\n                \"id\": 1,\n                \"name\": \"Farm Unit A\",\n                \"description\": null,\n                \"external_id\": null,\n                \"active\": false,\n                \"created_at\": \"2025-06-12T11:43:22.597+03:00\",\n                \"updated_at\": \"2025-06-12T11:43:22.597+03:00\"\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"farm_unit\",\n            \"attributes\": {\n                \"id\": 2,\n                \"name\": \"Farm Unit B\",\n                \"description\": \"Some Description\",\n                \"external_id\": 123,\n                \"active\": true,\n                \"created_at\": \"2025-06-12T12:08:15.653+03:00\",\n                \"updated_at\": \"2025-06-12T14:17:34.497+03:00\"\n            }\n        }\n    ]\n}\n\n ```\n\nThis response provides a structured overview of the farm units, enabling clients to easily access and utilize the information."
+								"description": "## API Endpoint: Farm Units\n\n### Purpose\n\nThis endpoint retrieves a list of farm units from the server. It is useful for clients that need to display or process information related to various farm units available in the system.\n\n---\n\n### FarmUnit has next parameters\n\n- (readonly) `id` — VelHerd ID of FarmUnit\n    \n- `name` — name of FarmUnit\n    \n- `description` — country_code of AdminRegion\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `active` — does FarmUnit is active and shows in list\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Acceptable methods\n\n- `Ids`\n    \n- `Changes`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `name`, `active`, `external_id`\n\n### Order by\n\n`id`, `name`\n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/farm_units\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **status**: Indicates the success or failure of the request (e.g., \"success\" or \"error\").\n    \n- **data**: An array of farm unit objects, where each object contains:\n    \n    - **id**: Unique identifier for the farm unit.\n        \n    - **name**: Name of the farm unit.\n        \n    - **description**: Description for the farm unit.\n        \n    - **external_id**: External ID for the farm unit.\n        \n    - **active**: Active status. Can be `true` or `false`\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"farm_unit\",\n            \"attributes\": {\n                \"id\": 1,\n                \"name\": \"Farm Unit A\",\n                \"description\": null,\n                \"external_id\": null,\n                \"active\": false,\n                \"created_at\": \"2025-06-12T11:43:22.597+03:00\",\n                \"updated_at\": \"2025-06-12T11:43:22.597+03:00\"\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"farm_unit\",\n            \"attributes\": {\n                \"id\": 2,\n                \"name\": \"Farm Unit B\",\n                \"description\": \"Some Description\",\n                \"external_id\": 123,\n                \"active\": true,\n                \"created_at\": \"2025-06-12T12:08:15.653+03:00\",\n                \"updated_at\": \"2025-06-12T14:17:34.497+03:00\"\n            }\n        }\n    ]\n}\n\n ```\n\nThis response provides a structured overview of the farm units, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_farm_units",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/farm_units",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"farm_units"
+									]
+								}
 							},
 							"response": []
 						},
@@ -215,8 +404,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{accessToken}}",
-										"type": "text"
+										"value": "Bearer {{accessToken}}"
 									}
 								],
 								"url": {
@@ -241,8 +429,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{accessToken}}",
-										"type": "text"
+										"value": "Bearer {{accessToken}}"
 									}
 								],
 								"url": {
@@ -270,8 +457,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{accessToken}}",
-										"type": "text"
+										"value": "Bearer {{accessToken}}"
 									}
 								],
 								"body": {
@@ -307,8 +493,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{accessToken}}",
-										"type": "text"
+										"value": "Bearer {{accessToken}}"
 									}
 								],
 								"body": {
@@ -341,8 +526,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{accessToken}}",
-										"type": "text"
+										"value": "Bearer {{accessToken}}"
 									}
 								],
 								"body": {
@@ -375,8 +559,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{accessToken}}",
-										"type": "text"
+										"value": "Bearer {{accessToken}}"
 									}
 								],
 								"body": {
@@ -410,8 +593,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{accessToken}}",
-										"type": "text"
+										"value": "Bearer {{accessToken}}"
 									}
 								],
 								"url": {
@@ -429,11 +611,545 @@
 							},
 							"response": []
 						}
-					],
-					"description": "{{baseUrl}}/api/{{apiVersion}}/farm_units\n\n---\n\n### FarmUnit has next parameters\n\n- (readonly) `id` — VelHerd ID of FarmUnit\n    \n- `name` — name of FarmUnit\n    \n- `description` — country_code of AdminRegion\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `active` — does FarmUnit is active and shows in list\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Acceptable methods\n\n- `Ids`\n    \n- `Changes`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `name`, `active`, `external_id`\n\n### Order by\n\n`id`, `name`"
+					]
+				},
+				{
+					"name": "Units",
+					"item": [
+						{
+							"name": "introduction Unit",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/units",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"units"
+									]
+								},
+								"description": "## API Endpoint: Units\n\n### Purpose\n\nThis endpoint retrieves a list of units from the server. It is useful for clients that need to display or process information related to various units available in the system.\n\n---\n\n### Unit has next parameters\n\n- (readonly) `id` — VelHerd ID of Unit\n    \n- `name` — names of Unit. Object where key is language, value is name in language. For setting name in same language use `name_` with language prefix. For example `name_en` - for an english unit name\n    \n- `symbol` — symbols of Unit, Object where key is language, value is symbol in language. For setting name in same language use `symbol_` with language prefix. For example `symbol_en` - for an english unit symbol\n    \n- `key` — key of Unit\n    \n- `unit_type` — unit_type of Unit\n    \n- `base_ratio` — base_ratio of Unit\n    \n- `is_base` — is it a base unit\n    \n- `description` — description of Unit\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Acceptable methods\n\n- `Ids`\n    \n- `Changes`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `is_base`, `key`, `unit_type`, `external_id`\n\n### Order by\n\n`id`, `is_base`, `key`, `unit_type`\n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/units\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **status**: Indicates the success or failure of the request (e.g., \"success\" or \"error\").\n    \n- **data**: An array of farm unit objects, where each object contains:\n    \n    - **id**: Unique identifier for the unit.\n        \n    - **name**: Names of the unit. Object where key is language, value is name in language. For setting name in same language use `name_` with language prefix. For example `name_en` - for an english unit name.\n        \n    - **symbol**: Symbols of unit, Object where key is language, value is symbol in language. For setting name in same language use `symbol_` with language prefix. For example `symbol_en` - for an english unit symbol.\n        \n    - **key:** Key for the unit.\n        \n    - **unit_type**: Unit type for the unit. Can be one of `mass`, `volume`, `length`, `area`, `count`, `energy`, `pressure`, `temperature`, `time`, `useful`.\n        \n    - **base_ratio**: Base ratio for the unit.\n        \n    - **is_base**: Is it a unit. Can be `true` or `false`\n        \n    - **description**: Description for the unit.\n        \n    - **external_id**: External ID for the unit.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"unit\",\n            \"attributes\": {\n                \"id\": 1,\n                \"key\": \"centner\",\n                \"unit_type\": \"mass\",\n                \"base_ratio\": \"10.0\",\n                \"is_base\": false,\n                \"description\": null,\n                \"external_id\": null,\n                \"created_at\": \"2025-10-25T13:16:57.684+03:00\",\n                \"updated_at\": \"2025-10-25T13:16:57.684+03:00\",\n                \"name\": {\n                    \"uk\": \"Центнери\"\n                },\n                \"symbol\": {\n                    \"uk\": \"ц\"\n                }\n            }\n        }\n    ]\n}\n\n ```\n\nThis response provides a structured overview of the units, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_units",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/units",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"units"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_unit_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/units/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"units",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_unit",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/units/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"units",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_units_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"unit_type\": \"desc\",\n        \"id\": \"asc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/units",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"units"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_units_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"is_base\": true\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/units",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"units"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_unit",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"name\": \"Test 3\",\n        \"description\": \"Some Description\",\n        \"external_id\": 123,\n        \"active\": false\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/units",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"units"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_unit",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"description\": \"Some Description\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/units/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"units",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_unit",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/units/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"units",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Crop",
+					"item": [
+						{
+							"name": "introduction Crop",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/crops",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"crops"
+									]
+								},
+								"description": "## API Endpoint: Crops\n\n### Purpose\n\nThis endpoint retrieves a list of crops from the server. It is useful for clients that need to display or process information related to various crops available in the system.\n\n---\n\n### Unit has next parameters\n\n- (readonly) `id` — VelHerd ID of Crop\n    \n- `custom_name` — custom name of Crop\n    \n- (readonly) `localized_name` — localized names of Crop\n    \n- `name_with_season_type` — is show crop name with season type\n    \n- (readonly) `standard` — is a standard crop\n    \n- `category` — category of Crop\n    \n- `code` — code of Crop\n    \n- `eppo_code` — eppo code of Crop\n    \n- `growth_type` — growth type of Crop\n    \n- `season_type` — season type of Crop\n    \n- `default_cycle_length` — default cycle length of Crop\n    \n- `active` — is it a active crop\n    \n- `base_crop_id` — base crop ID\n    \n- `description` — description of Crop\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Acceptable methods\n\n- `Ids`\n    \n- `Changes`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `category`, `eppo_code`, `external_id`, `season_type`, `default_cycle_length`, `active`\n\n### Order by\n\n`id`, `category`, `active`\n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/crops\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **status**: Indicates the success or failure of the request (e.g., \"success\" or \"error\").\n    \n- **data**: An array of farm unit objects, where each object contains:\n    \n    - **id**: Unique identifier for the unit.\n        \n    - **custom_name**: Custom name of crop\n        \n    - **localized_name**: Localized names of the crop. Object where key is language, value is name in language. For setting name in same language use `localized_name_` with language prefix. For example `localized_name_en` - for an english crop name.\n        \n    - **name_with_season_type**: Is show name with season type. Can be `true` or `false`.\n        \n    - **standard:** Is crop a standard. Can be `true` or `false`.\n        \n    - **category:** Category for the base crop. p. Can be one of `cereals`, `oilseeds`, `legumes`, `root_crops`, `tuber_crops`, `forage`, `vegetables`, `fruit`, `berry`, `industrial`, `herbs`, `greens`, `nursery`, `other.`\n        \n    - **code:** Code for the base crop.\n        \n    - **eppo_code:** Eppo code for the base crop.\n        \n    - **growth_type:** Growth type for the base crop. Can be one of `annual`, `perennial.`\n        \n    - **season_type:** Season type for the base crop. Can be one of `spring`, `winter.`\n        \n    - **default_cycle_length:** Default cycle length for the base crop.\n        \n    - **active**: Is crop active. Can be `true` or `false`.\n        \n    - base_crop_id: Base crop ID for crop.\n        \n    - **description**: Description for the crop.\n        \n    - **external_id**: External ID for the crop.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"5\",\n            \"type\": \"crop\",\n            \"attributes\": {\n                \"id\": 5,\n                \"custom_name\": \"Петрушка огранічна\",\n                \"name_with_season_type\": false,\n                \"standard\": false,\n                \"category\": \"greens\",\n                \"code\": null,\n                \"eppo_code\": null,\n                \"growth_type\": \"annual\",\n                \"season_type\": \"spring\",\n                \"default_cycle_length\": 21,\n                \"active\": true,\n                \"base_crop_id\": null,\n                \"description\": null,\n                \"external_id\": null,\n                \"created_at\": \"2025-10-19T19:56:05.028+03:00\",\n                \"updated_at\": \"2025-10-23T12:21:34.906+03:00\",\n                \"localized_name\": {\n                    \"uk\": \"Петрушка огранічна\"\n                }\n            }\n        },\n        {\n            \"id\": \"8\",\n            \"type\": \"crop\",\n            \"attributes\": {\n                \"id\": 8,\n                \"custom_name\": null,\n                \"name_with_season_type\": true,\n                \"standard\": true,\n                \"category\": \"cereals\",\n                \"code\": \"barley_spring\",\n                \"eppo_code\": \"HORVX\",\n                \"growth_type\": \"annual\",\n                \"season_type\": \"spring\",\n                \"default_cycle_length\": 200,\n                \"active\": true,\n                \"base_crop_id\": 21,\n                \"description\": null,\n                \"external_id\": null,\n                \"created_at\": \"2025-10-31T12:35:04.316+02:00\",\n                \"updated_at\": \"2025-10-31T12:35:04.316+02:00\",\n                \"localized_name\": {\n                    \"en\": \"Barley\",\n                    \"ru\": \"Ячмень\",\n                    \"uk\": \"Ячмінь\"\n                }\n            }\n        },\n    ]\n}\n\n ```\n\nThis response provides a structured overview of the crop, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_crops",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/crops",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"crops"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_crop_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/crops/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"crops",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_crop",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/crops/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"crops",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_crops_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"unit_type\": \"desc\",\n        \"id\": \"asc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/crops",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"crops"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_crops_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"is_base\": true\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/crops",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"crops"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_crop",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"name\": \"Test 3\",\n        \"description\": \"Some Description\",\n        \"external_id\": 123,\n        \"active\": false\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/crops",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"crops"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_crop",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"description\": \"Some Description\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/crops/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"crops",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_crop",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/crops/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"crops",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
-			],
-			"description": "### List of VelHerd API endpoints"
+			]
 		}
 	],
 	"event": [
@@ -441,6 +1157,7 @@
 			"listen": "prerequest",
 			"script": {
 				"type": "text/javascript",
+				"requests": {},
 				"exec": [
 					""
 				]
@@ -450,6 +1167,7 @@
 			"listen": "test",
 			"script": {
 				"type": "text/javascript",
+				"requests": {},
 				"exec": [
 					""
 				]
@@ -459,22 +1177,19 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "https://velherd.com"
+			"value": "{{baseUrl}}"
 		},
 		{
 			"key": "apiVersion",
-			"value": "v1",
-			"type": "string"
+			"value": "v1"
 		},
 		{
 			"key": "userApiToken",
-			"value": "USER_API_TOKEN",
-			"type": "string"
+			"value": "USER_API_TOKEN"
 		},
 		{
 			"key": "accessToken",
-			"value": "JWToken",
-			"type": "string"
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJjb21wYW55X2lkIjoxLCJleHAiOjE3NjE5NDAyNjh9.FE8fSlidw8DioylAM_mqFu1_A3hhFv1odVCDlBRK3h4"
 		}
 	]
 }

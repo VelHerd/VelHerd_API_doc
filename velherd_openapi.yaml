@@ -121,17 +121,17 @@ paths:
                 
             - **symbol**: Symbols of base unit, Object where key is language, value is symbol in language. For setting name in same language use `symbol_` with language prefix. For example `symbol_en` - for an english unit symbol.
                 
-            - **key:** Key for the farm unit.
+            - **key:** Key for the base unit.
                 
-            - **unit_type**: Unit type for the farm unit. Can be one of `mass`, `volume`, `length`, `area`, `count`, `energy`, `pressure`, `temperature`, `time`, `useful`.
+            - **unit_type**: Unit type for the base unit. Can be one of `mass`, `volume`, `length`, `area`, `count`, `energy`, `pressure`, `temperature`, `time`, `useful`.
                 
-            - **base_ratio**: Base ratio for the farm unit.
+            - **base_ratio**: Base ratio for the base unit.
                 
             - **is_base**: Is it a base unit. Can be `true` or `false`
                 
-            - **description**: Description for the farm unit.
+            - **description**: Description for the base unit.
                 
-            - **external_id**: External ID for the farm unit.
+            - **external_id**: External ID for the base unit.
                 
             - **created_at**: Created time
                 
@@ -637,7 +637,7 @@ paths:
 
          ```
 
-        This response provides a structured overview of the farm units, enabling
+        This response provides a structured overview of the units, enabling
         clients to easily access and utilize the information.
     parameters:
       - name: apiVersion
@@ -723,6 +723,538 @@ paths:
       tags:
         - API endpoints
         - Units
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/base_crops:
+    head:
+      summary: introduction BaseUnit
+      tags:
+        - API endpoints
+        - Base Crops
+      responses: {}
+      description: >-
+        ## API Endpoint: Base Crops
+
+
+        ### Purpose
+
+
+        This endpoint retrieves a list of base crops from the server. It is
+        useful for clients that need to display or process information related
+        to various base crops available in the system.
+
+
+        ---
+
+
+        ### BaseUnit has next parameters
+
+
+        - (readonly) `id` — VelHerd ID of BaseCrop
+            
+        - (readonly) `name` — names of BaseCrop
+            
+        - (readonly) `category` — category of BaseCrop
+            
+        - (readonly) `code` — code of BaseCrop
+            
+        - (readonly) `eppo_code` — eppo_code of BaseCrop
+            
+        - (readonly) `growth_type` — growth_type of BaseCrop
+            
+        - (readonly) `season_type` — season_type of BaseCrop
+            
+        - (readonly) `default_cycle_length` — default_cycle_length of BaseCrop
+            
+        - (readonly) `active` — active of BaseCrop
+            
+        - (readonly) `description` — description of BaseCrop
+            
+        - (readonly) `external_id` — an optional identifier used to reference
+        this resource in an external system
+            
+        - (readonly) `created_at`
+            
+        - (readonly) `updated_at`
+            
+
+        ### Acceptable methods
+
+
+        - `Ids`
+            
+        - `Single Resource`
+            
+
+        ### Filters by
+
+
+        `id`, `category`, `eppo_code`, `external_id`, `season_type`,
+        `default_cycle_length`, `active`
+
+
+        ### Order by
+
+
+        `id`, `category`, `active`
+
+
+        ---
+
+
+        ### Request Format
+
+
+        - **Method**: GET
+            
+        - **URL**: https://velherd.com/api/v1/base_crops
+            
+
+        ### Response Structure
+
+
+        The response will contain a JSON object with the following structure:
+
+
+        - **status**: Indicates the success or failure of the request (e.g.,
+        "success" or "error").
+            
+        - **data**: An array of base unit objects, where each object contains:
+            
+            - **id**: Unique identifier for the base unit.
+                
+            - **name**: Names of the base crop. Object where key is language, value is name in language. For setting name in same language use `name_` with language prefix. For example `name_en` - for an english crop name.
+                
+            - **category:** Category for the base crop. p. Can be one of `cereals`, `oilseeds`, `legumes`, `root_crops`, `tuber_crops`, `forage`, `vegetables`, `fruit`, `berry`, `industrial`, `herbs`, `greens`, `nursery`, `other`
+                
+            - **code:** Code for the base crop.
+                
+            - **eppo_code:** Eppo code for the base crop.
+                
+            - **growth_type:** Growth type for the base crop. Can be one of `annual`, `perennial`
+                
+            - **season_type:** Season type for the base crop. Can be one of `spring`, `winter`
+                
+            - **default_cycle_length:** Default cycle length for the base crop.
+                
+            - **active**: Is it an active base crop. Can be `true` or `false`
+                
+            - **description**: Description for the base crop.
+                
+            - **external_id**: External ID for the base crop.
+                
+            - **created_at**: Created time
+                
+            - **updated_at**: Updated time
+                
+
+        ### Example Response
+
+
+        ``` json
+
+        {
+            "data": [
+                {
+                    "id": "19",
+                    "type": "base_crop",
+                    "attributes": {
+                        "id": 19,
+                        "category": "cereals",
+                        "code": "wheat_spring",
+                        "eppo_code": "TRZAX",
+                        "growth_type": "annual",
+                        "season_type": "spring",
+                        "default_cycle_length": 220,
+                        "active": true,
+                        "description": null,
+                        "external_id": null,
+                        "created_at": "2025-10-30T18:33:31.276+02:00",
+                        "updated_at": "2025-10-30T18:33:31.276+02:00",
+                        "name": {
+                            "en": "Wheat",
+                            "ru": "Пшеница",
+                            "uk": "Пшениця"
+                        }
+                    }
+                }
+            ]
+        }
+
+         ```
+
+        This response provides a structured overview of the base crops, enabling
+        clients to easily access and utilize the information.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: get_base_crops
+      tags:
+        - API endpoints
+        - Base Crops
+      responses: {}
+  /api/v1/base_crops/ids:
+    get:
+      summary: get_base_crop_ids
+      tags:
+        - API endpoints
+        - Base Crops
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/base_crops/1:
+    get:
+      summary: get_base_crop
+      tags:
+        - API endpoints
+        - Base Crops
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/crops:
+    head:
+      summary: introduction Crop
+      tags:
+        - API endpoints
+        - Crop
+      responses: {}
+      description: >-
+        ## API Endpoint: Crops
+
+
+        ### Purpose
+
+
+        This endpoint retrieves a list of crops from the server. It is useful
+        for clients that need to display or process information related to
+        various crops available in the system.
+
+
+        ---
+
+
+        ### Unit has next parameters
+
+
+        - (readonly) `id` — VelHerd ID of Crop
+            
+        - `custom_name` — custom name of Crop
+            
+        - (readonly) `localized_name` — localized names of Crop
+            
+        - `name_with_season_type` — is show crop name with season type
+            
+        - (readonly) `standard` — is a standard crop
+            
+        - `category` — category of Crop
+            
+        - `code` — code of Crop
+            
+        - `eppo_code` — eppo code of Crop
+            
+        - `growth_type` — growth type of Crop
+            
+        - `season_type` — season type of Crop
+            
+        - `default_cycle_length` — default cycle length of Crop
+            
+        - `active` — is it a active crop
+            
+        - `base_crop_id` — base crop ID
+            
+        - `description` — description of Crop
+            
+        - `external_id` — an optional identifier used to reference this resource
+        in an external system
+            
+        - (readonly) `created_at`
+            
+        - (readonly) `updated_at`
+            
+
+        ### Acceptable methods
+
+
+        - `Ids`
+            
+        - `Changes`
+            
+        - `Single Resource`
+            
+        - `Create Resource`
+            
+        - `Update Resource`
+            
+        - `Delete Resource`
+            
+
+        ### Filters by
+
+
+        `id`, `category`, `eppo_code`, `external_id`, `season_type`,
+        `default_cycle_length`, `active`
+
+
+        ### Order by
+
+
+        `id`, `category`, `active`
+
+
+        ---
+
+
+        ### Request Format
+
+
+        - **Method**: GET
+            
+        - **URL**: https://velherd.com/api/v1/crops
+            
+
+        ### Response Structure
+
+
+        The response will contain a JSON object with the following structure:
+
+
+        - **status**: Indicates the success or failure of the request (e.g.,
+        "success" or "error").
+            
+        - **data**: An array of farm unit objects, where each object contains:
+            
+            - **id**: Unique identifier for the unit.
+                
+            - **custom_name**: Custom name of crop
+                
+            - **localized_name**: Localized names of the crop. Object where key is language, value is name in language. For setting name in same language use `localized_name_` with language prefix. For example `localized_name_en` - for an english crop name.
+                
+            - **name_with_season_type**: Is show name with season type. Can be `true` or `false`.
+                
+            - **standard:** Is crop a standard. Can be `true` or `false`.
+                
+            - **category:** Category for the base crop. p. Can be one of `cereals`, `oilseeds`, `legumes`, `root_crops`, `tuber_crops`, `forage`, `vegetables`, `fruit`, `berry`, `industrial`, `herbs`, `greens`, `nursery`, `other.`
+                
+            - **code:** Code for the base crop.
+                
+            - **eppo_code:** Eppo code for the base crop.
+                
+            - **growth_type:** Growth type for the base crop. Can be one of `annual`, `perennial.`
+                
+            - **season_type:** Season type for the base crop. Can be one of `spring`, `winter.`
+                
+            - **default_cycle_length:** Default cycle length for the base crop.
+                
+            - **active**: Is crop active. Can be `true` or `false`.
+                
+            - base_crop_id: Base crop ID for crop.
+                
+            - **description**: Description for the crop.
+                
+            - **external_id**: External ID for the crop.
+                
+            - **created_at**: Created time
+                
+            - **updated_at**: Updated time
+                
+
+        ### Example Response
+
+
+        ``` json
+
+        {
+            "data": [
+                {
+                    "id": "5",
+                    "type": "crop",
+                    "attributes": {
+                        "id": 5,
+                        "custom_name": "Петрушка огранічна",
+                        "name_with_season_type": false,
+                        "standard": false,
+                        "category": "greens",
+                        "code": null,
+                        "eppo_code": null,
+                        "growth_type": "annual",
+                        "season_type": "spring",
+                        "default_cycle_length": 21,
+                        "active": true,
+                        "base_crop_id": null,
+                        "description": null,
+                        "external_id": null,
+                        "created_at": "2025-10-19T19:56:05.028+03:00",
+                        "updated_at": "2025-10-23T12:21:34.906+03:00",
+                        "localized_name": {
+                            "uk": "Петрушка огранічна"
+                        }
+                    }
+                },
+                {
+                    "id": "8",
+                    "type": "crop",
+                    "attributes": {
+                        "id": 8,
+                        "custom_name": null,
+                        "name_with_season_type": true,
+                        "standard": true,
+                        "category": "cereals",
+                        "code": "barley_spring",
+                        "eppo_code": "HORVX",
+                        "growth_type": "annual",
+                        "season_type": "spring",
+                        "default_cycle_length": 200,
+                        "active": true,
+                        "base_crop_id": 21,
+                        "description": null,
+                        "external_id": null,
+                        "created_at": "2025-10-31T12:35:04.316+02:00",
+                        "updated_at": "2025-10-31T12:35:04.316+02:00",
+                        "localized_name": {
+                            "en": "Barley",
+                            "ru": "Ячмень",
+                            "uk": "Ячмінь"
+                        }
+                    }
+                },
+            ]
+        }
+
+         ```
+
+        This response provides a structured overview of the crop, enabling
+        clients to easily access and utilize the information.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: get_crops
+      tags:
+        - API endpoints
+        - Crop
+      responses: {}
+    post:
+      summary: create_crop
+      tags:
+        - API endpoints
+        - Crop
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    external_id:
+                      type: integer
+                    active:
+                      type: boolean
+  /api/v1/crop:
+    post:
+      summary: create_crop
+      tags:
+        - API endpoints
+        - Crop
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    external_id:
+                      type: integer
+                    active:
+                      type: boolean
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/crops/ids:
+    get:
+      summary: get_crop_ids
+      tags:
+        - API endpoints
+        - Crop
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/crops/1:
+    get:
+      summary: get_crop
+      tags:
+        - API endpoints
+        - Crop
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+    put:
+      summary: update_crop
+      tags:
+        - API endpoints
+        - Crop
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+  /api/v1/crops/3:
+    delete:
+      summary: destroy_crop
+      tags:
+        - API endpoints
+        - Crop
       responses: {}
     parameters:
       - name: apiVersion
