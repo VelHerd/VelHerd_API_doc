@@ -6,6 +6,140 @@ info:
 servers:
   - url: 'https://velherd.com'
 paths:
+  /:
+    head:
+      summary: Introduction
+      tags:
+        - Reference
+        - Introduction
+      responses: {}
+      description: >-
+        ## General info
+
+
+        You can use VelHerd API if you have account on VelHerd web site.
+
+
+        VelHerd API is HTTP JSON API. That means all requests and responses are
+        sent via HTTP protocol (secured with SSL). All data in requests and
+        responses present in HTTP Body in
+        [JSON](http://en.wikipedia.org/wiki/JSON) format.
+
+
+        VelHerd API is based on
+        [REST](http://en.wikipedia.org/wiki/Representational_state_transfer)
+        principles. You have to be authenticated and call the simple HTTPs
+        request on the URLs specified below. The following documentation covers
+        core resources that are used to manipulate the main entities. First of
+        all, read basic instructions to start using the API.
+
+
+        ## Very basics of HTTP REST concepts
+
+
+        ### Allowed HTTPs request typesemail
+
+
+        - `GET` — Get a resource or list of resources
+            
+        - `POST` — To create or update resource
+            
+        - `PUT` — To create or update resource
+            
+        - `DELETE` — To delete resource
+            
+
+        ### Usual [HTTP response
+        codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+
+
+        - `200 OK` — the request was successful.
+            
+        - `201 Created` — the request was successful and a resource was created.
+            
+        - `204 No Content` — the request was successful but there is no
+        representation to return (i.e. the response is empty).
+            
+        - `400 Bad Request` — the request could not be understood or was missing
+        required parameters.
+            
+        - `401 Unauthorized` — authentication failed or user doesn't have
+        permissions for requested operation.
+            
+        - `403 Forbidden` — access denied.
+            
+        - `404 Not Found` — resource was not found.
+            
+        - `422 Unprocessable Entity` - the request was well-formed but was
+        unable to be followed due to semantic errors.
+            
+        - `503 Service Unavailable` — service is temporary unavailable (e.g.
+        scheduled Platform Maintenance). Try again later.
+            
+
+        ### Methods
+
+
+        - `Resources collection` => `GET` https://velherd.com/api/v1/OBJECTS
+        — get list of objects.
+            
+        - `Ids` => `GET`
+        [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)[/OBJECTS/ids](https://velherd.com/api/v1/OBJECTS/ids)
+        — get list of ids for all objects.
+            
+        - `Single Resource` => `GET`
+        [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)[/OBJECT/ID](https://velherd.com/api/v1/OBJECT/ID)
+        — get one object by ID.
+            
+        - `Create Resource` => `POST`
+        [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)[/OBJECTS](https://operations.cropwise.com/api/v3/OBJECTS)
+        — create new object.
+            
+        - `Update Resource` => `PUT/PATCH`
+        [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)[/OBJECTS/ID](https://operations.cropwise.com/api/v3/OBJECTS/ID)
+        — update object by ID.
+            
+        - `Delete Resource` => `DELETE`
+        [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)[/OBJECTS/ID](https://operations.cropwise.com/api/v3/OBJECTS/ID)
+        — delete object by ID.
+            
+
+        ### Useful tools
+
+
+        - Postman ([https://www.getpostman.com](https://www.getpostman.com/)) —
+        multi-platform REST client for API testing.
+            
+        - Paw ([https://paw.cloud](https://paw.cloud/)) — beautiful (but MacOS
+        only) REST client.
+            
+        - ApiDog ([https://apidog.com](https://apidog.com/)) — a real
+        design-first API development platform.
+            
+
+        # Important notice! — read before start using API
+
+
+        1. You should add HTTP Header `Content-Type: application/json` for all
+        `POST` and `PUT` requests. Else, request would be dropped.
+            
+        2. VelHerd API works only via HTTPS (SSL). **Important!** — check that
+        you use `https://` in all requests (especially in Authorization
+        request).
+            
+        3. In case of wrong request or data, API gives you response with HTTP
+        Error Code and detailed error description (if available). Please read it
+        carefully.
+            
+        4. Naming convention for OBJECT in requests: you need to use plural
+        object name in `snake_case`:
+            
+
+        -
+        [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)`/animals`
+            
+        -
+        [https://velherd.com/api/v1](https://velherd.com/api/v1/OBJECTS)`/company_units`
   /api/access_tokens:
     post:
       summary: JWToken
@@ -24,12 +158,302 @@ paths:
                   properties:
                     token:
                       type: string
+  /api/v1/farm_units:
+    head:
+      summary: introduction FarmUnit
+      tags:
+        - API endpoints
+        - Farm Units
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: >-
+        ## API Endpoint: Farm Units
+
+
+        ### Purpose
+
+
+        This endpoint retrieves a list of farm units from the server. It is
+        useful for clients that need to display or process information related
+        to various farm units available in the system.
+
+
+        ---
+
+
+        ### FarmUnit has next parameters
+
+
+        - (readonly) `id` — VelHerd ID of FarmUnit
+            
+        - `name` — name of FarmUnit
+            
+        - `description` — country_code of AdminRegion
+            
+        - `external_id` — an optional identifier used to reference this resource
+        in an external system
+            
+        - `active` — does FarmUnit is active and shows in list
+            
+        - (readonly) `created_at`
+            
+        - (readonly) `updated_at`
+            
+
+        ### Acceptable methods
+
+
+        - `Ids`
+            
+        - `Changes`
+            
+        - `Single Resource`
+            
+        - `Create Resource`
+            
+        - `Update Resource`
+            
+        - `Delete Resource`
+            
+
+        ### Filters by
+
+
+        `id`, `name`, `active`, `external_id`
+
+
+        ### Order by
+
+
+        `id`, `name`
+
+
+        ---
+
+
+        ### Request Format
+
+
+        - **Method**: GET
+            
+        - **URL**: https://velherd.com/api/v1/farm_units
+            
+
+        ### Response Structure
+
+
+        The response will contain a JSON object with the following structure:
+
+
+        - **status**: Indicates the success or failure of the request (e.g.,
+        "success" or "error").
+            
+        - **data**: An array of farm unit objects, where each object contains:
+            
+            - **id**: Unique identifier for the farm unit.
+                
+            - **name**: Name of the farm unit.
+                
+            - **description**: Description for the farm unit.
+                
+            - **external_id**: External ID for the farm unit.
+                
+            - **active**: Active status. Can be `true` or `false`
+                
+            - **created_at**: Created time
+                
+            - **updated_at**: Updated time
+                
+
+        ### Example Response
+
+
+        ``` json
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "farm_unit",
+                    "attributes": {
+                        "id": 1,
+                        "name": "Farm Unit A",
+                        "description": null,
+                        "external_id": null,
+                        "active": false,
+                        "created_at": "2025-06-12T11:43:22.597+03:00",
+                        "updated_at": "2025-06-12T11:43:22.597+03:00"
+                    }
+                },
+                {
+                    "id": "2",
+                    "type": "farm_unit",
+                    "attributes": {
+                        "id": 2,
+                        "name": "Farm Unit B",
+                        "description": "Some Description",
+                        "external_id": 123,
+                        "active": true,
+                        "created_at": "2025-06-12T12:08:15.653+03:00",
+                        "updated_at": "2025-06-12T14:17:34.497+03:00"
+                    }
+                }
+            ]
+        }
+
+         ```
+
+        This response provides a structured overview of the farm units, enabling
+        clients to easily access and utilize the information.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: get_farm_units
+      tags:
+        - API endpoints
+        - Farm Units
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_farm_unit
+      tags:
+        - API endpoints
+        - Farm Units
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    external_id:
+                      type: integer
+                    active:
+                      type: boolean
+  /api/v1/farm_units/ids:
+    get:
+      summary: get_farm_unit_ids
+      tags:
+        - API endpoints
+        - Farm Units
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/farm_units/1:
+    get:
+      summary: get_farm_unit
+      tags:
+        - API endpoints
+        - Farm Units
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/farm_units/2:
+    put:
+      summary: update_farm_unit
+      tags:
+        - API endpoints
+        - Farm Units
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/farm_units/3:
+    delete:
+      summary: destroy_farm_unit
+      tags:
+        - API endpoints
+        - Farm Units
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
   /api/v1/base_units:
     head:
       summary: introduction BaseUnit
       tags:
         - API endpoints
         - Base Units
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
       responses: {}
       description: >-
         ## API Endpoint: Base Units
@@ -207,6 +631,12 @@ paths:
       tags:
         - API endpoints
         - Base Units
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
   /api/v1/base_units/ids:
     get:
@@ -214,6 +644,12 @@ paths:
       tags:
         - API endpoints
         - Base Units
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
     parameters:
       - name: apiVersion
@@ -227,250 +663,12 @@ paths:
       tags:
         - API endpoints
         - Base Units
-      responses: {}
-    parameters:
-      - name: apiVersion
-        in: path
-        required: true
-        schema:
-          type: string
-  /api/v1/farm_units:
-    head:
-      summary: introduction FarmUnit
-      tags:
-        - API endpoints
-        - Farm Units
-      responses: {}
-      description: >-
-        ## API Endpoint: Farm Units
-
-
-        ### Purpose
-
-
-        This endpoint retrieves a list of farm units from the server. It is
-        useful for clients that need to display or process information related
-        to various farm units available in the system.
-
-
-        ---
-
-
-        ### FarmUnit has next parameters
-
-
-        - (readonly) `id` — VelHerd ID of FarmUnit
-            
-        - `name` — name of FarmUnit
-            
-        - `description` — country_code of AdminRegion
-            
-        - `external_id` — an optional identifier used to reference this resource
-        in an external system
-            
-        - `active` — does FarmUnit is active and shows in list
-            
-        - (readonly) `created_at`
-            
-        - (readonly) `updated_at`
-            
-
-        ### Acceptable methods
-
-
-        - `Ids`
-            
-        - `Changes`
-            
-        - `Single Resource`
-            
-        - `Create Resource`
-            
-        - `Update Resource`
-            
-        - `Delete Resource`
-            
-
-        ### Filters by
-
-
-        `id`, `name`, `active`, `external_id`
-
-
-        ### Order by
-
-
-        `id`, `name`
-
-
-        ---
-
-
-        ### Request Format
-
-
-        - **Method**: GET
-            
-        - **URL**: https://velherd.com/api/v1/farm_units
-            
-
-        ### Response Structure
-
-
-        The response will contain a JSON object with the following structure:
-
-
-        - **status**: Indicates the success or failure of the request (e.g.,
-        "success" or "error").
-            
-        - **data**: An array of farm unit objects, where each object contains:
-            
-            - **id**: Unique identifier for the farm unit.
-                
-            - **name**: Name of the farm unit.
-                
-            - **description**: Description for the farm unit.
-                
-            - **external_id**: External ID for the farm unit.
-                
-            - **active**: Active status. Can be `true` or `false`
-                
-            - **created_at**: Created time
-                
-            - **updated_at**: Updated time
-                
-
-        ### Example Response
-
-
-        ``` json
-
-        {
-            "data": [
-                {
-                    "id": "1",
-                    "type": "farm_unit",
-                    "attributes": {
-                        "id": 1,
-                        "name": "Farm Unit A",
-                        "description": null,
-                        "external_id": null,
-                        "active": false,
-                        "created_at": "2025-06-12T11:43:22.597+03:00",
-                        "updated_at": "2025-06-12T11:43:22.597+03:00"
-                    }
-                },
-                {
-                    "id": "2",
-                    "type": "farm_unit",
-                    "attributes": {
-                        "id": 2,
-                        "name": "Farm Unit B",
-                        "description": "Some Description",
-                        "external_id": 123,
-                        "active": true,
-                        "created_at": "2025-06-12T12:08:15.653+03:00",
-                        "updated_at": "2025-06-12T14:17:34.497+03:00"
-                    }
-                }
-            ]
-        }
-
-         ```
-
-        This response provides a structured overview of the farm units, enabling
-        clients to easily access and utilize the information.
-    parameters:
-      - name: apiVersion
-        in: path
-        required: true
-        schema:
-          type: string
-    get:
-      summary: get_farm_units
-      tags:
-        - API endpoints
-        - Farm Units
-      responses: {}
-    post:
-      summary: create_farm_unit
-      tags:
-        - API endpoints
-        - Farm Units
-      responses: {}
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                data:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    description:
-                      type: string
-                    external_id:
-                      type: integer
-                    active:
-                      type: boolean
-  /api/v1/farm_units/ids:
-    get:
-      summary: get_farm_unit_ids
-      tags:
-        - API endpoints
-        - Farm Units
-      responses: {}
-    parameters:
-      - name: apiVersion
-        in: path
-        required: true
-        schema:
-          type: string
-  /api/v1/farm_units/1:
-    get:
-      summary: get_farm_unit
-      tags:
-        - API endpoints
-        - Farm Units
-      responses: {}
-    parameters:
-      - name: apiVersion
-        in: path
-        required: true
-        schema:
-          type: string
-  /api/v1/farm_units/2:
-    put:
-      summary: update_farm_unit
-      tags:
-        - API endpoints
-        - Farm Units
-      responses: {}
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                data:
-                  type: object
-                  properties:
-                    description:
-                      type: string
-    parameters:
-      - name: apiVersion
-        in: path
-        required: true
-        schema:
-          type: string
-  /api/v1/farm_units/3:
-    delete:
-      summary: destroy_farm_unit
-      tags:
-        - API endpoints
-        - Farm Units
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
     parameters:
       - name: apiVersion
@@ -484,6 +682,12 @@ paths:
       tags:
         - API endpoints
         - Units
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
       description: >-
         ## API Endpoint: Units
@@ -650,12 +854,23 @@ paths:
       tags:
         - API endpoints
         - Units
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
     post:
       summary: create_unit
       tags:
         - API endpoints
         - Units
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
       responses: {}
       requestBody:
         content:
@@ -680,6 +895,11 @@ paths:
       tags:
         - API endpoints
         - Units
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
       responses: {}
     parameters:
       - name: apiVersion
@@ -693,6 +913,11 @@ paths:
       tags:
         - API endpoints
         - Units
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
       responses: {}
     parameters:
       - name: apiVersion
@@ -705,6 +930,11 @@ paths:
       tags:
         - API endpoints
         - Units
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
       responses: {}
       requestBody:
         content:
@@ -723,6 +953,11 @@ paths:
       tags:
         - API endpoints
         - Units
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
       responses: {}
     parameters:
       - name: apiVersion
@@ -736,6 +971,11 @@ paths:
       tags:
         - API endpoints
         - Base Crops
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
       responses: {}
       description: >-
         ## API Endpoint: Base Crops
@@ -824,7 +1064,7 @@ paths:
         - **status**: Indicates the success or failure of the request (e.g.,
         "success" or "error").
             
-        - **data**: An array of base unit objects, where each object contains:
+        - **data**: An array of base crop objects, where each object contains:
             
             - **id**: Unique identifier for the base unit.
                 
@@ -901,6 +1141,11 @@ paths:
       tags:
         - API endpoints
         - Base Crops
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
       responses: {}
   /api/v1/base_crops/ids:
     get:
@@ -908,6 +1153,12 @@ paths:
       tags:
         - API endpoints
         - Base Crops
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
     parameters:
       - name: apiVersion
@@ -921,6 +1172,12 @@ paths:
       tags:
         - API endpoints
         - Base Crops
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
     parameters:
       - name: apiVersion
@@ -933,7 +1190,13 @@ paths:
       summary: introduction Crop
       tags:
         - API endpoints
-        - Crop
+        - Crops
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
       description: >-
         ## API Endpoint: Crops
@@ -1151,13 +1414,25 @@ paths:
       summary: get_crops
       tags:
         - API endpoints
-        - Crop
+        - Crops
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
     post:
       summary: create_crop
       tags:
         - API endpoints
-        - Crop
+        - Crops
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
       requestBody:
         content:
@@ -1176,42 +1451,18 @@ paths:
                       type: integer
                     active:
                       type: boolean
-  /api/v1/crop:
-    post:
-      summary: create_crop
-      tags:
-        - API endpoints
-        - Crop
-      responses: {}
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                data:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    description:
-                      type: string
-                    external_id:
-                      type: integer
-                    active:
-                      type: boolean
-    parameters:
-      - name: apiVersion
-        in: path
-        required: true
-        schema:
-          type: string
   /api/v1/crops/ids:
     get:
       summary: get_crop_ids
       tags:
         - API endpoints
-        - Crop
+        - Crops
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
     parameters:
       - name: apiVersion
@@ -1224,7 +1475,13 @@ paths:
       summary: get_crop
       tags:
         - API endpoints
-        - Crop
+        - Crops
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
     parameters:
       - name: apiVersion
@@ -1236,7 +1493,13 @@ paths:
       summary: update_crop
       tags:
         - API endpoints
-        - Crop
+        - Crops
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
       requestBody:
         content:
@@ -1254,7 +1517,530 @@ paths:
       summary: destroy_crop
       tags:
         - API endpoints
-        - Crop
+        - Crops
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/base_animal_types:
+    head:
+      summary: introduction BaseAnimalTypes
+      tags:
+        - API endpoints
+        - BaseAnimalTypes
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: >-
+        ## API Endpoint: BaseAnimalTypes
+
+
+        ### Purpose
+
+
+        This endpoint retrieves a list of base animal types from the server. It
+        is useful for clients that need to display or process information
+        related to various base animal types available in the system.
+
+
+        ---
+
+
+        ### Unit has next parameters
+
+
+        - (readonly) `id` — VelHerd ID of BaseAnimalType
+            
+        - (readonly) `name` — names of BaseAnimalType
+            
+        - (readonly) `animal_type` — it is a animal type of BaseAnimalType
+            
+        - (readonly) `animal_key` — it is a animal key of BaseAnimalType
+            
+        - (readonly) `gestation_days` — it is a gestation days
+            
+        - (readonly) `maturity_age_days` — it is a maturity age days
+            
+        - (readonly) `lifespan_length` — it is a lifespan length
+            
+        - (readonly) `active` — is it a active base animal type
+            
+        - (readonly) `description` — description of BaseAnimalType
+            
+        - (readonly) `external_id` — an optional identifier used to reference
+        this resource in an external system
+            
+        - (readonly) `created_at`
+            
+        - (readonly) `updated_at`
+            
+
+        ### Acceptable methods
+
+
+        - `Ids`
+            
+        - `Single Resource`
+            
+
+        ### Filters by
+
+
+        `id`, `category`, `external_id`, `gestation_days`, `maturity_age_days`,
+        `lifespan_length`, `active`
+
+
+        ### Order by
+
+
+        `id`, `animal_type`, `active`
+
+
+        ---
+
+
+        ### Request Format
+
+
+        - **Method**: GET
+            
+        - **URL**: https://velherd.com/api/v1/base_animal_types
+            
+
+        ### Response Structure
+
+
+        The response will contain a JSON object with the following structure:
+
+
+        - **status**: Indicates the success or failure of the request (e.g.,
+        "success" or "error").
+            
+        - **data**: An array of base animal types, where each object contains:
+            
+            - **id**: Unique identifier for the unit.
+                
+            - **name**: Names of the crop. Object where key is language, value is name in language. For setting name in same language use `name_` with language prefix. For example `name_en` - for an english crop name.
+                
+            - **animal_type**: Animal type of base animal type. Can be one of `cattle`, `pigs`, `sheep`, `goats`, `horses`, `donkeys`, `mules`, `poultry`, `rabbits`, `bees`, `fish`, `camels`, `deer`, `buffalo`, `insects`.
+                
+            - **animal_key**: Key of animal for base animal type.
+                
+            - **gestation_days**: It is the gestation period for an animal.
+                
+            - **maturity_age_days:** It is a mature age for an animal.
+                
+            - **lifespan_length:** It is the lifespan length for an animal.
+                
+            - **active**: Is crop active. Can be `true` or `false`.
+                
+            - **description**: Description for the crop.
+                
+            - **external_id**: External ID for the crop.
+                
+            - **created_at**: Created time
+                
+            - **updated_at**: Updated time
+                
+
+        ### Example Response
+
+
+        ``` json
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "base_animal_type",
+                    "attributes": {
+                        "id": 1,
+                        "animal_type": "fish",
+                        "animal_key": "carp",
+                        "gestation_days": null,
+                        "maturity_age_days": 730,
+                        "lifespan_length": 5475,
+                        "active": true,
+                        "description": null,
+                        "external_id": null,
+                        "created_at": "2025-11-05T16:05:24.091+02:00",
+                        "updated_at": "2025-11-05T16:05:24.091+02:00",
+                        "name": {
+                            "en": "Carp",
+                            "ru": "Карп",
+                            "uk": "Короп"
+                        }
+                    }
+                },
+            ]
+        }
+
+         ```
+
+        This response provides a structured overview of the base animal type,
+        enabling clients to easily access and utilize the information.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: get_base_animal_types
+      tags:
+        - API endpoints
+        - BaseAnimalTypes
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+  /api/v1/base_animal_types/ids:
+    get:
+      summary: get_base_animal_type_ids
+      tags:
+        - API endpoints
+        - BaseAnimalTypes
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/base_animal_types/1:
+    get:
+      summary: get_base_animal_type
+      tags:
+        - API endpoints
+        - BaseAnimalTypes
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/animal_types:
+    head:
+      summary: introduction AnimalTypes
+      tags:
+        - API endpoints
+        - AnimalTypes
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: >-
+        ## API Endpoint: AnimalTypes
+
+
+        ### Purpose
+
+
+        This endpoint retrieves a list of animal types from the server. It is
+        useful for clients that need to display or process information related
+        to various animal types available in the system.
+
+
+        ---
+
+
+        ### Unit has next parameters
+
+
+        - (readonly) `id` — VelHerd ID of AnimalTypes
+            
+        - `name` — names of AnimalTypes
+            
+        - `animal_type` — it is a animal type of AnimalTypes
+            
+        - `animal_key` — it is a animal key of AnimalTypes
+            
+        - `gestation_days` — it is a gestation days
+            
+        - `maturity_age_days` — it is a maturity age days
+            
+        - `lifespan_length` — it is a lifespan length
+            
+        - `active` — is it a active animal type
+            
+        - `description` — description of AnimalTypes
+            
+        - `base_animal_type_id` — relation to base animal type
+            
+        - `external_id` — an optional identifier used to reference this resource
+        in an external system
+            
+        - (readonly) `created_at`
+            
+        - (readonly) `updated_at`
+            
+
+        ### Acceptable methods
+
+
+        - `Ids`
+            
+        - `Changes`
+            
+        - `Single Resource`
+            
+        - `Create Resource`
+            
+        - `Update Resource`
+            
+        - `Delete Resource`
+            
+
+        ### Filters by
+
+
+        `id`, `animal_type`, `base_animal_type_id`, `external_id`,
+        `gestation_days`, `maturity_age_days`, `lifespan_length`, `active`
+
+
+        ### Order by
+
+
+        `id`, `animal_type`, `active`
+
+
+        ---
+
+
+        ### Request Format
+
+
+        - **Method**: GET
+            
+        - **URL**: https://velherd.com/api/v1/animal_types
+            
+
+        ### Response Structure
+
+
+        The response will contain a JSON object with the following structure:
+
+
+        - **status**: Indicates the success or failure of the request (e.g.,
+        "success" or "error").
+            
+        - **data**: An array of animal types, where each object contains:
+            
+            - **id**: Unique identifier for the unit.
+                
+            - **name**: Names of the crop. Object where key is language, value is name in language. For setting name in same language use `name_` with language prefix. For example `name_en` - for an english crop name.
+                
+            - **animal_type**: Animal type of base animal type. Can be one of `cattle`, `pigs`, `sheep`, `goats`, `horses`, `donkeys`, `mules`, `poultry`, `rabbits`, `bees`, `fish`, `camels`, `deer`, `buffalo`, `insects`.
+                
+            - **animal_key**: Key of animal for base animal type.
+                
+            - **gestation_days**: It is the gestation period for an animal.
+                
+            - **maturity_age_days:** It is a mature age for an animal.
+                
+            - **lifespan_length:** It is the lifespan length for an animal.
+                
+            - **active**: Is crop active. Can be `true` or `false`.
+                
+            - **base_animal_type_id**: relation to base animal type.
+                
+            - **description**: Description for the crop.
+                
+            - **external_id**: External ID for the crop.
+                
+            - **created_at**: Created time
+                
+            - **updated_at**: Updated time
+                
+
+        ### Example Response
+
+
+        ``` json
+
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "base_animal_type",
+                    "attributes": {
+                        "id": 1,
+                        "animal_type": "fish",
+                        "animal_key": "carp",
+                        "gestation_days": null,
+                        "maturity_age_days": 730,
+                        "lifespan_length": 5475,
+                        "active": true,
+                        "description": null,
+                        "external_id": null,
+                        "created_at": "2025-11-05T16:05:24.091+02:00",
+                        "updated_at": "2025-11-05T16:05:24.091+02:00",
+                        "name": {
+                            "en": "Carp",
+                            "ru": "Карп",
+                            "uk": "Короп"
+                        }
+                    }
+                },
+            ]
+        }
+
+         ```
+
+        This response provides a structured overview of the animal type,
+        enabling clients to easily access and utilize the information.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: get_animal_types
+      tags:
+        - API endpoints
+        - AnimalTypes
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_base_animal_type
+      tags:
+        - API endpoints
+        - AnimalTypes
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name_en:
+                      type: string
+                    description:
+                      type: string
+                    external_id:
+                      type: integer
+                    active:
+                      type: boolean
+  /api/v1/animal_types/ids:
+    get:
+      summary: get_animal_type_ids
+      tags:
+        - API endpoints
+        - AnimalTypes
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/animal_types/1:
+    get:
+      summary: get_animal_type
+      tags:
+        - API endpoints
+        - AnimalTypes
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+    put:
+      summary: update_animal_type
+      tags:
+        - API endpoints
+        - AnimalTypes
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+  /api/v1/animal_types/3:
+    delete:
+      summary: destroy_base_animal_type
+      tags:
+        - API endpoints
+        - AnimalTypes
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
       responses: {}
     parameters:
       - name: apiVersion
