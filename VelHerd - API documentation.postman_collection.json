@@ -14857,6 +14857,3875 @@
 					]
 				},
 				{
+					"name": "Machine Types",
+					"item": [
+						{
+							"name": "introduction MachineType",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_types",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_types"
+									]
+								},
+								"description": "## API Endpoint: Machine Types\n\n### Purpose\n\nThis endpoint manages machine types (classes) — the handbook of tractor and self-propelled machine classes a company's fleet and machinery aggregates refer to.\n\n---\n\n### MachineType has next parameters\n\n- (readonly) `id` — VelHerd ID of MachineType\n    \n- `name` — name of MachineType, unique\n    \n- `power_min` — lower bound of the engine power of the class, horsepower\n    \n- `power_max` — upper bound of the engine power of the class, horsepower\n    \n- `active` — is the class offered in the forms, `true` by default\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `description` — description of MachineType\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Required on create\n\n`name`\n\n### Acceptable methods\n\n- `Ids`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `name`, `active`, `external_id`\n\n### Order by\n\n`id`, `name`\n\n### Important\n\n- `power_max` cannot be lower than `power_min`.\n    \n- A class that machines or machinery aggregates refer to cannot be deleted: `DELETE` answers `422` with `errors`.\n    \n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/machine_types\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **data**: An array of machine type objects, where each object contains:\n    \n    - **id**: VelHerd ID of MachineType.\n        \n    - **name**: Name of MachineType, unique.\n        \n    - **power_min**: Lower bound of the engine power of the class, horsepower.\n        \n    - **power_max**: Upper bound of the engine power of the class, horsepower.\n        \n    - **active**: Is the class offered in the forms, `true` by default.\n        \n    - **external_id**: An optional identifier used to reference this resource in an external system.\n        \n    - **description**: Description of MachineType.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n- **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.\n    \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"machine_type\",\n            \"attributes\": {\n                \"id\": 1,\n                \"name\": \"Tractor 1.4\",\n                \"power_min\": \"80.0\",\n                \"power_max\": \"150.0\",\n                \"active\": true,\n                \"external_id\": null,\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\"\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"machine_type\",\n            \"attributes\": {\n                \"id\": 2,\n                \"name\": \"Combine harvester\",\n                \"power_min\": \"250.0\",\n                \"power_max\": null,\n                \"active\": true,\n                \"external_id\": \"ERP-MT-02\",\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"per_page\": 100,\n        \"total_count\": 2,\n        \"total_pages\": 1\n    }\n}\n\n ```\n\nThis response provides a structured overview of the machine types, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_types",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_types",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_types"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_type_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_types/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_types",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_type",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_types/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_types",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_types_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_types",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_types"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"name\": \"asc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_types_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_types",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_types"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"active\": true\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_machine_type",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_types",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_types"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"name\": \"Tractor 1.4\",\n        \"power_min\": 80,\n        \"power_max\": 150,\n        \"active\": true\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_machine_type",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_types/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_types",
+										"1"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"power_max\": 160\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_machine_type",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_types/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_types",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Equipment Types",
+					"item": [
+						{
+							"name": "introduction EquipmentType",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_types",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_types"
+									]
+								},
+								"description": "## API Endpoint: Equipment Types\n\n### Purpose\n\nThis endpoint manages equipment types (classes) — the handbook of implement and stationary equipment classes a company's fleet and machinery aggregates refer to.\n\n---\n\n### EquipmentType has next parameters\n\n- (readonly) `id` — VelHerd ID of EquipmentType\n    \n- `name` — name of EquipmentType, unique\n    \n- `category` — kind of the class\n    \n- `working_width` — working width of an implement, metres; empty for a stationary class\n    \n- `active` — is the class offered in the forms, `true` by default\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `description` — description of EquipmentType\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Required on create\n\n`category`, `name`\n\n### Acceptable methods\n\n- `Ids`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `name`, `category`, `active`, `external_id`\n\n### Order by\n\n`id`, `name`\n\n### Important\n\n- Only an `implement` class joins machinery aggregates and keeps a `working_width`; a width sent for a `stationary` class is dropped.\n    \n- A class that equipment or machinery aggregates refer to cannot be deleted: `DELETE` answers `422` with `errors`.\n    \n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/equipment_types\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **data**: An array of equipment type objects, where each object contains:\n    \n    - **id**: VelHerd ID of EquipmentType.\n        \n    - **name**: Name of EquipmentType, unique.\n        \n    - **category**: Kind of the class. Can be one of `implement` (pulled by a machine: harrow, seeder, header), `stationary` (stands on its own: milking machine, dryer).\n        \n    - **working_width**: Working width of an implement, metres; empty for a stationary class.\n        \n    - **active**: Is the class offered in the forms, `true` by default.\n        \n    - **external_id**: An optional identifier used to reference this resource in an external system.\n        \n    - **description**: Description of EquipmentType.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n- **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.\n    \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"equipment_type\",\n            \"attributes\": {\n                \"id\": 1,\n                \"name\": \"Disc harrow\",\n                \"category\": \"implement\",\n                \"working_width\": \"6.0\",\n                \"active\": true,\n                \"external_id\": null,\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\"\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"equipment_type\",\n            \"attributes\": {\n                \"id\": 2,\n                \"name\": \"Milking machine\",\n                \"category\": \"stationary\",\n                \"working_width\": null,\n                \"active\": true,\n                \"external_id\": null,\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"per_page\": 100,\n        \"total_count\": 2,\n        \"total_pages\": 1\n    }\n}\n\n ```\n\nThis response provides a structured overview of the equipment types, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipment_types",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_types",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_types"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipment_type_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_types/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_types",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipment_type",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_types/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_types",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipment_types_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_types",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_types"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"name\": \"asc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipment_types_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_types",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_types"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"category\": \"implement\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_equipment_type",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_types",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_types"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"name\": \"Disc harrow\",\n        \"category\": \"implement\",\n        \"working_width\": 6\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_equipment_type",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_types/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_types",
+										"1"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"working_width\": 6.5\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_equipment_type",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_types/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_types",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Machines",
+					"item": [
+						{
+							"name": "introduction Machine",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machines",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machines"
+									]
+								},
+								"description": "## API Endpoint: Machines\n\n### Purpose\n\nThis endpoint manages machines — the tractors, combines and other self-propelled units of the company's fleet. Where a machine stands is kept in `/machine_location_assignments`.\n\n---\n\n### Machine has next parameters\n\n- (readonly) `id` — VelHerd ID of Machine\n    \n- `machine_type_id` — ID of MachineType (`/machine_types`)\n    \n- `brand` — brand of Machine\n    \n- `model` — model of Machine\n    \n- `registration_number` — registration (licence) number, unique; stored in upper case\n    \n- `inventory_number` — inventory number, unique\n    \n- `serial_number` — serial number\n    \n- `year_of_manufacture` — year of manufacture, from 1950 to the next year\n    \n- `power` — engine power, horsepower\n    \n- `engine_hours` — engine hours counter\n    \n- `status` — status of Machine\n    \n- `decommissioned_on` — date the machine was written off; required with status `decommissioned` and forbidden otherwise\n    \n- `acquired_on` — date of acquisition\n    \n- `default_operator_id` — ID of Employee who usually drives it (`/employees`)\n    \n- `fuel_resource_id` — ID of Resource of the `fuel` category its shifts are priced by (`/resources`)\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `description` — description of Machine\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n- (readonly) `current_farm_unit_item_id` — ID of FarmUnitItem the machine stands at today, from its location assignments (`/farm_unit_items`)\n    \n\n### Required on create\n\n`brand`, `machine_type_id`, `model`\n\n### Acceptable methods\n\n- `Ids`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `machine_type_id`, `status`, `registration_number`, `inventory_number`, `default_operator_id`, `fuel_resource_id`, `external_id`\n\n### Order by\n\n`id`, `brand`, `model`, `year_of_manufacture`\n\n### Important\n\n- `status` is `active` by default. Status `decommissioned` needs `decommissioned_on`; a date on a machine still in service is refused.\n    \n- Machines in service count against the plan limit of the company; a create beyond the limit answers `422` with `errors`.\n    \n- A machine with machine tasks cannot be deleted: `DELETE` answers `422` with `errors`.\n    \n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/machines\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **data**: An array of machine objects, where each object contains:\n    \n    - **id**: VelHerd ID of Machine.\n        \n    - **machine_type_id**: ID of MachineType (`/machine_types`).\n        \n    - **brand**: Brand of Machine.\n        \n    - **model**: Model of Machine.\n        \n    - **registration_number**: Registration (licence) number, unique; stored in upper case.\n        \n    - **inventory_number**: Inventory number, unique.\n        \n    - **serial_number**: Serial number.\n        \n    - **year_of_manufacture**: Year of manufacture, from 1950 to the next year.\n        \n    - **power**: Engine power, horsepower.\n        \n    - **engine_hours**: Engine hours counter.\n        \n    - **status**: Status of Machine. Can be one of `active`, `under_repair`, `decommissioned`.\n        \n    - **decommissioned_on**: Date the machine was written off; required with status `decommissioned` and forbidden otherwise (date, ISO 8601).\n        \n    - **acquired_on**: Date of acquisition (date, ISO 8601).\n        \n    - **default_operator_id**: ID of Employee who usually drives it (`/employees`).\n        \n    - **fuel_resource_id**: ID of Resource of the `fuel` category its shifts are priced by (`/resources`).\n        \n    - **external_id**: An optional identifier used to reference this resource in an external system.\n        \n    - **description**: Description of Machine.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n    - **current_farm_unit_item_id**: ID of FarmUnitItem the machine stands at today, from its location assignments (`/farm_unit_items`).\n        \n\n- **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.\n    \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"machine\",\n            \"attributes\": {\n                \"id\": 1,\n                \"machine_type_id\": 1,\n                \"brand\": \"John Deere\",\n                \"model\": \"8R 370\",\n                \"registration_number\": \"AA1234BP\",\n                \"inventory_number\": \"M-0001\",\n                \"serial_number\": null,\n                \"year_of_manufacture\": 2021,\n                \"power\": \"370.0\",\n                \"engine_hours\": \"1250.5\",\n                \"status\": \"active\",\n                \"decommissioned_on\": null,\n                \"acquired_on\": \"2021-03-15\",\n                \"default_operator_id\": 3,\n                \"fuel_resource_id\": 12,\n                \"external_id\": null,\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"current_farm_unit_item_id\": 7\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"machine\",\n            \"attributes\": {\n                \"id\": 2,\n                \"machine_type_id\": 1,\n                \"brand\": \"MTZ\",\n                \"model\": \"892\",\n                \"registration_number\": \"AA5678BP\",\n                \"inventory_number\": \"M-0002\",\n                \"serial_number\": \"80912345\",\n                \"year_of_manufacture\": 2012,\n                \"power\": \"90.0\",\n                \"engine_hours\": \"8400.0\",\n                \"status\": \"decommissioned\",\n                \"decommissioned_on\": \"2026-02-01\",\n                \"acquired_on\": \"2012-05-10\",\n                \"default_operator_id\": null,\n                \"fuel_resource_id\": null,\n                \"external_id\": \"ERP-M-0002\",\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"current_farm_unit_item_id\": null\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"per_page\": 100,\n        \"total_count\": 2,\n        \"total_pages\": 1\n    }\n}\n\n ```\n\nThis response provides a structured overview of the machines, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_machines",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machines",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machines"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machines/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machines",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machines/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machines",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machines_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machines",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machines"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"brand\": \"asc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machines_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machines",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machines"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"status\": \"active\",\n        \"machine_type_id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_machine",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machines",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machines"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"machine_type_id\": 1,\n        \"brand\": \"John Deere\",\n        \"model\": \"8R 370\",\n        \"registration_number\": \"AA1234BP\",\n        \"inventory_number\": \"M-0001\",\n        \"year_of_manufacture\": 2021,\n        \"power\": 370,\n        \"engine_hours\": 1250.5,\n        \"status\": \"active\",\n        \"acquired_on\": \"2021-03-15\",\n        \"default_operator_id\": 3,\n        \"fuel_resource_id\": 12\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_machine",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machines/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machines",
+										"1"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"engine_hours\": 1310,\n        \"status\": \"under_repair\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_machine",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machines/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machines",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Equipments",
+					"item": [
+						{
+							"name": "introduction Equipment",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipments"
+									]
+								},
+								"description": "## API Endpoint: Equipments\n\n### Purpose\n\nThis endpoint manages equipment — the implements and stationary units of the company's fleet. Where a unit stands is kept in `/equipment_location_assignments`.\n\n---\n\n### Equipment has next parameters\n\n- (readonly) `id` — VelHerd ID of Equipment\n    \n- `equipment_type_id` — ID of EquipmentType (`/equipment_types`)\n    \n- `brand` — brand of Equipment\n    \n- `model` — model of Equipment\n    \n- `inventory_number` — inventory number, unique\n    \n- `serial_number` — serial number\n    \n- `year_of_manufacture` — year of manufacture, from 1950 to the next year\n    \n- `working_width` — working width of an implement, metres; dropped for a stationary class\n    \n- `status` — status of Equipment\n    \n- `decommissioned_on` — date the unit was written off; required with status `decommissioned` and forbidden otherwise\n    \n- `acquired_on` — date of acquisition\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `description` — description of Equipment\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n- (readonly) `current_farm_unit_item_id` — ID of FarmUnitItem the unit stands at today, from its location assignments (`/farm_unit_items`)\n    \n\n### Required on create\n\n`brand`, `equipment_type_id`, `model`\n\n### Acceptable methods\n\n- `Ids`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `equipment_type_id`, `status`, `inventory_number`, `external_id`\n\n### Order by\n\n`id`, `brand`, `model`, `year_of_manufacture`\n\n### Important\n\n- `status` is `active` by default. Status `decommissioned` needs `decommissioned_on`; a date on a unit still in service is refused.\n    \n- A unit assigned to machine tasks cannot be deleted: `DELETE` answers `422` with `errors`.\n    \n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/equipments\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **data**: An array of equipment objects, where each object contains:\n    \n    - **id**: VelHerd ID of Equipment.\n        \n    - **equipment_type_id**: ID of EquipmentType (`/equipment_types`).\n        \n    - **brand**: Brand of Equipment.\n        \n    - **model**: Model of Equipment.\n        \n    - **inventory_number**: Inventory number, unique.\n        \n    - **serial_number**: Serial number.\n        \n    - **year_of_manufacture**: Year of manufacture, from 1950 to the next year.\n        \n    - **working_width**: Working width of an implement, metres; dropped for a stationary class.\n        \n    - **status**: Status of Equipment. Can be one of `active`, `under_repair`, `decommissioned`.\n        \n    - **decommissioned_on**: Date the unit was written off; required with status `decommissioned` and forbidden otherwise (date, ISO 8601).\n        \n    - **acquired_on**: Date of acquisition (date, ISO 8601).\n        \n    - **external_id**: An optional identifier used to reference this resource in an external system.\n        \n    - **description**: Description of Equipment.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n    - **current_farm_unit_item_id**: ID of FarmUnitItem the unit stands at today, from its location assignments (`/farm_unit_items`).\n        \n\n- **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.\n    \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"equipment\",\n            \"attributes\": {\n                \"id\": 1,\n                \"equipment_type_id\": 1,\n                \"brand\": \"Lemken\",\n                \"model\": \"Rubin 12\",\n                \"inventory_number\": \"E-0001\",\n                \"serial_number\": null,\n                \"year_of_manufacture\": 2019,\n                \"working_width\": \"6.0\",\n                \"status\": \"active\",\n                \"decommissioned_on\": null,\n                \"acquired_on\": \"2019-08-01\",\n                \"external_id\": null,\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"current_farm_unit_item_id\": 7\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"per_page\": 100,\n        \"total_count\": 1,\n        \"total_pages\": 1\n    }\n}\n\n ```\n\nThis response provides a structured overview of the equipment, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipments",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipment_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipments/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipments",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipment",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipments/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipments_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipments"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"brand\": \"asc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipments_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipments"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"equipment_type_id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_equipment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipments"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"equipment_type_id\": 1,\n        \"brand\": \"Lemken\",\n        \"model\": \"Rubin 12\",\n        \"inventory_number\": \"E-0001\",\n        \"year_of_manufacture\": 2019,\n        \"working_width\": 6,\n        \"status\": \"active\",\n        \"acquired_on\": \"2019-08-01\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_equipment",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipments/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipments",
+										"1"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"status\": \"under_repair\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_equipment",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipments/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipments",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Machine Location Assignments",
+					"item": [
+						{
+							"name": "introduction MachineLocationAssignment",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_location_assignments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_location_assignments"
+									]
+								},
+								"description": "## API Endpoint: Machine Location Assignments\n\n### Purpose\n\nThis endpoint manages the assignments of machines to farm unit items (machine yards) for a period of time. Only assignments of machines are visible and changed here.\n\n---\n\n### MachineLocationAssignment has next parameters\n\n- (readonly) `id` — VelHerd ID of MachineLocationAssignment\n    \n- `farm_unit_item_id` — ID of FarmUnitItem of the `machines` type the record is assigned to (`/farm_unit_items`)\n    \n- (readonly) `assignable_type` — type of the assigned record, always `Machine`\n    \n- `assignable_id` — ID of Machine that is assigned (`/machines`)\n    \n- `start_at` — start of the assignment\n    \n- `end_at` — end of the assignment, empty while it lasts\n    \n- `assignment_type` — type of the assignment\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `description` — description of MachineLocationAssignment\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Required on create\n\n`assignable_id`, `assignment_type`, `farm_unit_item_id`, `start_at`\n\n### Acceptable methods\n\n- `Ids`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `assignable_id`, `farm_unit_item_id`, `assignment_type`, `external_id`\n\n### Order by\n\n`id`, `start_at`\n\n### Important\n\n- `assignable_type` is set to `Machine` automatically and does not need to be sent.\n    \n- The farm unit item must be of the `machines` type (`item_type` in `/farm_unit_items`); a barn or a field group is refused with `422`.\n    \n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/machine_location_assignments\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **data**: An array of machine location assignment objects, where each object contains:\n    \n    - **id**: VelHerd ID of MachineLocationAssignment.\n        \n    - **farm_unit_item_id**: ID of FarmUnitItem of the `machines` type the record is assigned to (`/farm_unit_items`).\n        \n    - **assignable_type**: Type of the assigned record, always `Machine`.\n        \n    - **assignable_id**: ID of Machine that is assigned (`/machines`).\n        \n    - **start_at**: Start of the assignment (date and time, ISO 8601).\n        \n    - **end_at**: End of the assignment, empty while it lasts (date and time, ISO 8601).\n        \n    - **assignment_type**: Type of the assignment. Can be one of `permanent`, `temporary`, `lease`, `operation`, `storage`, `other`.\n        \n    - **external_id**: An optional identifier used to reference this resource in an external system.\n        \n    - **description**: Description of MachineLocationAssignment.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n- **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.\n    \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"location_assignment\",\n            \"attributes\": {\n                \"id\": 1,\n                \"farm_unit_item_id\": 7,\n                \"assignable_type\": \"Machine\",\n                \"assignable_id\": 1,\n                \"start_at\": \"2026-03-01T08:00:00.000+02:00\",\n                \"end_at\": null,\n                \"assignment_type\": \"permanent\",\n                \"external_id\": null,\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"per_page\": 100,\n        \"total_count\": 1,\n        \"total_pages\": 1\n    }\n}\n\n ```\n\nThis response provides a structured overview of the machine location assignments, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_location_assignments",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_location_assignments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_location_assignments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_location_assignment_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_location_assignments/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_location_assignments",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_location_assignment",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_location_assignments/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_location_assignments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_location_assignments_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_location_assignments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_location_assignments"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"start_at\": \"desc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_location_assignments_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_location_assignments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_location_assignments"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"assignable_id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_machine_location_assignment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_location_assignments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_location_assignments"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"assignable_id\": 1,\n        \"farm_unit_item_id\": 7,\n        \"start_at\": \"2026-03-01T08:00:00+02:00\",\n        \"assignment_type\": \"permanent\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_machine_location_assignment",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_location_assignments/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_location_assignments",
+										"1"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"end_at\": \"2026-09-30T18:00:00+03:00\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_machine_location_assignment",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_location_assignments/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_location_assignments",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Equipment Location Assignments",
+					"item": [
+						{
+							"name": "introduction EquipmentLocationAssignment",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_location_assignments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_location_assignments"
+									]
+								},
+								"description": "## API Endpoint: Equipment Location Assignments\n\n### Purpose\n\nThis endpoint manages the assignments of equipment to farm unit items (machine yards) for a period of time. Only assignments of equipment are visible and changed here.\n\n---\n\n### EquipmentLocationAssignment has next parameters\n\n- (readonly) `id` — VelHerd ID of EquipmentLocationAssignment\n    \n- `farm_unit_item_id` — ID of FarmUnitItem of the `machines` type the record is assigned to (`/farm_unit_items`)\n    \n- (readonly) `assignable_type` — type of the assigned record, always `Equipment`\n    \n- `assignable_id` — ID of Equipment that is assigned (`/equipments`)\n    \n- `start_at` — start of the assignment\n    \n- `end_at` — end of the assignment, empty while it lasts\n    \n- `assignment_type` — type of the assignment\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `description` — description of EquipmentLocationAssignment\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Required on create\n\n`assignable_id`, `assignment_type`, `farm_unit_item_id`, `start_at`\n\n### Acceptable methods\n\n- `Ids`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `assignable_id`, `farm_unit_item_id`, `assignment_type`, `external_id`\n\n### Order by\n\n`id`, `start_at`\n\n### Important\n\n- `assignable_type` is set to `Equipment` automatically and does not need to be sent.\n    \n- The farm unit item must be of the `machines` type (`item_type` in `/farm_unit_items`); a barn or a field group is refused with `422`.\n    \n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/equipment_location_assignments\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **data**: An array of equipment location assignment objects, where each object contains:\n    \n    - **id**: VelHerd ID of EquipmentLocationAssignment.\n        \n    - **farm_unit_item_id**: ID of FarmUnitItem of the `machines` type the record is assigned to (`/farm_unit_items`).\n        \n    - **assignable_type**: Type of the assigned record, always `Equipment`.\n        \n    - **assignable_id**: ID of Equipment that is assigned (`/equipments`).\n        \n    - **start_at**: Start of the assignment (date and time, ISO 8601).\n        \n    - **end_at**: End of the assignment, empty while it lasts (date and time, ISO 8601).\n        \n    - **assignment_type**: Type of the assignment. Can be one of `permanent`, `temporary`, `lease`, `operation`, `storage`, `other`.\n        \n    - **external_id**: An optional identifier used to reference this resource in an external system.\n        \n    - **description**: Description of EquipmentLocationAssignment.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n- **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.\n    \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"2\",\n            \"type\": \"location_assignment\",\n            \"attributes\": {\n                \"id\": 2,\n                \"farm_unit_item_id\": 7,\n                \"assignable_type\": \"Equipment\",\n                \"assignable_id\": 1,\n                \"start_at\": \"2026-03-01T08:00:00.000+02:00\",\n                \"end_at\": null,\n                \"assignment_type\": \"storage\",\n                \"external_id\": null,\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"per_page\": 100,\n        \"total_count\": 1,\n        \"total_pages\": 1\n    }\n}\n\n ```\n\nThis response provides a structured overview of the equipment location assignments, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipment_location_assignments",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_location_assignments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_location_assignments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipment_location_assignment_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_location_assignments/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_location_assignments",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipment_location_assignment",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_location_assignments/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_location_assignments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipment_location_assignments_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_location_assignments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_location_assignments"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"start_at\": \"desc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_equipment_location_assignments_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_location_assignments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_location_assignments"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"assignable_id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_equipment_location_assignment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_location_assignments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_location_assignments"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"assignable_id\": 1,\n        \"farm_unit_item_id\": 7,\n        \"start_at\": \"2026-03-01T08:00:00+02:00\",\n        \"assignment_type\": \"storage\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_equipment_location_assignment",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_location_assignments/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_location_assignments",
+										"1"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"end_at\": \"2026-09-30T18:00:00+03:00\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_equipment_location_assignment",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/equipment_location_assignments/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"equipment_location_assignments",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Machinery Aggregates",
+					"item": [
+						{
+							"name": "introduction MachineryAggregate",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machinery_aggregates",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machinery_aggregates"
+									]
+								},
+								"description": "## API Endpoint: Machinery Aggregates\n\n### Purpose\n\nThis endpoint manages machinery aggregates — a machine class with its implement classes for one work type, carrying the output and fuel norms that tech maps, agro plans and the machinery schedule count with.\n\n---\n\n### MachineryAggregate has next parameters\n\n- (readonly) `id` — VelHerd ID of MachineryAggregate\n    \n- `name` — name of MachineryAggregate, unique within the work type\n    \n- `work_type_id` — ID of WorkType the norms hold for (`/work_types`)\n    \n- `machine_type_id` — ID of MachineType that pulls the aggregate (`/machine_types`); empty for a self-propelled or an implement-only aggregate\n    \n- `output_rate` — output norm, units of the rate basis per shift\n    \n- `fuel_rate` — fuel norm, litres per unit of the rate basis\n    \n- `shift_hours` — hours in a shift, `8` by default\n    \n- `operators_count` — operators per shift, `1` by default\n    \n- `auxiliary_workers_count` — auxiliary workers per shift, `0` by default\n    \n- `active` — is the aggregate offered in the forms, `true` by default\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `description` — description of MachineryAggregate\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n- (readonly) `rate_basis` — rate basis of the work type the norms are counted in\n    \n- `machinery_aggregate_items` — array of implement classes of the aggregate, see below\n    \n\n### Required on create\n\n`name`, `work_type_id`\n\n### Acceptable methods\n\n- `Ids`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `name`, `work_type_id`, `machine_type_id`, `active`, `external_id`\n\n### Order by\n\n`id`, `name`\n\n### Important\n\n- `output_rate` and `fuel_rate` are taken and returned in the **planning unit of the work type's rate basis** exactly as stored (hectares, tonnes, kilometres…): `output_rate` is units per shift, `fuel_rate` is litres per unit. They are not converted to the units the user picked in the web interface.\n    \n- An aggregate needs a machine class or at least one implement class; a name with norms and nothing underneath is refused.\n    \n- Only `implement` equipment classes join an aggregate; `output_rate` is dropped for a work type with the `time` basis.\n    \n- Implement classes are sent in `machinery_aggregate_items_attributes`: a row without `id` is added, a row with `id` is changed, a row with `id` and `\"_destroy\": true` is removed. Rows that are not sent stay as they are.\n    \n- An aggregate that tech map rows, agro plans or machine tasks refer to cannot be deleted: `DELETE` answers `422` with `errors`.\n    \n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/machinery_aggregates\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **data**: An array of machinery aggregate objects, where each object contains:\n    \n    - **id**: VelHerd ID of MachineryAggregate.\n        \n    - **name**: Name of MachineryAggregate, unique within the work type.\n        \n    - **work_type_id**: ID of WorkType the norms hold for (`/work_types`).\n        \n    - **machine_type_id**: ID of MachineType that pulls the aggregate (`/machine_types`); empty for a self-propelled or an implement-only aggregate.\n        \n    - **output_rate**: Output norm, units of the rate basis per shift.\n        \n    - **fuel_rate**: Fuel norm, litres per unit of the rate basis.\n        \n    - **shift_hours**: Hours in a shift, `8` by default.\n        \n    - **operators_count**: Operators per shift, `1` by default.\n        \n    - **auxiliary_workers_count**: Auxiliary workers per shift, `0` by default.\n        \n    - **active**: Is the aggregate offered in the forms, `true` by default.\n        \n    - **external_id**: An optional identifier used to reference this resource in an external system.\n        \n    - **description**: Description of MachineryAggregate.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n    - **rate_basis**: Rate basis of the work type the norms are counted in. Can be one of `area`, `mass`, `distance`, `volume`, `count`, `head`, `time`.\n        \n    - **machinery_aggregate_items**: Array of implement classes of the aggregate, see below.\n        \n        - `id`\n            \n        - `equipment_type_id` — implement class (`/equipment_types`)\n            \n        - `quantity` — how many units of the class the aggregate holds, `1` by default\n            \n        - `external_id`, `description`, `created_at`, `updated_at`\n            \n\n- **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.\n    \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"machinery_aggregate\",\n            \"attributes\": {\n                \"id\": 1,\n                \"name\": \"Sowing unit 12 m\",\n                \"work_type_id\": 4,\n                \"machine_type_id\": 1,\n                \"output_rate\": \"60.0\",\n                \"fuel_rate\": \"4.5\",\n                \"shift_hours\": \"10.0\",\n                \"operators_count\": 1,\n                \"auxiliary_workers_count\": 1,\n                \"active\": true,\n                \"external_id\": null,\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"rate_basis\": \"area\",\n                \"machinery_aggregate_items\": [\n                    {\n                        \"id\": 5,\n                        \"equipment_type_id\": 3,\n                        \"quantity\": 1,\n                        \"external_id\": null,\n                        \"description\": null,\n                        \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                        \"updated_at\": \"2026-03-02T09:14:27.512+02:00\"\n                    }\n                ]\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"per_page\": 100,\n        \"total_count\": 1,\n        \"total_pages\": 1\n    }\n}\n\n ```\n\nThis response provides a structured overview of the machinery aggregates, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_machinery_aggregates",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machinery_aggregates",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machinery_aggregates"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machinery_aggregate_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machinery_aggregates/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machinery_aggregates",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machinery_aggregate",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machinery_aggregates/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machinery_aggregates",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machinery_aggregates_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machinery_aggregates",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machinery_aggregates"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"name\": \"asc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machinery_aggregates_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machinery_aggregates",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machinery_aggregates"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"work_type_id\": 4,\n        \"active\": true\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_machinery_aggregate",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machinery_aggregates",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machinery_aggregates"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"name\": \"Sowing unit 12 m\",\n        \"work_type_id\": 4,\n        \"machine_type_id\": 1,\n        \"output_rate\": 60,\n        \"fuel_rate\": 4.5,\n        \"shift_hours\": 10,\n        \"operators_count\": 1,\n        \"auxiliary_workers_count\": 1,\n        \"machinery_aggregate_items_attributes\": [\n            {\n                \"equipment_type_id\": 3,\n                \"quantity\": 1\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_machinery_aggregate",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machinery_aggregates/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machinery_aggregates",
+										"1"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"fuel_rate\": 4.2,\n        \"machinery_aggregate_items_attributes\": [\n            {\n                \"id\": 5,\n                \"_destroy\": true\n            },\n            {\n                \"equipment_type_id\": 4,\n                \"quantity\": 2\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_machinery_aggregate",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machinery_aggregates/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machinery_aggregates",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Machine Tasks",
+					"item": [
+						{
+							"name": "introduction MachineTask",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks"
+									]
+								},
+								"description": "## API Endpoint: Machine Tasks\n\n### Purpose\n\nThis endpoint manages machine tasks — works assigned to one machine with its implements on the fields of a basis: an agro plan or a list of agro operations. A task is an Operation with the `MachineTask` detail, so it shares the statuses, events and rights of `/operations`, but the plain operations endpoint neither lists nor changes tasks, and this one never touches a field or animal work.\n\n---\n\n### MachineTask has next parameters\n\n- (readonly) `id` — VelHerd ID of the Operation the task is\n    \n- `name` — name of MachineTask; filled in from the work type when empty\n    \n- `work_type_id` — ID of WorkType of the `agro` category, the same as the basis has (`/work_types`)\n    \n- `season_id` — ID of Season, the same as the basis has (`/seasons`)\n    \n- (create only) `status` — status of MachineTask\n    \n- (readonly) `timeliness` — was it done on time, set by the system\n    \n- `planned_start_at` — planned start\n    \n- `planned_finish_at` — planned finish\n    \n- (readonly) `actual_start_at` — actual start, set by the events\n    \n- (readonly) `actual_finish_at` — actual finish, set by the events\n    \n- `planned_cost` — planned cost\n    \n- `actual_cost` — actual cost\n    \n- `currency` — currency\n    \n- `work_number` — number of the work\n    \n- `accounting_code` — accounting code\n    \n- (readonly) `data_source` — where the data came from\n    \n- (readonly) `created_by_id` — ID of the VelHerd user who created the record (the token owner)\n    \n- (readonly) `confirmed_by_id` — ID of the VelHerd user who confirmed it\n    \n- (readonly) `confirmed_at` — when it was confirmed\n    \n- (readonly) `cancelled_by_id` — ID of the VelHerd user who cancelled it\n    \n- (readonly) `cancelled_at` — when it was cancelled\n    \n- (readonly) `cancel_reason` — reason of the cancellation\n    \n- (readonly) `reopened_by_id` — ID of the VelHerd user who reopened it\n    \n- (readonly) `reopened_at` — when it was reopened\n    \n- (readonly) `reopen_reason` — reason of the reopening\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `description` — description of MachineTask\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n- `machine_task` — the machine, the implements and the basis of the task (object), see below\n    \n\n### Required on create\n\n`machine_task_attributes.machine_id`, `planned_finish_at`, `planned_start_at`, `season_id`, `work_type_id`, and one basis: `machine_task_attributes.agro_plan_id` or `machine_task_attributes.agro_operation_ids`\n\n### Acceptable methods\n\n- `Ids`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n- `confirm` — `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/confirm\n    \n- `start` — `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/start\n    \n- `complete` — `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/complete\n    \n- `revert` — `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/revert\n    \n- `cancel` — `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/cancel\n    \n- `reopen` — `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/reopen\n    \n\n### Filters by\n\n`id`, `work_type_id`, `season_id`, `status`, `timeliness`, `work_number`, `external_id`\n\n### Order by\n\n`id`, `planned_start_at`, `planned_finish_at`\n\n### Important\n\n- `id` is the ID of the operation, the same as in `/operations`; the ID of the detail is `machine_task.id`, and that is what `machine_task_id` of `/machine_task_shifts` refers to.\n    \n- The status cannot be changed through `update`; it moves only by the additional actions below. On create only, `status` may be `draft` or `planned`.\n    \n- The detail is sent in `machine_task_attributes`: `machine_id`, `equipment_ids` (array, the full list — what is left out is unhitched), `machinery_aggregate_id`, and exactly one basis: `agro_plan_id` or `agro_operation_ids` (array of `agro_operation.id` from `/operations`). The basis must be of the same work type and season as the task.\n    \n- A task cannot carry a target or applications of its own: materials are applied in the agro operations of the basis.\n    \n- With an aggregate, the machine must be of its machine class and the implements of its implement classes; written-off units and stationary equipment are refused.\n    \n- `created_by_id` is set to the token owner automatically.\n    \n- Status flow: `draft` → `confirm` → `planned` → `start` → `in_progress` → `complete` → `done`; `revert` moves `in_progress` or `done` back to `planned`; `reopen` moves `done` back to `in_progress`; `cancel` works from any status except `cancelled`.\n    \n\n### Additional actions\n\n#### `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/confirm\n\nMoves a `draft` task to `planned`.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.\n\n#### `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/start\n\nMoves a `planned` task to `in_progress`.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.\n\n#### `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/complete\n\nMoves an `in_progress` task to `done`. `actual_start_at` and `actual_finish_at` are optional.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.\n\n#### `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/revert\n\nMoves an `in_progress` or `done` task back to `planned`.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.\n\n#### `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/cancel\n\nCancels the task. `cancel_reason` is optional.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.\n\n#### `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/reopen\n\nMoves a `done` task back to `in_progress` so more shifts can be recorded; `reopen_reason` is required and `reopened_by_id` is set to the token owner. Reopening is a right of its own: a `user` role gets it only through the `reopen` permission on operations.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.\n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/machine_tasks\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **data**: An array of machine task objects, where each object contains:\n    \n    - **id**: VelHerd ID of the Operation the task is.\n        \n    - **name**: Name of MachineTask; filled in from the work type when empty.\n        \n    - **work_type_id**: ID of WorkType of the `agro` category, the same as the basis has (`/work_types`).\n        \n    - **season_id**: ID of Season, the same as the basis has (`/seasons`).\n        \n    - **status**: Status of MachineTask. Can be one of `draft`, `planned`, `in_progress`, `done`, `cancelled`.\n        \n    - **timeliness**: Was it done on time, set by the system. Can be one of `early`, `on_time`, `late`.\n        \n    - **planned_start_at**: Planned start (date and time, ISO 8601).\n        \n    - **planned_finish_at**: Planned finish (date and time, ISO 8601).\n        \n    - **actual_start_at**: Actual start, set by the events (date and time, ISO 8601).\n        \n    - **actual_finish_at**: Actual finish, set by the events (date and time, ISO 8601).\n        \n    - **planned_cost**: Planned cost.\n        \n    - **actual_cost**: Actual cost.\n        \n    - **currency**: Currency. Can be one of `usd`, `eur`, `uah`, `gbp`.\n        \n    - **work_number**: Number of the work.\n        \n    - **accounting_code**: Accounting code.\n        \n    - **data_source**: Where the data came from.\n        \n    - **created_by_id**: ID of the VelHerd user who created the record (the token owner).\n        \n    - **confirmed_by_id**: ID of the VelHerd user who confirmed it.\n        \n    - **confirmed_at**: When it was confirmed (date and time, ISO 8601).\n        \n    - **cancelled_by_id**: ID of the VelHerd user who cancelled it.\n        \n    - **cancelled_at**: When it was cancelled (date and time, ISO 8601).\n        \n    - **cancel_reason**: Reason of the cancellation.\n        \n    - **reopened_by_id**: ID of the VelHerd user who reopened it.\n        \n    - **reopened_at**: When it was reopened (date and time, ISO 8601).\n        \n    - **reopen_reason**: Reason of the reopening.\n        \n    - **external_id**: An optional identifier used to reference this resource in an external system.\n        \n    - **description**: Description of MachineTask.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n    - **machine_task**: The machine, the implements and the basis of the task (object), see below.\n        \n        - `id` — the ID a shift refers to as `machine_task_id`\n            \n        - `machine_id` — the machine (`/machines`)\n            \n        - `machinery_aggregate_id` — the aggregate whose norms the task is counted by (`/machinery_aggregates`)\n            \n        - `agro_plan_id` — the plan the task serves (`/agro_plans`), or empty\n            \n        - `equipment_ids` — array of hitched implements (`/equipments`)\n            \n        - `agro_operation_ids` — array of agro operations of the basis when the task serves a list, empty with a plan\n            \n        - `external_id`, `description`\n            \n\n- **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.\n    \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"41\",\n            \"type\": \"machine_task\",\n            \"attributes\": {\n                \"id\": 41,\n                \"name\": \"Sowing — John Deere 8R 370\",\n                \"work_type_id\": 4,\n                \"season_id\": 2,\n                \"status\": \"in_progress\",\n                \"timeliness\": null,\n                \"planned_start_at\": \"2026-04-10T07:00:00.000+03:00\",\n                \"planned_finish_at\": \"2026-04-12T19:00:00.000+03:00\",\n                \"actual_start_at\": \"2026-04-10T07:30:00.000+03:00\",\n                \"actual_finish_at\": null,\n                \"planned_cost\": null,\n                \"actual_cost\": null,\n                \"currency\": null,\n                \"work_number\": null,\n                \"accounting_code\": null,\n                \"data_source\": \"manual\",\n                \"created_by_id\": 2,\n                \"confirmed_by_id\": 2,\n                \"confirmed_at\": \"2026-04-01T09:00:00.000+03:00\",\n                \"cancelled_by_id\": null,\n                \"cancelled_at\": null,\n                \"cancel_reason\": null,\n                \"reopened_by_id\": null,\n                \"reopened_at\": null,\n                \"reopen_reason\": null,\n                \"external_id\": null,\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"machine_task\": {\n                    \"id\": 9,\n                    \"machine_id\": 1,\n                    \"machinery_aggregate_id\": 1,\n                    \"agro_plan_id\": 5,\n                    \"external_id\": null,\n                    \"description\": null,\n                    \"equipment_ids\": [\n                        1\n                    ],\n                    \"agro_operation_ids\": []\n                }\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"per_page\": 100,\n        \"total_count\": 1,\n        \"total_pages\": 1\n    }\n}\n\n ```\n\nThis response provides a structured overview of the machine tasks, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_tasks",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_task_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_task",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_tasks_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"planned_start_at\": \"asc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_tasks_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"status\": \"planned\",\n        \"season_id\": 2\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_machine_task",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"name\": \"Sowing — John Deere 8R 370\",\n        \"work_type_id\": 4,\n        \"season_id\": 2,\n        \"planned_start_at\": \"2026-04-10T07:00:00+03:00\",\n        \"planned_finish_at\": \"2026-04-12T19:00:00+03:00\",\n        \"machine_task_attributes\": {\n            \"machine_id\": 1,\n            \"equipment_ids\": [\n                1\n            ],\n            \"machinery_aggregate_id\": 1,\n            \"agro_plan_id\": 5\n        }\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_machine_task",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks",
+										"1"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"planned_finish_at\": \"2026-04-13T19:00:00+03:00\",\n        \"machine_task_attributes\": {\n            \"equipment_ids\": [\n                1,\n                2\n            ]\n        }\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "confirm_machine_task",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks/1/confirm",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks",
+										"1",
+										"confirm"
+									]
+								},
+								"description": "Moves a `draft` task to `planned`.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`."
+							},
+							"response": []
+						},
+						{
+							"name": "start_machine_task",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks/1/start",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks",
+										"1",
+										"start"
+									]
+								},
+								"description": "Moves a `planned` task to `in_progress`.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`."
+							},
+							"response": []
+						},
+						{
+							"name": "complete_machine_task",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks/1/complete",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks",
+										"1",
+										"complete"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"actual_start_at\": \"2026-04-10T07:30:00+03:00\",\n        \"actual_finish_at\": \"2026-04-10T17:00:00+03:00\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Moves an `in_progress` task to `done`. `actual_start_at` and `actual_finish_at` are optional.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`."
+							},
+							"response": []
+						},
+						{
+							"name": "revert_machine_task",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks/1/revert",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks",
+										"1",
+										"revert"
+									]
+								},
+								"description": "Moves an `in_progress` or `done` task back to `planned`.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`."
+							},
+							"response": []
+						},
+						{
+							"name": "cancel_machine_task",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks/1/cancel",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks",
+										"1",
+										"cancel"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"cancel_reason\": \"Rain\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Cancels the task. `cancel_reason` is optional.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`."
+							},
+							"response": []
+						},
+						{
+							"name": "reopen_machine_task",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks/1/reopen",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks",
+										"1",
+										"reopen"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"reopen_reason\": \"A field was missed\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Moves a `done` task back to `in_progress` so more shifts can be recorded; `reopen_reason` is required and `reopened_by_id` is set to the token owner. Reopening is a right of its own: a `user` role gets it only through the `reopen` permission on operations.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`."
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_machine_task",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_tasks/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_tasks",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Machine Task Shifts",
+					"item": [
+						{
+							"name": "introduction MachineTaskShift",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_task_shifts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_task_shifts"
+									]
+								},
+								"description": "## API Endpoint: Machine Task Shifts\n\n### Purpose\n\nThis endpoint manages the shifts of machine tasks — a driver's spell on the machine with what it did on each agro operation of the basis. The works of a shift are the facts: the agro operation takes the sum of them as its actual area and actual quantities, recounted by the system on every save and delete.\n\n---\n\n### MachineTaskShift has next parameters\n\n- (readonly) `id` — VelHerd ID of MachineTaskShift\n    \n- (create only) `machine_task_id` — ID of the task detail — `machine_task.id` from `/machine_tasks`, not the operation ID\n    \n- `driver_id` — ID of Employee who drove (`/employees`)\n    \n- `started_at` — start of the shift\n    \n- `finished_at` — end of the shift, not later than now\n    \n- `engine_hours_start` — engine hours counter at the start\n    \n- `engine_hours_end` — engine hours counter at the end, not lower than at the start\n    \n- `fuel_quantity` — fuel used, in the base volume unit\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `description` — description of MachineTaskShift\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n- `shift_works` — array of what the shift did on each agro operation, see below\n    \n\n### Required on create\n\n`finished_at`, `machine_task_id`, `started_at`\n\n### Acceptable methods\n\n- `Ids`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n\n### Filters by\n\n`id`, `machine_task_id`, `driver_id`, `external_id`\n\n### Order by\n\n`id`, `started_at`\n\n### Important\n\n- `worked_area`, `fuel_quantity` and the applied `quantity` are taken and returned in **base units** (the unit with `is_base` = `true` for its unit type, see `/units`), not in the units the user picked in the web interface.\n    \n- Reading needs the right to see operations; creating, changing and deleting a shift need the right to update operations — a shift is part of its task, so a manager may delete one though a manager may not delete a work.\n    \n- A shift is recorded only on a `planned` or `in_progress` task, and only on agro operations of the task's basis that are `planned` or `in_progress`; a closed agro operation keeps its facts until reopened.\n    \n- `machine_task_id` is set on create only and is ignored on update.\n    \n- Works are sent in `shift_works_attributes`, the resources a work applied in `shift_work_applications_attributes` inside it: a row without `id` is added, a row with `id` is changed, a row with `id` and `\"_destroy\": true` is removed. Rows that are not sent stay as they are. A resource may be reported only on a work type that takes applications.\n    \n- A delete the task or an agro operation refuses answers `422` with `errors` instead of `204`.\n    \n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/machine_task_shifts\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **data**: An array of machine task shift objects, where each object contains:\n    \n    - **id**: VelHerd ID of MachineTaskShift.\n        \n    - **machine_task_id**: ID of the task detail — `machine_task.id` from `/machine_tasks`, not the operation ID.\n        \n    - **driver_id**: ID of Employee who drove (`/employees`).\n        \n    - **started_at**: Start of the shift (date and time, ISO 8601).\n        \n    - **finished_at**: End of the shift, not later than now (date and time, ISO 8601).\n        \n    - **engine_hours_start**: Engine hours counter at the start.\n        \n    - **engine_hours_end**: Engine hours counter at the end, not lower than at the start.\n        \n    - **fuel_quantity**: Fuel used, in the base volume unit.\n        \n    - **external_id**: An optional identifier used to reference this resource in an external system.\n        \n    - **description**: Description of MachineTaskShift.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n    - **shift_works**: Array of what the shift did on each agro operation, see below.\n        \n        - `id`\n            \n        - `agro_operation_id` — the agro operation of the basis (`agro_operation.id` from `/operations`)\n            \n        - `worked_area` — area worked on it, base area unit\n            \n        - `external_id`, `description`\n            \n        - `shift_work_applications` — array of resources applied on it: `id`, `resource_id` (`/resources`), `quantity` in the base unit of the resource, `external_id`, `description`\n            \n\n- **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.\n    \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"3\",\n            \"type\": \"machine_task_shift\",\n            \"attributes\": {\n                \"id\": 3,\n                \"machine_task_id\": 9,\n                \"driver_id\": 3,\n                \"started_at\": \"2026-04-10T07:30:00.000+03:00\",\n                \"finished_at\": \"2026-04-10T17:00:00.000+03:00\",\n                \"engine_hours_start\": \"1250.5\",\n                \"engine_hours_end\": \"1259.5\",\n                \"fuel_quantity\": \"180.0\",\n                \"external_id\": null,\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"shift_works\": [\n                    {\n                        \"id\": 12,\n                        \"agro_operation_id\": 41,\n                        \"worked_area\": \"420000.0\",\n                        \"external_id\": null,\n                        \"description\": null,\n                        \"shift_work_applications\": [\n                            {\n                                \"id\": 4,\n                                \"resource_id\": 15,\n                                \"quantity\": \"2100.0\",\n                                \"external_id\": null,\n                                \"description\": null\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"per_page\": 100,\n        \"total_count\": 1,\n        \"total_pages\": 1\n    }\n}\n\n ```\n\nThis response provides a structured overview of the machine task shifts, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_task_shifts",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_task_shifts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_task_shifts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_task_shift_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_task_shifts/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_task_shifts",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_task_shift",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_task_shifts/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_task_shifts",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_task_shifts_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_task_shifts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_task_shifts"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"started_at\": \"desc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_machine_task_shifts_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_task_shifts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_task_shifts"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"machine_task_id\": 9\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_machine_task_shift",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_task_shifts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_task_shifts"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"machine_task_id\": 9,\n        \"driver_id\": 3,\n        \"started_at\": \"2026-04-10T07:30:00+03:00\",\n        \"finished_at\": \"2026-04-10T17:00:00+03:00\",\n        \"engine_hours_start\": 1250.5,\n        \"engine_hours_end\": 1259.5,\n        \"fuel_quantity\": 180,\n        \"shift_works_attributes\": [\n            {\n                \"agro_operation_id\": 41,\n                \"worked_area\": 420000,\n                \"shift_work_applications_attributes\": [\n                    {\n                        \"resource_id\": 15,\n                        \"quantity\": 2100\n                    }\n                ]\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_machine_task_shift",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_task_shifts/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_task_shifts",
+										"1"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"fuel_quantity\": 175,\n        \"shift_works_attributes\": [\n            {\n                \"id\": 12,\n                \"worked_area\": 450000\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_machine_task_shift",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machine_task_shifts/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machine_task_shifts",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tech Maps",
+					"item": [
+						{
+							"name": "introduction TechMap",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_maps",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_maps"
+									]
+								},
+								"description": "## API Endpoint: Tech Maps\n\n### Purpose\n\nThis endpoint manages tech maps — how a crop is grown: the ordered works with their machinery norms and recipes, independent of the season. The rows live in `/tech_map_rows`. A map without a crop is a library map: a source of rows for other maps, never deployed itself.\n\n---\n\n### TechMap has next parameters\n\n- (readonly) `id` — VelHerd ID of TechMap\n    \n- `name` — name of TechMap, unique for the crop and the predecessor\n    \n- `crop_id` — ID of Crop the map grows (`/crops`); empty for a library map\n    \n- `predecessor_crop_id` — ID of Crop the map follows (`/crops`), not the crop itself\n    \n- (readonly) `status` — status of TechMap\n    \n- (readonly) `approved_by_id` — ID of the VelHerd user who approved it\n    \n- (readonly) `approved_at` — when it was approved\n    \n- `planned_area` — default crop area the map is read for, base area unit\n    \n- `fuel_resource_id` — ID of Resource of the `fuel` category the map is priced by (`/resources`)\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `description` — description of TechMap\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Required on create\n\n`name`\n\n### Acceptable methods\n\n- `Ids`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n- `approve` — `POST` {{baseUrl}}/api/{{apiVersion}}/tech_maps/ID/approve\n    \n- `archive` — `POST` {{baseUrl}}/api/{{apiVersion}}/tech_maps/ID/archive\n    \n- `compose` — `POST` {{baseUrl}}/api/{{apiVersion}}/tech_maps/ID/compose\n    \n\n### Filters by\n\n`id`, `name`, `crop_id`, `predecessor_crop_id`, `status`, `external_id`\n\n### Order by\n\n`id`, `name`\n\n### Important\n\n- `planned_area` are taken and returned in **base units** (the unit with `is_base` = `true` for its unit type, see `/units`), not in the units the user picked in the web interface.\n    \n- The status cannot be changed through `update`; a new map is `draft` and moves only by `approve` and `archive`.\n    \n- Deleting a map deletes its rows.\n    \n\n### Additional actions\n\n#### `POST` {{baseUrl}}/api/{{apiVersion}}/tech_maps/ID/approve\n\nMoves the map to `approved`; `approved_by_id` is set to the token owner. Only an approved map of a crop may give birth to agro plans.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.\n\n#### `POST` {{baseUrl}}/api/{{apiVersion}}/tech_maps/ID/archive\n\nMoves the map to `archived`.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.\n\n#### `POST` {{baseUrl}}/api/{{apiVersion}}/tech_maps/ID/compose\n\nCopies every row of another map (typically a library map of shared works) into this one, with recipes and norms; the copies drop the `base` flag and remember the source map in `source_tech_map_id`. All or nothing: a row that cannot be copied stops the whole copy.\n\nResponse: `200 OK` with the map in the same format as **Single Resource** and `meta.rows_count` — how many rows were added. A map copied into itself or a row that cannot be copied returns `422` with `errors`.\n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/tech_maps\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **data**: An array of tech map objects, where each object contains:\n    \n    - **id**: VelHerd ID of TechMap.\n        \n    - **name**: Name of TechMap, unique for the crop and the predecessor.\n        \n    - **crop_id**: ID of Crop the map grows (`/crops`); empty for a library map.\n        \n    - **predecessor_crop_id**: ID of Crop the map follows (`/crops`), not the crop itself.\n        \n    - **status**: Status of TechMap. Can be one of `draft`, `approved`, `archived`.\n        \n    - **approved_by_id**: ID of the VelHerd user who approved it.\n        \n    - **approved_at**: When it was approved (date and time, ISO 8601).\n        \n    - **planned_area**: Default crop area the map is read for, base area unit.\n        \n    - **fuel_resource_id**: ID of Resource of the `fuel` category the map is priced by (`/resources`).\n        \n    - **external_id**: An optional identifier used to reference this resource in an external system.\n        \n    - **description**: Description of TechMap.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n- **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.\n    \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"tech_map\",\n            \"attributes\": {\n                \"id\": 1,\n                \"name\": \"Winter wheat after sunflower\",\n                \"crop_id\": 3,\n                \"predecessor_crop_id\": 5,\n                \"status\": \"approved\",\n                \"approved_by_id\": 2,\n                \"approved_at\": \"2026-02-10T11:20:00.000+02:00\",\n                \"planned_area\": \"1200000.0\",\n                \"fuel_resource_id\": 12,\n                \"external_id\": null,\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\"\n            }\n        },\n        {\n            \"id\": \"7\",\n            \"type\": \"tech_map\",\n            \"attributes\": {\n                \"id\": 7,\n                \"name\": \"Shared autumn works\",\n                \"crop_id\": null,\n                \"predecessor_crop_id\": null,\n                \"status\": \"draft\",\n                \"approved_by_id\": null,\n                \"approved_at\": null,\n                \"planned_area\": null,\n                \"fuel_resource_id\": null,\n                \"external_id\": \"LIB-01\",\n                \"description\": \"Library map\",\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"per_page\": 100,\n        \"total_count\": 2,\n        \"total_pages\": 1\n    }\n}\n\n ```\n\nThis response provides a structured overview of the tech maps, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_tech_maps",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_maps",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_maps"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_tech_map_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_maps/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_maps",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_tech_map",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_maps/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_maps",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_tech_maps_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_maps",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_maps"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"name\": \"asc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_tech_maps_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_maps",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_maps"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"crop_id\": 3,\n        \"status\": \"approved\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_tech_map",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_maps",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_maps"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"name\": \"Winter wheat after sunflower\",\n        \"crop_id\": 3,\n        \"predecessor_crop_id\": 5,\n        \"planned_area\": 1200000,\n        \"fuel_resource_id\": 12\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_tech_map",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_maps/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_maps",
+										"1"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"planned_area\": 1500000\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "approve_tech_map",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_maps/1/approve",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_maps",
+										"1",
+										"approve"
+									]
+								},
+								"description": "Moves the map to `approved`; `approved_by_id` is set to the token owner. Only an approved map of a crop may give birth to agro plans.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`."
+							},
+							"response": []
+						},
+						{
+							"name": "archive_tech_map",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_maps/1/archive",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_maps",
+										"1",
+										"archive"
+									]
+								},
+								"description": "Moves the map to `archived`.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`."
+							},
+							"response": []
+						},
+						{
+							"name": "compose_tech_map",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_maps/1/compose",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_maps",
+										"1",
+										"compose"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"source_tech_map_id\": 7\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Copies every row of another map (typically a library map of shared works) into this one, with recipes and norms; the copies drop the `base` flag and remember the source map in `source_tech_map_id`. All or nothing: a row that cannot be copied stops the whole copy.\n\nResponse: `200 OK` with the map in the same format as **Single Resource** and `meta.rows_count` — how many rows were added. A map copied into itself or a row that cannot be copied returns `422` with `errors`."
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_tech_map",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_maps/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_maps",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tech Map Rows",
+					"item": [
+						{
+							"name": "introduction TechMapRow",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_map_rows",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_map_rows"
+									]
+								},
+								"description": "## API Endpoint: Tech Map Rows\n\n### Purpose\n\nThis endpoint manages the rows of tech maps — one work of a map: a snapshot of a template's recipe and of an aggregate's norms, plus what only the map knows: the share of the crop area and the timing relative to the base work. Copies, not references: editing the handbook never rewrites a map somebody has already costed.\n\n---\n\n### TechMapRow has next parameters\n\n- (readonly) `id` — VelHerd ID of TechMapRow\n    \n- (create only) `tech_map_id` — ID of TechMap (`/tech_maps`)\n    \n- (readonly) `position` — order of the row in the map; a new row is appended, `move` changes it\n    \n- `name` — name of TechMapRow\n    \n- `work_type_id` — ID of WorkType of the `agro` category (`/work_types`)\n    \n- (readonly) `source_template_id` — ID of AgroOperationTemplate the recipe was taken from (`/agro_operation_templates`)\n    \n- (readonly) `source_tech_map_id` — ID of TechMap the row was composed from (`/tech_maps`)\n    \n- `machinery_aggregate_id` — ID of MachineryAggregate of the same work type (`/machinery_aggregates`); sent alone, it fills the norms below\n    \n- `output_rate` — output norm, units of the rate basis per shift\n    \n- `fuel_rate` — fuel norm, litres per unit of the rate basis\n    \n- `shift_hours` — hours in a shift\n    \n- `operators_count` — operators per shift\n    \n- `auxiliary_workers_count` — auxiliary workers per shift\n    \n- `area_share` — share of the crop area the work covers, percent, `100` by default\n    \n- `base` — is this the base work (sowing) the timing of the others counts from; one per map\n    \n- `day_offset` — days from the base work, negative before it; dropped for the base row\n    \n- `duration_days` — how many days the work takes, `10` by default\n    \n- `planned_spray_rate` — spray rate of the recipe, base volume unit; required with tank-mix positions\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `description` — description of TechMapRow\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n- `tech_map_row_applications` — array of recipe positions, see below\n    \n\n### Required on create\n\n`name`, `tech_map_id`, `work_type_id`\n\n### Acceptable methods\n\n- `Ids`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n- `refresh` — `POST` {{baseUrl}}/api/{{apiVersion}}/tech_map_rows/ID/refresh\n    \n- `move` — `POST` {{baseUrl}}/api/{{apiVersion}}/tech_map_rows/ID/move\n    \n\n### Filters by\n\n`id`, `tech_map_id`, `work_type_id`, `machinery_aggregate_id`, `source_template_id`, `base`, `external_id`\n\n### Order by\n\n`id`, `position`\n\n### Important\n\n- `output_rate` and `fuel_rate` are taken and returned in the **planning unit of the work type's rate basis** exactly as stored (hectares, tonnes, kilometres…): `output_rate` is units per shift, `fuel_rate` is litres per unit. They are not converted to the units the user picked in the web interface. `planned_spray_rate` and `planned_quantity` are taken and returned in **base units** (the unit with `is_base` = `true` for its unit type, see `/units`), not in the units the user picked in the web interface.\n    \n- A row may be snapshotted from a template: send `template_id` with `tech_map_id` on create, and the template's name, work type, spray rate and recipe come first, the other attributes sent go on top. Later edits of the template do not touch the row; `refresh` re-takes the snapshot.\n    \n- Recipe positions are sent in `tech_map_row_applications_attributes`: a row without `id` is added, a row with `id` is changed, a row with `id` and `\"_destroy\": true` is removed. Rows that are not sent stay as they are. Positions are numbered in the order they are sent; `application_basis` is `per_area` or `per_solution`, and `per_solution` needs `in_tank_mix`. A recipe needs a work type that takes applications.\n    \n- `tech_map_id` is set on create only and is ignored on update; `position` is the map's own and moves only by `move`. Deleting a row renumbers the rest.\n    \n\n### Additional actions\n\n#### `POST` {{baseUrl}}/api/{{apiVersion}}/tech_map_rows/ID/refresh\n\nRe-takes the snapshot from the sources: the recipe and the spray rate from `source_template_id`, the norms from `machinery_aggregate_id`. The name, the area share and the timing are left alone. A row without a source returns `422`.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.\n\n#### `POST` {{baseUrl}}/api/{{apiVersion}}/tech_map_rows/ID/move\n\nSwaps places with the neighbour above (`direction` = `up`) or below (`down`); a row already at the edge stays put.\n\nResponse: `200 OK` with the row in the same format as **Single Resource**.\n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/tech_map_rows\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **data**: An array of tech map row objects, where each object contains:\n    \n    - **id**: VelHerd ID of TechMapRow.\n        \n    - **tech_map_id**: ID of TechMap (`/tech_maps`).\n        \n    - **position**: Order of the row in the map; a new row is appended, `move` changes it.\n        \n    - **name**: Name of TechMapRow.\n        \n    - **work_type_id**: ID of WorkType of the `agro` category (`/work_types`).\n        \n    - **source_template_id**: ID of AgroOperationTemplate the recipe was taken from (`/agro_operation_templates`).\n        \n    - **source_tech_map_id**: ID of TechMap the row was composed from (`/tech_maps`).\n        \n    - **machinery_aggregate_id**: ID of MachineryAggregate of the same work type (`/machinery_aggregates`); sent alone, it fills the norms below.\n        \n    - **output_rate**: Output norm, units of the rate basis per shift.\n        \n    - **fuel_rate**: Fuel norm, litres per unit of the rate basis.\n        \n    - **shift_hours**: Hours in a shift.\n        \n    - **operators_count**: Operators per shift.\n        \n    - **auxiliary_workers_count**: Auxiliary workers per shift.\n        \n    - **area_share**: Share of the crop area the work covers, percent, `100` by default.\n        \n    - **base**: Is this the base work (sowing) the timing of the others counts from; one per map.\n        \n    - **day_offset**: Days from the base work, negative before it; dropped for the base row.\n        \n    - **duration_days**: How many days the work takes, `10` by default.\n        \n    - **planned_spray_rate**: Spray rate of the recipe, base volume unit; required with tank-mix positions.\n        \n    - **external_id**: An optional identifier used to reference this resource in an external system.\n        \n    - **description**: Description of TechMapRow.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n    - **tech_map_row_applications**: Array of recipe positions, see below.\n        \n        - `id`\n            \n        - `resource_id` — applied resource (`/resources`)\n            \n        - `application_basis` — `per_area` or `per_solution`\n            \n        - `in_tank_mix` — is it part of a tank mix\n            \n        - `planned_quantity` — in base units, on the reference area of 10 ha\n            \n        - `position` — order in the recipe, numbered by the system\n            \n        - `external_id`, `description`\n            \n\n- **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.\n    \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"11\",\n            \"type\": \"tech_map_row\",\n            \"attributes\": {\n                \"id\": 11,\n                \"tech_map_id\": 1,\n                \"position\": 2,\n                \"name\": \"Pre-sowing cultivation\",\n                \"work_type_id\": 4,\n                \"source_template_id\": null,\n                \"source_tech_map_id\": null,\n                \"machinery_aggregate_id\": 1,\n                \"output_rate\": \"60.0\",\n                \"fuel_rate\": \"4.5\",\n                \"shift_hours\": \"10.0\",\n                \"operators_count\": 1,\n                \"auxiliary_workers_count\": 1,\n                \"area_share\": \"100.0\",\n                \"base\": false,\n                \"day_offset\": -3,\n                \"duration_days\": 5,\n                \"planned_spray_rate\": \"0.2\",\n                \"external_id\": null,\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"tech_map_row_applications\": [\n                    {\n                        \"id\": 21,\n                        \"resource_id\": 15,\n                        \"application_basis\": \"per_area\",\n                        \"in_tank_mix\": true,\n                        \"planned_quantity\": \"5.0\",\n                        \"position\": 1,\n                        \"external_id\": null,\n                        \"description\": null\n                    }\n                ]\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"per_page\": 100,\n        \"total_count\": 1,\n        \"total_pages\": 1\n    }\n}\n\n ```\n\nThis response provides a structured overview of the tech map rows, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_tech_map_rows",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_map_rows",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_map_rows"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_tech_map_row_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_map_rows/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_map_rows",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_tech_map_row",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_map_rows/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_map_rows",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_tech_map_rows_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_map_rows",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_map_rows"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"position\": \"asc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_tech_map_rows_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_map_rows",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_map_rows"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"tech_map_id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_tech_map_row",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_map_rows",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_map_rows"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"tech_map_id\": 1,\n        \"name\": \"Pre-sowing cultivation\",\n        \"work_type_id\": 4,\n        \"machinery_aggregate_id\": 1,\n        \"area_share\": 100,\n        \"day_offset\": -3,\n        \"duration_days\": 5,\n        \"planned_spray_rate\": 0.2,\n        \"tech_map_row_applications_attributes\": [\n            {\n                \"resource_id\": 15,\n                \"application_basis\": \"per_area\",\n                \"in_tank_mix\": true,\n                \"planned_quantity\": 5\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_tech_map_row",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_map_rows/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_map_rows",
+										"1"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"area_share\": 80,\n        \"tech_map_row_applications_attributes\": [\n            {\n                \"id\": 21,\n                \"planned_quantity\": 6\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "refresh_tech_map_row",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_map_rows/1/refresh",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_map_rows",
+										"1",
+										"refresh"
+									]
+								},
+								"description": "Re-takes the snapshot from the sources: the recipe and the spray rate from `source_template_id`, the norms from `machinery_aggregate_id`. The name, the area share and the timing are left alone. A row without a source returns `422`.\n\nResponse: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`."
+							},
+							"response": []
+						},
+						{
+							"name": "move_tech_map_row",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_map_rows/1/move",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_map_rows",
+										"1",
+										"move"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"direction\": \"up\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Swaps places with the neighbour above (`direction` = `up`) or below (`down`); a row already at the edge stays put.\n\nResponse: `200 OK` with the row in the same format as **Single Resource**."
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_tech_map_row",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/tech_map_rows/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"tech_map_rows",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Resource Prices",
+					"item": [
+						{
+							"name": "introduction ResourcePrice",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/resource_prices",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"resource_prices"
+									]
+								},
+								"description": "## API Endpoint: Resource Prices\n\n### Purpose\n\nThis endpoint manages resource prices — the planning price of a resource for one season. Maps and plans keep norms only; this is where the money lives, one price per resource and season.\n\n---\n\n### ResourcePrice has next parameters\n\n- (readonly) `id` — VelHerd ID of ResourcePrice\n    \n- `resource_id` — ID of Resource (`/resources`)\n    \n- `season_id` — ID of Season (`/seasons`)\n    \n- `unit_price` — price of one unit of the resource in its own unit\n    \n- `currency` — currency, `uah` by default\n    \n- `external_id` — an optional identifier used to reference this resource in an external system\n    \n- `description` — description of ResourcePrice\n    \n- (readonly) `created_at`\n    \n- (readonly) `updated_at`\n    \n\n### Required on create\n\n`resource_id`, `season_id`, `unit_price`\n\n### Acceptable methods\n\n- `Ids`\n    \n- `Single Resource`\n    \n- `Create Resource`\n    \n- `Update Resource`\n    \n- `Delete Resource`\n    \n- `copy` — `POST` {{baseUrl}}/api/{{apiVersion}}/resource_prices/copy\n    \n\n### Filters by\n\n`id`, `resource_id`, `season_id`, `currency`, `external_id`\n\n### Order by\n\n`id`, `unit_price`\n\n### Important\n\n- One price per resource and season: a second one is refused with `422`.\n    \n\n### Additional actions\n\n#### `POST` {{baseUrl}}/api/{{apiVersion}}/resource_prices/copy\n\nFills the empty cells of the price list of `season_id` from `source_season_id`, every price raised by `index_percent` percent (optional, `0` by default). Only resources without a price in the target season are copied: a price somebody already typed stays. Needs the right to create resource prices.\n\nResponse: `200 OK` with `meta.created_count` — how many prices were created. A season named as its own source returns `422` with `errors`; an unknown season `404`.\n\n---\n\n### Request Format\n\n- **Method**: GET\n    \n- **URL**: {{baseUrl}}/api/{{apiVersion}}/resource_prices\n    \n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **data**: An array of resource price objects, where each object contains:\n    \n    - **id**: VelHerd ID of ResourcePrice.\n        \n    - **resource_id**: ID of Resource (`/resources`).\n        \n    - **season_id**: ID of Season (`/seasons`).\n        \n    - **unit_price**: Price of one unit of the resource in its own unit.\n        \n    - **currency**: Currency. Can be one of `usd`, `eur`, `uah`, `gbp`.\n        \n    - **external_id**: An optional identifier used to reference this resource in an external system.\n        \n    - **description**: Description of ResourcePrice.\n        \n    - **created_at**: Created time\n        \n    - **updated_at**: Updated time\n        \n\n- **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.\n    \n\n### Example Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"resource_price\",\n            \"attributes\": {\n                \"id\": 1,\n                \"resource_id\": 15,\n                \"season_id\": 2,\n                \"unit_price\": \"1250.5\",\n                \"currency\": \"uah\",\n                \"external_id\": null,\n                \"description\": null,\n                \"created_at\": \"2026-03-02T09:14:27.512+02:00\",\n                \"updated_at\": \"2026-03-02T09:14:27.512+02:00\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"per_page\": 100,\n        \"total_count\": 1,\n        \"total_pages\": 1\n    }\n}\n\n ```\n\nThis response provides a structured overview of the resource prices, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_resource_prices",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/resource_prices",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"resource_prices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_resource_price_ids",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/resource_prices/ids",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"resource_prices",
+										"ids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_resource_price",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/resource_prices/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"resource_prices",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_resource_prices_with_order",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/resource_prices",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"resource_prices"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"order_params\": {\n        \"unit_price\": \"desc\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_resource_prices_with_filter",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/resource_prices",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"resource_prices"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"filter_params\": {\n        \"season_id\": 2\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_resource_price",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/resource_prices",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"resource_prices"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"resource_id\": 15,\n        \"season_id\": 2,\n        \"unit_price\": 1250.5,\n        \"currency\": \"uah\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_resource_price",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/resource_prices/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"resource_prices",
+										"1"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"unit_price\": 1300\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "copy_resource_prices",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/resource_prices/copy",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"resource_prices",
+										"copy"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"season_id\": 3,\n        \"source_season_id\": 2,\n        \"index_percent\": 10\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Fills the empty cells of the price list of `season_id` from `source_season_id`, every price raised by `index_percent` percent (optional, `0` by default). Only resources without a price in the target season are copied: a price somebody already typed stays. Needs the right to create resource prices.\n\nResponse: `200 OK` with `meta.created_count` — how many prices were created. A season named as its own source returns `422` with `errors`; an unknown season `404`."
+							},
+							"response": []
+						},
+						{
+							"name": "destroy_resource_price",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/resource_prices/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"resource_prices",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Machinery Schedule",
+					"item": [
+						{
+							"name": "introduction MachinerySchedule",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machinery_schedule",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machinery_schedule"
+									]
+								},
+								"description": "## API Endpoint: Machinery Schedule\n\n### Purpose\n\nThis endpoint reads the machinery schedule of a season — how many machines and implements of each class the season's agro plans need day by day, against the units the fleet has. The schedule is computed from the plans, the tech maps and the fleet, never stored, so it is read only and has no records of its own: there is no `ids`, no single resource, no pagination.\n\n---\n\n### Request Format\n\n- **Method**: GET\n\n- **URL**: {{baseUrl}}/api/{{apiVersion}}/machinery_schedule?season_id=ID\n\n\n`season_id` is required: without it the response is `422`, for an unknown season `404`.\n\n### Acceptable methods\n\n- `Resources collection` only\n\n\n### Important\n\n- Areas are returned in the **base area unit** (see `/units`), not in the unit the user picked in the web interface.\n\n- A plan's shifts are spread evenly over the calendar days of its window; an aggregate is split into its classes, so two aggregates pulled by the same tractor class compete for it. The need of a class on a day is rounded up only after the works of the day are summed.\n\n- A unit under repair still counts as available; only a written-off unit has left the yard.\n\n- A plan the schedule cannot count stays in `works` with its `reason` instead of its shifts: `no_aggregate`, `no_area`, `basis_not_supported` (the work type is not counted per area), `norm_not_set`.\n\n- Reading needs the `MachinerySchedule` permission (read), which a company role may grant without granting the fleet or the plans.\n\n\n### Response Structure\n\nThe response will contain a JSON object with the following structure:\n\n- **season**: `id` and `name` of the season.\n\n- **areaUnitLabel**: Symbol of the base area unit the areas are in.\n\n- **decades**: The axis — every calendar decade (the 1st–10th, the 11th–20th and the 21st to the month's end) from the first busy day to the last, the empty ones included: `key` (ISO date of the first day), `number` (1–3), `startOn`, `endOn`.\n\n- **lines**: One row per class of machines and implements the plans need, machines first: `key`, `kind` (`machine_type` or `equipment_type`), `name`, `available` (units in service), `peak` (most units needed on one day of the season), `deficit` (is any day short), `contractArea` (area no own unit can take over the season), `decades` — per decade `key`: `needed` (busiest day of the decade), `deficit` (units short on that day), `contractArea`.\n\n- **bottlenecks**: The decades a class is short in: `key`, `className`, `available`, `needed`, `deficit`, `contractArea`, `startOn`, `endOn`.\n\n- **works**: The plans the schedule is built from: `key`, `name`, `source` (`plan`, or `forecast` for a plan still expected from an approved tech map), `planId`, `reason` (why it is not counted, or empty), `techMapId`, `techMapName`, `farmUnitItemName`, `workTypeName`, `aggregateName`, `startOn`, `finishOn`, `area`, `shifts`.\n\n- **summary**: `worksCount`, `forecastCount`, `gapsCount` (works with a `reason`), `deficitClassesCount`.\n\n\n### Example Response\n\n``` json\n{\n    \"season\": {\n        \"id\": 2,\n        \"name\": \"2026\"\n    },\n    \"areaUnitLabel\": \"m²\",\n    \"decades\": [\n        {\n            \"key\": \"2026-04-11\",\n            \"number\": 2,\n            \"startOn\": \"2026-04-11\",\n            \"endOn\": \"2026-04-20\"\n        },\n        {\n            \"key\": \"2026-04-21\",\n            \"number\": 3,\n            \"startOn\": \"2026-04-21\",\n            \"endOn\": \"2026-04-30\"\n        }\n    ],\n    \"lines\": [\n        {\n            \"key\": \"machine_type-1\",\n            \"kind\": \"machine_type\",\n            \"name\": \"Tractor 1.4\",\n            \"available\": 1,\n            \"peak\": 2,\n            \"deficit\": true,\n            \"contractArea\": \"500000.0\",\n            \"decades\": {\n                \"2026-04-11\": {\n                    \"needed\": 2,\n                    \"deficit\": 1,\n                    \"contractArea\": \"500000.0\"\n                },\n                \"2026-04-21\": {\n                    \"needed\": 1,\n                    \"deficit\": 0,\n                    \"contractArea\": \"0.0\"\n                }\n            }\n        },\n        {\n            \"key\": \"equipment_type-3\",\n            \"kind\": \"equipment_type\",\n            \"name\": \"Seeder 12 m\",\n            \"available\": 2,\n            \"peak\": 2,\n            \"deficit\": false,\n            \"contractArea\": \"0.0\",\n            \"decades\": {\n                \"2026-04-11\": {\n                    \"needed\": 2,\n                    \"deficit\": 0,\n                    \"contractArea\": \"0.0\"\n                },\n                \"2026-04-21\": {\n                    \"needed\": 1,\n                    \"deficit\": 0,\n                    \"contractArea\": \"0.0\"\n                }\n            }\n        }\n    ],\n    \"bottlenecks\": [\n        {\n            \"key\": \"machine_type-1-2026-04-11\",\n            \"className\": \"Tractor 1.4\",\n            \"available\": 1,\n            \"startOn\": \"2026-04-11\",\n            \"endOn\": \"2026-04-20\",\n            \"needed\": 2,\n            \"deficit\": 1,\n            \"contractArea\": \"500000.0\"\n        }\n    ],\n    \"works\": [\n        {\n            \"key\": 0,\n            \"name\": \"Sowing of winter wheat\",\n            \"source\": \"plan\",\n            \"planId\": 5,\n            \"reason\": null,\n            \"techMapId\": 1,\n            \"techMapName\": \"Winter wheat after sunflower\",\n            \"farmUnitItemName\": \"North\",\n            \"workTypeName\": \"Sowing\",\n            \"aggregateName\": \"Sowing unit 12 m\",\n            \"startOn\": \"2026-04-20\",\n            \"finishOn\": \"2026-04-21\",\n            \"area\": \"1000000.0\",\n            \"shifts\": \"4.0\"\n        },\n        {\n            \"key\": 1,\n            \"name\": \"Rolling\",\n            \"source\": \"plan\",\n            \"planId\": 6,\n            \"reason\": \"no_aggregate\",\n            \"techMapId\": null,\n            \"techMapName\": null,\n            \"farmUnitItemName\": \"North\",\n            \"workTypeName\": \"Rolling\",\n            \"aggregateName\": null,\n            \"startOn\": \"2026-04-22\",\n            \"finishOn\": \"2026-04-23\",\n            \"area\": \"1000000.0\",\n            \"shifts\": null\n        }\n    ],\n    \"summary\": {\n        \"worksCount\": 2,\n        \"forecastCount\": 0,\n        \"gapsCount\": 1,\n        \"deficitClassesCount\": 1\n    }\n}\n\n ```\n\nThis response provides a structured overview of the machinery schedule, enabling clients to easily access and utilize the information."
+							},
+							"response": []
+						},
+						{
+							"name": "get_machinery_schedule",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{accessToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/{{apiVersion}}/machinery_schedule?season_id=2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"{{apiVersion}}",
+										"machinery_schedule"
+									],
+									"query": [
+										{
+											"key": "season_id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Direct Uploads",
 					"item": [
 						{
