@@ -25,6 +25,7 @@ paths:
         responses present in HTTP Body in
         [JSON](http://en.wikipedia.org/wiki/JSON) format.
 
+
         VelHerd API is based on
         [REST](http://en.wikipedia.org/wiki/Representational_state_transfer)
         principles. You have to be authenticated and call the simple HTTPs
@@ -19080,6 +19081,4610 @@ paths:
           required: false
           deprecated: false
           schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_types:
+    head:
+      summary: introduction MachineType
+      tags:
+        - API endpoints
+        - Machine Types
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: |-
+        ## API Endpoint: Machine Types
+
+        ### Purpose
+
+        This endpoint manages machine types (classes) — the handbook of tractor and self-propelled machine classes a company's fleet and machinery aggregates refer to.
+
+        ---
+
+        ### MachineType has next parameters
+
+        - (readonly) `id` — VelHerd ID of MachineType
+
+        - `name` — name of MachineType, unique
+
+        - `power_min` — lower bound of the engine power of the class, horsepower
+
+        - `power_max` — upper bound of the engine power of the class, horsepower
+
+        - `active` — is the class offered in the forms, `true` by default
+
+        - `external_id` — an optional identifier used to reference this resource in an external system
+
+        - `description` — description of MachineType
+
+        - (readonly) `created_at`
+
+        - (readonly) `updated_at`
+
+
+        ### Required on create
+
+        `name`
+
+        ### Acceptable methods
+
+        - `Ids`
+
+        - `Single Resource`
+
+        - `Create Resource`
+
+        - `Update Resource`
+
+        - `Delete Resource`
+
+
+        ### Filters by
+
+        `id`, `name`, `active`, `external_id`
+
+        ### Order by
+
+        `id`, `name`
+
+        ### Important
+
+        - `power_max` cannot be lower than `power_min`.
+
+        - A class that machines or machinery aggregates refer to cannot be deleted: `DELETE` answers `422` with `errors`.
+
+
+        ---
+
+        ### Request Format
+
+        - **Method**: GET
+
+        - **URL**: {{baseUrl}}/api/{{apiVersion}}/machine_types
+
+
+        ### Response Structure
+
+        The response will contain a JSON object with the following structure:
+
+        - **data**: An array of machine type objects, where each object contains:
+
+            - **id**: VelHerd ID of MachineType.
+
+            - **name**: Name of MachineType, unique.
+
+            - **power_min**: Lower bound of the engine power of the class, horsepower.
+
+            - **power_max**: Upper bound of the engine power of the class, horsepower.
+
+            - **active**: Is the class offered in the forms, `true` by default.
+
+            - **external_id**: An optional identifier used to reference this resource in an external system.
+
+            - **description**: Description of MachineType.
+
+            - **created_at**: Created time
+
+            - **updated_at**: Updated time
+
+
+        - **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.
+
+
+        ### Example Response
+
+        ``` json
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "machine_type",
+                    "attributes": {
+                        "id": 1,
+                        "name": "Tractor 1.4",
+                        "power_min": "80.0",
+                        "power_max": "150.0",
+                        "active": true,
+                        "external_id": null,
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00"
+                    }
+                },
+                {
+                    "id": "2",
+                    "type": "machine_type",
+                    "attributes": {
+                        "id": 2,
+                        "name": "Combine harvester",
+                        "power_min": "250.0",
+                        "power_max": null,
+                        "active": true,
+                        "external_id": "ERP-MT-02",
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00"
+                    }
+                }
+            ],
+            "meta": {
+                "page": 1,
+                "per_page": 100,
+                "total_count": 2,
+                "total_pages": 1
+            }
+        }
+
+         ```
+
+        This response provides a structured overview of the machine types, enabling clients to easily access and utilize the information.
+    get:
+      summary: get_machine_types
+      tags:
+        - API endpoints
+        - Machine Types
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_machine_type
+      tags:
+        - API endpoints
+        - Machine Types
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    power_min:
+                      type: integer
+                    power_max:
+                      type: integer
+                    active:
+                      type: boolean
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_types/ids:
+    get:
+      summary: get_machine_type_ids
+      tags:
+        - API endpoints
+        - Machine Types
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_types/1:
+    get:
+      summary: get_machine_type
+      tags:
+        - API endpoints
+        - Machine Types
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    put:
+      summary: update_machine_type
+      tags:
+        - API endpoints
+        - Machine Types
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    power_max:
+                      type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_types/3:
+    delete:
+      summary: destroy_machine_type
+      tags:
+        - API endpoints
+        - Machine Types
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/equipment_types:
+    head:
+      summary: introduction EquipmentType
+      tags:
+        - API endpoints
+        - Equipment Types
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: |-
+        ## API Endpoint: Equipment Types
+
+        ### Purpose
+
+        This endpoint manages equipment types (classes) — the handbook of implement and stationary equipment classes a company's fleet and machinery aggregates refer to.
+
+        ---
+
+        ### EquipmentType has next parameters
+
+        - (readonly) `id` — VelHerd ID of EquipmentType
+
+        - `name` — name of EquipmentType, unique
+
+        - `category` — kind of the class
+
+        - `working_width` — working width of an implement, metres; empty for a stationary class
+
+        - `active` — is the class offered in the forms, `true` by default
+
+        - `external_id` — an optional identifier used to reference this resource in an external system
+
+        - `description` — description of EquipmentType
+
+        - (readonly) `created_at`
+
+        - (readonly) `updated_at`
+
+
+        ### Required on create
+
+        `category`, `name`
+
+        ### Acceptable methods
+
+        - `Ids`
+
+        - `Single Resource`
+
+        - `Create Resource`
+
+        - `Update Resource`
+
+        - `Delete Resource`
+
+
+        ### Filters by
+
+        `id`, `name`, `category`, `active`, `external_id`
+
+        ### Order by
+
+        `id`, `name`
+
+        ### Important
+
+        - Only an `implement` class joins machinery aggregates and keeps a `working_width`; a width sent for a `stationary` class is dropped.
+
+        - A class that equipment or machinery aggregates refer to cannot be deleted: `DELETE` answers `422` with `errors`.
+
+
+        ---
+
+        ### Request Format
+
+        - **Method**: GET
+
+        - **URL**: {{baseUrl}}/api/{{apiVersion}}/equipment_types
+
+
+        ### Response Structure
+
+        The response will contain a JSON object with the following structure:
+
+        - **data**: An array of equipment type objects, where each object contains:
+
+            - **id**: VelHerd ID of EquipmentType.
+
+            - **name**: Name of EquipmentType, unique.
+
+            - **category**: Kind of the class. Can be one of `implement` (pulled by a machine: harrow, seeder, header), `stationary` (stands on its own: milking machine, dryer).
+
+            - **working_width**: Working width of an implement, metres; empty for a stationary class.
+
+            - **active**: Is the class offered in the forms, `true` by default.
+
+            - **external_id**: An optional identifier used to reference this resource in an external system.
+
+            - **description**: Description of EquipmentType.
+
+            - **created_at**: Created time
+
+            - **updated_at**: Updated time
+
+
+        - **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.
+
+
+        ### Example Response
+
+        ``` json
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "equipment_type",
+                    "attributes": {
+                        "id": 1,
+                        "name": "Disc harrow",
+                        "category": "implement",
+                        "working_width": "6.0",
+                        "active": true,
+                        "external_id": null,
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00"
+                    }
+                },
+                {
+                    "id": "2",
+                    "type": "equipment_type",
+                    "attributes": {
+                        "id": 2,
+                        "name": "Milking machine",
+                        "category": "stationary",
+                        "working_width": null,
+                        "active": true,
+                        "external_id": null,
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00"
+                    }
+                }
+            ],
+            "meta": {
+                "page": 1,
+                "per_page": 100,
+                "total_count": 2,
+                "total_pages": 1
+            }
+        }
+
+         ```
+
+        This response provides a structured overview of the equipment types, enabling clients to easily access and utilize the information.
+    get:
+      summary: get_equipment_types
+      tags:
+        - API endpoints
+        - Equipment Types
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_equipment_type
+      tags:
+        - API endpoints
+        - Equipment Types
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    category:
+                      type: string
+                    working_width:
+                      type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/equipment_types/ids:
+    get:
+      summary: get_equipment_type_ids
+      tags:
+        - API endpoints
+        - Equipment Types
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/equipment_types/1:
+    get:
+      summary: get_equipment_type
+      tags:
+        - API endpoints
+        - Equipment Types
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    put:
+      summary: update_equipment_type
+      tags:
+        - API endpoints
+        - Equipment Types
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    working_width:
+                      type: number
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/equipment_types/3:
+    delete:
+      summary: destroy_equipment_type
+      tags:
+        - API endpoints
+        - Equipment Types
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machines:
+    head:
+      summary: introduction Machine
+      tags:
+        - API endpoints
+        - Machines
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: |-
+        ## API Endpoint: Machines
+
+        ### Purpose
+
+        This endpoint manages machines — the tractors, combines and other self-propelled units of the company's fleet. Where a machine stands is kept in `/machine_location_assignments`.
+
+        ---
+
+        ### Machine has next parameters
+
+        - (readonly) `id` — VelHerd ID of Machine
+
+        - `machine_type_id` — ID of MachineType (`/machine_types`)
+
+        - `brand` — brand of Machine
+
+        - `model` — model of Machine
+
+        - `registration_number` — registration (licence) number, unique; stored in upper case
+
+        - `inventory_number` — inventory number, unique
+
+        - `serial_number` — serial number
+
+        - `year_of_manufacture` — year of manufacture, from 1950 to the next year
+
+        - `power` — engine power, horsepower
+
+        - `engine_hours` — engine hours counter
+
+        - `status` — status of Machine
+
+        - `decommissioned_on` — date the machine was written off; required with status `decommissioned` and forbidden otherwise
+
+        - `acquired_on` — date of acquisition
+
+        - `default_operator_id` — ID of Employee who usually drives it (`/employees`)
+
+        - `fuel_resource_id` — ID of Resource of the `fuel` category its shifts are priced by (`/resources`)
+
+        - `external_id` — an optional identifier used to reference this resource in an external system
+
+        - `description` — description of Machine
+
+        - (readonly) `created_at`
+
+        - (readonly) `updated_at`
+
+        - (readonly) `current_farm_unit_item_id` — ID of FarmUnitItem the machine stands at today, from its location assignments (`/farm_unit_items`)
+
+
+        ### Required on create
+
+        `brand`, `machine_type_id`, `model`
+
+        ### Acceptable methods
+
+        - `Ids`
+
+        - `Single Resource`
+
+        - `Create Resource`
+
+        - `Update Resource`
+
+        - `Delete Resource`
+
+
+        ### Filters by
+
+        `id`, `machine_type_id`, `status`, `registration_number`, `inventory_number`, `default_operator_id`, `fuel_resource_id`, `external_id`
+
+        ### Order by
+
+        `id`, `brand`, `model`, `year_of_manufacture`
+
+        ### Important
+
+        - `status` is `active` by default. Status `decommissioned` needs `decommissioned_on`; a date on a machine still in service is refused.
+
+        - Machines in service count against the plan limit of the company; a create beyond the limit answers `422` with `errors`.
+
+        - A machine with machine tasks cannot be deleted: `DELETE` answers `422` with `errors`.
+
+
+        ---
+
+        ### Request Format
+
+        - **Method**: GET
+
+        - **URL**: {{baseUrl}}/api/{{apiVersion}}/machines
+
+
+        ### Response Structure
+
+        The response will contain a JSON object with the following structure:
+
+        - **data**: An array of machine objects, where each object contains:
+
+            - **id**: VelHerd ID of Machine.
+
+            - **machine_type_id**: ID of MachineType (`/machine_types`).
+
+            - **brand**: Brand of Machine.
+
+            - **model**: Model of Machine.
+
+            - **registration_number**: Registration (licence) number, unique; stored in upper case.
+
+            - **inventory_number**: Inventory number, unique.
+
+            - **serial_number**: Serial number.
+
+            - **year_of_manufacture**: Year of manufacture, from 1950 to the next year.
+
+            - **power**: Engine power, horsepower.
+
+            - **engine_hours**: Engine hours counter.
+
+            - **status**: Status of Machine. Can be one of `active`, `under_repair`, `decommissioned`.
+
+            - **decommissioned_on**: Date the machine was written off; required with status `decommissioned` and forbidden otherwise (date, ISO 8601).
+
+            - **acquired_on**: Date of acquisition (date, ISO 8601).
+
+            - **default_operator_id**: ID of Employee who usually drives it (`/employees`).
+
+            - **fuel_resource_id**: ID of Resource of the `fuel` category its shifts are priced by (`/resources`).
+
+            - **external_id**: An optional identifier used to reference this resource in an external system.
+
+            - **description**: Description of Machine.
+
+            - **created_at**: Created time
+
+            - **updated_at**: Updated time
+
+            - **current_farm_unit_item_id**: ID of FarmUnitItem the machine stands at today, from its location assignments (`/farm_unit_items`).
+
+
+        - **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.
+
+
+        ### Example Response
+
+        ``` json
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "machine",
+                    "attributes": {
+                        "id": 1,
+                        "machine_type_id": 1,
+                        "brand": "John Deere",
+                        "model": "8R 370",
+                        "registration_number": "AA1234BP",
+                        "inventory_number": "M-0001",
+                        "serial_number": null,
+                        "year_of_manufacture": 2021,
+                        "power": "370.0",
+                        "engine_hours": "1250.5",
+                        "status": "active",
+                        "decommissioned_on": null,
+                        "acquired_on": "2021-03-15",
+                        "default_operator_id": 3,
+                        "fuel_resource_id": 12,
+                        "external_id": null,
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00",
+                        "current_farm_unit_item_id": 7
+                    }
+                },
+                {
+                    "id": "2",
+                    "type": "machine",
+                    "attributes": {
+                        "id": 2,
+                        "machine_type_id": 1,
+                        "brand": "MTZ",
+                        "model": "892",
+                        "registration_number": "AA5678BP",
+                        "inventory_number": "M-0002",
+                        "serial_number": "80912345",
+                        "year_of_manufacture": 2012,
+                        "power": "90.0",
+                        "engine_hours": "8400.0",
+                        "status": "decommissioned",
+                        "decommissioned_on": "2026-02-01",
+                        "acquired_on": "2012-05-10",
+                        "default_operator_id": null,
+                        "fuel_resource_id": null,
+                        "external_id": "ERP-M-0002",
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00",
+                        "current_farm_unit_item_id": null
+                    }
+                }
+            ],
+            "meta": {
+                "page": 1,
+                "per_page": 100,
+                "total_count": 2,
+                "total_pages": 1
+            }
+        }
+
+         ```
+
+        This response provides a structured overview of the machines, enabling clients to easily access and utilize the information.
+    get:
+      summary: get_machines
+      tags:
+        - API endpoints
+        - Machines
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_machine
+      tags:
+        - API endpoints
+        - Machines
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    machine_type_id:
+                      type: integer
+                    brand:
+                      type: string
+                    model:
+                      type: string
+                    registration_number:
+                      type: string
+                    inventory_number:
+                      type: string
+                    year_of_manufacture:
+                      type: integer
+                    power:
+                      type: integer
+                    engine_hours:
+                      type: number
+                    status:
+                      type: string
+                    acquired_on:
+                      type: string
+                    default_operator_id:
+                      type: integer
+                    fuel_resource_id:
+                      type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machines/ids:
+    get:
+      summary: get_machine_ids
+      tags:
+        - API endpoints
+        - Machines
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machines/1:
+    get:
+      summary: get_machine
+      tags:
+        - API endpoints
+        - Machines
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    put:
+      summary: update_machine
+      tags:
+        - API endpoints
+        - Machines
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    engine_hours:
+                      type: integer
+                    status:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machines/3:
+    delete:
+      summary: destroy_machine
+      tags:
+        - API endpoints
+        - Machines
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/equipments:
+    head:
+      summary: introduction Equipment
+      tags:
+        - API endpoints
+        - Equipments
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: |-
+        ## API Endpoint: Equipments
+
+        ### Purpose
+
+        This endpoint manages equipment — the implements and stationary units of the company's fleet. Where a unit stands is kept in `/equipment_location_assignments`.
+
+        ---
+
+        ### Equipment has next parameters
+
+        - (readonly) `id` — VelHerd ID of Equipment
+
+        - `equipment_type_id` — ID of EquipmentType (`/equipment_types`)
+
+        - `brand` — brand of Equipment
+
+        - `model` — model of Equipment
+
+        - `inventory_number` — inventory number, unique
+
+        - `serial_number` — serial number
+
+        - `year_of_manufacture` — year of manufacture, from 1950 to the next year
+
+        - `working_width` — working width of an implement, metres; dropped for a stationary class
+
+        - `status` — status of Equipment
+
+        - `decommissioned_on` — date the unit was written off; required with status `decommissioned` and forbidden otherwise
+
+        - `acquired_on` — date of acquisition
+
+        - `external_id` — an optional identifier used to reference this resource in an external system
+
+        - `description` — description of Equipment
+
+        - (readonly) `created_at`
+
+        - (readonly) `updated_at`
+
+        - (readonly) `current_farm_unit_item_id` — ID of FarmUnitItem the unit stands at today, from its location assignments (`/farm_unit_items`)
+
+
+        ### Required on create
+
+        `brand`, `equipment_type_id`, `model`
+
+        ### Acceptable methods
+
+        - `Ids`
+
+        - `Single Resource`
+
+        - `Create Resource`
+
+        - `Update Resource`
+
+        - `Delete Resource`
+
+
+        ### Filters by
+
+        `id`, `equipment_type_id`, `status`, `inventory_number`, `external_id`
+
+        ### Order by
+
+        `id`, `brand`, `model`, `year_of_manufacture`
+
+        ### Important
+
+        - `status` is `active` by default. Status `decommissioned` needs `decommissioned_on`; a date on a unit still in service is refused.
+
+        - A unit assigned to machine tasks cannot be deleted: `DELETE` answers `422` with `errors`.
+
+
+        ---
+
+        ### Request Format
+
+        - **Method**: GET
+
+        - **URL**: {{baseUrl}}/api/{{apiVersion}}/equipments
+
+
+        ### Response Structure
+
+        The response will contain a JSON object with the following structure:
+
+        - **data**: An array of equipment objects, where each object contains:
+
+            - **id**: VelHerd ID of Equipment.
+
+            - **equipment_type_id**: ID of EquipmentType (`/equipment_types`).
+
+            - **brand**: Brand of Equipment.
+
+            - **model**: Model of Equipment.
+
+            - **inventory_number**: Inventory number, unique.
+
+            - **serial_number**: Serial number.
+
+            - **year_of_manufacture**: Year of manufacture, from 1950 to the next year.
+
+            - **working_width**: Working width of an implement, metres; dropped for a stationary class.
+
+            - **status**: Status of Equipment. Can be one of `active`, `under_repair`, `decommissioned`.
+
+            - **decommissioned_on**: Date the unit was written off; required with status `decommissioned` and forbidden otherwise (date, ISO 8601).
+
+            - **acquired_on**: Date of acquisition (date, ISO 8601).
+
+            - **external_id**: An optional identifier used to reference this resource in an external system.
+
+            - **description**: Description of Equipment.
+
+            - **created_at**: Created time
+
+            - **updated_at**: Updated time
+
+            - **current_farm_unit_item_id**: ID of FarmUnitItem the unit stands at today, from its location assignments (`/farm_unit_items`).
+
+
+        - **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.
+
+
+        ### Example Response
+
+        ``` json
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "equipment",
+                    "attributes": {
+                        "id": 1,
+                        "equipment_type_id": 1,
+                        "brand": "Lemken",
+                        "model": "Rubin 12",
+                        "inventory_number": "E-0001",
+                        "serial_number": null,
+                        "year_of_manufacture": 2019,
+                        "working_width": "6.0",
+                        "status": "active",
+                        "decommissioned_on": null,
+                        "acquired_on": "2019-08-01",
+                        "external_id": null,
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00",
+                        "current_farm_unit_item_id": 7
+                    }
+                }
+            ],
+            "meta": {
+                "page": 1,
+                "per_page": 100,
+                "total_count": 1,
+                "total_pages": 1
+            }
+        }
+
+         ```
+
+        This response provides a structured overview of the equipment, enabling clients to easily access and utilize the information.
+    get:
+      summary: get_equipments
+      tags:
+        - API endpoints
+        - Equipments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_equipment
+      tags:
+        - API endpoints
+        - Equipments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    equipment_type_id:
+                      type: integer
+                    brand:
+                      type: string
+                    model:
+                      type: string
+                    inventory_number:
+                      type: string
+                    year_of_manufacture:
+                      type: integer
+                    working_width:
+                      type: integer
+                    status:
+                      type: string
+                    acquired_on:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/equipments/ids:
+    get:
+      summary: get_equipment_ids
+      tags:
+        - API endpoints
+        - Equipments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/equipments/1:
+    get:
+      summary: get_equipment
+      tags:
+        - API endpoints
+        - Equipments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    put:
+      summary: update_equipment
+      tags:
+        - API endpoints
+        - Equipments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/equipments/3:
+    delete:
+      summary: destroy_equipment
+      tags:
+        - API endpoints
+        - Equipments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_location_assignments:
+    head:
+      summary: introduction MachineLocationAssignment
+      tags:
+        - API endpoints
+        - Machine Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: |-
+        ## API Endpoint: Machine Location Assignments
+
+        ### Purpose
+
+        This endpoint manages the assignments of machines to farm unit items (machine yards) for a period of time. Only assignments of machines are visible and changed here.
+
+        ---
+
+        ### MachineLocationAssignment has next parameters
+
+        - (readonly) `id` — VelHerd ID of MachineLocationAssignment
+
+        - `farm_unit_item_id` — ID of FarmUnitItem of the `machines` type the record is assigned to (`/farm_unit_items`)
+
+        - (readonly) `assignable_type` — type of the assigned record, always `Machine`
+
+        - `assignable_id` — ID of Machine that is assigned (`/machines`)
+
+        - `start_at` — start of the assignment
+
+        - `end_at` — end of the assignment, empty while it lasts
+
+        - `assignment_type` — type of the assignment
+
+        - `external_id` — an optional identifier used to reference this resource in an external system
+
+        - `description` — description of MachineLocationAssignment
+
+        - (readonly) `created_at`
+
+        - (readonly) `updated_at`
+
+
+        ### Required on create
+
+        `assignable_id`, `assignment_type`, `farm_unit_item_id`, `start_at`
+
+        ### Acceptable methods
+
+        - `Ids`
+
+        - `Single Resource`
+
+        - `Create Resource`
+
+        - `Update Resource`
+
+        - `Delete Resource`
+
+
+        ### Filters by
+
+        `id`, `assignable_id`, `farm_unit_item_id`, `assignment_type`, `external_id`
+
+        ### Order by
+
+        `id`, `start_at`
+
+        ### Important
+
+        - `assignable_type` is set to `Machine` automatically and does not need to be sent.
+
+        - The farm unit item must be of the `machines` type (`item_type` in `/farm_unit_items`); a barn or a field group is refused with `422`.
+
+
+        ---
+
+        ### Request Format
+
+        - **Method**: GET
+
+        - **URL**: {{baseUrl}}/api/{{apiVersion}}/machine_location_assignments
+
+
+        ### Response Structure
+
+        The response will contain a JSON object with the following structure:
+
+        - **data**: An array of machine location assignment objects, where each object contains:
+
+            - **id**: VelHerd ID of MachineLocationAssignment.
+
+            - **farm_unit_item_id**: ID of FarmUnitItem of the `machines` type the record is assigned to (`/farm_unit_items`).
+
+            - **assignable_type**: Type of the assigned record, always `Machine`.
+
+            - **assignable_id**: ID of Machine that is assigned (`/machines`).
+
+            - **start_at**: Start of the assignment (date and time, ISO 8601).
+
+            - **end_at**: End of the assignment, empty while it lasts (date and time, ISO 8601).
+
+            - **assignment_type**: Type of the assignment. Can be one of `permanent`, `temporary`, `lease`, `operation`, `storage`, `other`.
+
+            - **external_id**: An optional identifier used to reference this resource in an external system.
+
+            - **description**: Description of MachineLocationAssignment.
+
+            - **created_at**: Created time
+
+            - **updated_at**: Updated time
+
+
+        - **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.
+
+
+        ### Example Response
+
+        ``` json
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "location_assignment",
+                    "attributes": {
+                        "id": 1,
+                        "farm_unit_item_id": 7,
+                        "assignable_type": "Machine",
+                        "assignable_id": 1,
+                        "start_at": "2026-03-01T08:00:00.000+02:00",
+                        "end_at": null,
+                        "assignment_type": "permanent",
+                        "external_id": null,
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00"
+                    }
+                }
+            ],
+            "meta": {
+                "page": 1,
+                "per_page": 100,
+                "total_count": 1,
+                "total_pages": 1
+            }
+        }
+
+         ```
+
+        This response provides a structured overview of the machine location assignments, enabling clients to easily access and utilize the information.
+    get:
+      summary: get_machine_location_assignments
+      tags:
+        - API endpoints
+        - Machine Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_machine_location_assignment
+      tags:
+        - API endpoints
+        - Machine Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    assignable_id:
+                      type: integer
+                    farm_unit_item_id:
+                      type: integer
+                    start_at:
+                      type: string
+                    assignment_type:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_location_assignments/ids:
+    get:
+      summary: get_machine_location_assignment_ids
+      tags:
+        - API endpoints
+        - Machine Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_location_assignments/1:
+    get:
+      summary: get_machine_location_assignment
+      tags:
+        - API endpoints
+        - Machine Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    put:
+      summary: update_machine_location_assignment
+      tags:
+        - API endpoints
+        - Machine Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    end_at:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_location_assignments/3:
+    delete:
+      summary: destroy_machine_location_assignment
+      tags:
+        - API endpoints
+        - Machine Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/equipment_location_assignments:
+    head:
+      summary: introduction EquipmentLocationAssignment
+      tags:
+        - API endpoints
+        - Equipment Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: |-
+        ## API Endpoint: Equipment Location Assignments
+
+        ### Purpose
+
+        This endpoint manages the assignments of equipment to farm unit items (machine yards) for a period of time. Only assignments of equipment are visible and changed here.
+
+        ---
+
+        ### EquipmentLocationAssignment has next parameters
+
+        - (readonly) `id` — VelHerd ID of EquipmentLocationAssignment
+
+        - `farm_unit_item_id` — ID of FarmUnitItem of the `machines` type the record is assigned to (`/farm_unit_items`)
+
+        - (readonly) `assignable_type` — type of the assigned record, always `Equipment`
+
+        - `assignable_id` — ID of Equipment that is assigned (`/equipments`)
+
+        - `start_at` — start of the assignment
+
+        - `end_at` — end of the assignment, empty while it lasts
+
+        - `assignment_type` — type of the assignment
+
+        - `external_id` — an optional identifier used to reference this resource in an external system
+
+        - `description` — description of EquipmentLocationAssignment
+
+        - (readonly) `created_at`
+
+        - (readonly) `updated_at`
+
+
+        ### Required on create
+
+        `assignable_id`, `assignment_type`, `farm_unit_item_id`, `start_at`
+
+        ### Acceptable methods
+
+        - `Ids`
+
+        - `Single Resource`
+
+        - `Create Resource`
+
+        - `Update Resource`
+
+        - `Delete Resource`
+
+
+        ### Filters by
+
+        `id`, `assignable_id`, `farm_unit_item_id`, `assignment_type`, `external_id`
+
+        ### Order by
+
+        `id`, `start_at`
+
+        ### Important
+
+        - `assignable_type` is set to `Equipment` automatically and does not need to be sent.
+
+        - The farm unit item must be of the `machines` type (`item_type` in `/farm_unit_items`); a barn or a field group is refused with `422`.
+
+
+        ---
+
+        ### Request Format
+
+        - **Method**: GET
+
+        - **URL**: {{baseUrl}}/api/{{apiVersion}}/equipment_location_assignments
+
+
+        ### Response Structure
+
+        The response will contain a JSON object with the following structure:
+
+        - **data**: An array of equipment location assignment objects, where each object contains:
+
+            - **id**: VelHerd ID of EquipmentLocationAssignment.
+
+            - **farm_unit_item_id**: ID of FarmUnitItem of the `machines` type the record is assigned to (`/farm_unit_items`).
+
+            - **assignable_type**: Type of the assigned record, always `Equipment`.
+
+            - **assignable_id**: ID of Equipment that is assigned (`/equipments`).
+
+            - **start_at**: Start of the assignment (date and time, ISO 8601).
+
+            - **end_at**: End of the assignment, empty while it lasts (date and time, ISO 8601).
+
+            - **assignment_type**: Type of the assignment. Can be one of `permanent`, `temporary`, `lease`, `operation`, `storage`, `other`.
+
+            - **external_id**: An optional identifier used to reference this resource in an external system.
+
+            - **description**: Description of EquipmentLocationAssignment.
+
+            - **created_at**: Created time
+
+            - **updated_at**: Updated time
+
+
+        - **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.
+
+
+        ### Example Response
+
+        ``` json
+        {
+            "data": [
+                {
+                    "id": "2",
+                    "type": "location_assignment",
+                    "attributes": {
+                        "id": 2,
+                        "farm_unit_item_id": 7,
+                        "assignable_type": "Equipment",
+                        "assignable_id": 1,
+                        "start_at": "2026-03-01T08:00:00.000+02:00",
+                        "end_at": null,
+                        "assignment_type": "storage",
+                        "external_id": null,
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00"
+                    }
+                }
+            ],
+            "meta": {
+                "page": 1,
+                "per_page": 100,
+                "total_count": 1,
+                "total_pages": 1
+            }
+        }
+
+         ```
+
+        This response provides a structured overview of the equipment location assignments, enabling clients to easily access and utilize the information.
+    get:
+      summary: get_equipment_location_assignments
+      tags:
+        - API endpoints
+        - Equipment Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_equipment_location_assignment
+      tags:
+        - API endpoints
+        - Equipment Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    assignable_id:
+                      type: integer
+                    farm_unit_item_id:
+                      type: integer
+                    start_at:
+                      type: string
+                    assignment_type:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/equipment_location_assignments/ids:
+    get:
+      summary: get_equipment_location_assignment_ids
+      tags:
+        - API endpoints
+        - Equipment Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/equipment_location_assignments/1:
+    get:
+      summary: get_equipment_location_assignment
+      tags:
+        - API endpoints
+        - Equipment Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    put:
+      summary: update_equipment_location_assignment
+      tags:
+        - API endpoints
+        - Equipment Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    end_at:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/equipment_location_assignments/3:
+    delete:
+      summary: destroy_equipment_location_assignment
+      tags:
+        - API endpoints
+        - Equipment Location Assignments
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machinery_aggregates:
+    head:
+      summary: introduction MachineryAggregate
+      tags:
+        - API endpoints
+        - Machinery Aggregates
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: |-
+        ## API Endpoint: Machinery Aggregates
+
+        ### Purpose
+
+        This endpoint manages machinery aggregates — a machine class with its implement classes for one work type, carrying the output and fuel norms that tech maps, agro plans and the machinery schedule count with.
+
+        ---
+
+        ### MachineryAggregate has next parameters
+
+        - (readonly) `id` — VelHerd ID of MachineryAggregate
+
+        - `name` — name of MachineryAggregate, unique within the work type
+
+        - `work_type_id` — ID of WorkType the norms hold for (`/work_types`)
+
+        - `machine_type_id` — ID of MachineType that pulls the aggregate (`/machine_types`); empty for a self-propelled or an implement-only aggregate
+
+        - `output_rate` — output norm, units of the rate basis per shift
+
+        - `fuel_rate` — fuel norm, litres per unit of the rate basis
+
+        - `shift_hours` — hours in a shift, `8` by default
+
+        - `operators_count` — operators per shift, `1` by default
+
+        - `auxiliary_workers_count` — auxiliary workers per shift, `0` by default
+
+        - `active` — is the aggregate offered in the forms, `true` by default
+
+        - `external_id` — an optional identifier used to reference this resource in an external system
+
+        - `description` — description of MachineryAggregate
+
+        - (readonly) `created_at`
+
+        - (readonly) `updated_at`
+
+        - (readonly) `rate_basis` — rate basis of the work type the norms are counted in
+
+        - `machinery_aggregate_items` — array of implement classes of the aggregate, see below
+
+
+        ### Required on create
+
+        `name`, `work_type_id`
+
+        ### Acceptable methods
+
+        - `Ids`
+
+        - `Single Resource`
+
+        - `Create Resource`
+
+        - `Update Resource`
+
+        - `Delete Resource`
+
+
+        ### Filters by
+
+        `id`, `name`, `work_type_id`, `machine_type_id`, `active`, `external_id`
+
+        ### Order by
+
+        `id`, `name`
+
+        ### Important
+
+        - `output_rate` and `fuel_rate` are taken and returned in the **planning unit of the work type's rate basis** exactly as stored (hectares, tonnes, kilometres…): `output_rate` is units per shift, `fuel_rate` is litres per unit. They are not converted to the units the user picked in the web interface.
+
+        - An aggregate needs a machine class or at least one implement class; a name with norms and nothing underneath is refused.
+
+        - Only `implement` equipment classes join an aggregate; `output_rate` is dropped for a work type with the `time` basis.
+
+        - Implement classes are sent in `machinery_aggregate_items_attributes`: a row without `id` is added, a row with `id` is changed, a row with `id` and `"_destroy": true` is removed. Rows that are not sent stay as they are.
+
+        - An aggregate that tech map rows, agro plans or machine tasks refer to cannot be deleted: `DELETE` answers `422` with `errors`.
+
+
+        ---
+
+        ### Request Format
+
+        - **Method**: GET
+
+        - **URL**: {{baseUrl}}/api/{{apiVersion}}/machinery_aggregates
+
+
+        ### Response Structure
+
+        The response will contain a JSON object with the following structure:
+
+        - **data**: An array of machinery aggregate objects, where each object contains:
+
+            - **id**: VelHerd ID of MachineryAggregate.
+
+            - **name**: Name of MachineryAggregate, unique within the work type.
+
+            - **work_type_id**: ID of WorkType the norms hold for (`/work_types`).
+
+            - **machine_type_id**: ID of MachineType that pulls the aggregate (`/machine_types`); empty for a self-propelled or an implement-only aggregate.
+
+            - **output_rate**: Output norm, units of the rate basis per shift.
+
+            - **fuel_rate**: Fuel norm, litres per unit of the rate basis.
+
+            - **shift_hours**: Hours in a shift, `8` by default.
+
+            - **operators_count**: Operators per shift, `1` by default.
+
+            - **auxiliary_workers_count**: Auxiliary workers per shift, `0` by default.
+
+            - **active**: Is the aggregate offered in the forms, `true` by default.
+
+            - **external_id**: An optional identifier used to reference this resource in an external system.
+
+            - **description**: Description of MachineryAggregate.
+
+            - **created_at**: Created time
+
+            - **updated_at**: Updated time
+
+            - **rate_basis**: Rate basis of the work type the norms are counted in. Can be one of `area`, `mass`, `distance`, `volume`, `count`, `head`, `time`.
+
+            - **machinery_aggregate_items**: Array of implement classes of the aggregate, see below.
+
+                - `id`
+
+                - `equipment_type_id` — implement class (`/equipment_types`)
+
+                - `quantity` — how many units of the class the aggregate holds, `1` by default
+
+                - `external_id`, `description`, `created_at`, `updated_at`
+
+
+        - **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.
+
+
+        ### Example Response
+
+        ``` json
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "machinery_aggregate",
+                    "attributes": {
+                        "id": 1,
+                        "name": "Sowing unit 12 m",
+                        "work_type_id": 4,
+                        "machine_type_id": 1,
+                        "output_rate": "60.0",
+                        "fuel_rate": "4.5",
+                        "shift_hours": "10.0",
+                        "operators_count": 1,
+                        "auxiliary_workers_count": 1,
+                        "active": true,
+                        "external_id": null,
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00",
+                        "rate_basis": "area",
+                        "machinery_aggregate_items": [
+                            {
+                                "id": 5,
+                                "equipment_type_id": 3,
+                                "quantity": 1,
+                                "external_id": null,
+                                "description": null,
+                                "created_at": "2026-03-02T09:14:27.512+02:00",
+                                "updated_at": "2026-03-02T09:14:27.512+02:00"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "meta": {
+                "page": 1,
+                "per_page": 100,
+                "total_count": 1,
+                "total_pages": 1
+            }
+        }
+
+         ```
+
+        This response provides a structured overview of the machinery aggregates, enabling clients to easily access and utilize the information.
+    get:
+      summary: get_machinery_aggregates
+      tags:
+        - API endpoints
+        - Machinery Aggregates
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_machinery_aggregate
+      tags:
+        - API endpoints
+        - Machinery Aggregates
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    work_type_id:
+                      type: integer
+                    machine_type_id:
+                      type: integer
+                    output_rate:
+                      type: integer
+                    fuel_rate:
+                      type: number
+                    shift_hours:
+                      type: integer
+                    operators_count:
+                      type: integer
+                    auxiliary_workers_count:
+                      type: integer
+                    machinery_aggregate_items_attributes:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          equipment_type_id:
+                            type: integer
+                          quantity:
+                            type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machinery_aggregates/ids:
+    get:
+      summary: get_machinery_aggregate_ids
+      tags:
+        - API endpoints
+        - Machinery Aggregates
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machinery_aggregates/1:
+    get:
+      summary: get_machinery_aggregate
+      tags:
+        - API endpoints
+        - Machinery Aggregates
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    put:
+      summary: update_machinery_aggregate
+      tags:
+        - API endpoints
+        - Machinery Aggregates
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    fuel_rate:
+                      type: number
+                    machinery_aggregate_items_attributes:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          _destroy:
+                            type: boolean
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machinery_aggregates/3:
+    delete:
+      summary: destroy_machinery_aggregate
+      tags:
+        - API endpoints
+        - Machinery Aggregates
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_tasks:
+    head:
+      summary: introduction MachineTask
+      tags:
+        - API endpoints
+        - Machine Tasks
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: |-
+        ## API Endpoint: Machine Tasks
+
+        ### Purpose
+
+        This endpoint manages machine tasks — works assigned to one machine with its implements on the fields of a basis: an agro plan or a list of agro operations. A task is an Operation with the `MachineTask` detail, so it shares the statuses, events and rights of `/operations`, but the plain operations endpoint neither lists nor changes tasks, and this one never touches a field or animal work.
+
+        ---
+
+        ### MachineTask has next parameters
+
+        - (readonly) `id` — VelHerd ID of the Operation the task is
+
+        - `name` — name of MachineTask; filled in from the work type when empty
+
+        - `work_type_id` — ID of WorkType of the `agro` category, the same as the basis has (`/work_types`)
+
+        - `season_id` — ID of Season, the same as the basis has (`/seasons`)
+
+        - (create only) `status` — status of MachineTask
+
+        - (readonly) `timeliness` — was it done on time, set by the system
+
+        - `planned_start_at` — planned start
+
+        - `planned_finish_at` — planned finish
+
+        - (readonly) `actual_start_at` — actual start, set by the events
+
+        - (readonly) `actual_finish_at` — actual finish, set by the events
+
+        - `planned_cost` — planned cost
+
+        - `actual_cost` — actual cost
+
+        - `currency` — currency
+
+        - `work_number` — number of the work
+
+        - `accounting_code` — accounting code
+
+        - (readonly) `data_source` — where the data came from
+
+        - (readonly) `created_by_id` — ID of the VelHerd user who created the record (the token owner)
+
+        - (readonly) `confirmed_by_id` — ID of the VelHerd user who confirmed it
+
+        - (readonly) `confirmed_at` — when it was confirmed
+
+        - (readonly) `cancelled_by_id` — ID of the VelHerd user who cancelled it
+
+        - (readonly) `cancelled_at` — when it was cancelled
+
+        - (readonly) `cancel_reason` — reason of the cancellation
+
+        - (readonly) `reopened_by_id` — ID of the VelHerd user who reopened it
+
+        - (readonly) `reopened_at` — when it was reopened
+
+        - (readonly) `reopen_reason` — reason of the reopening
+
+        - `external_id` — an optional identifier used to reference this resource in an external system
+
+        - `description` — description of MachineTask
+
+        - (readonly) `created_at`
+
+        - (readonly) `updated_at`
+
+        - `machine_task` — the machine, the implements and the basis of the task (object), see below
+
+
+        ### Required on create
+
+        `machine_task_attributes.machine_id`, `planned_finish_at`, `planned_start_at`, `season_id`, `work_type_id`, and one basis: `machine_task_attributes.agro_plan_id` or `machine_task_attributes.agro_operation_ids`
+
+        ### Acceptable methods
+
+        - `Ids`
+
+        - `Single Resource`
+
+        - `Create Resource`
+
+        - `Update Resource`
+
+        - `Delete Resource`
+
+        - `confirm` — `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/confirm
+
+        - `start` — `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/start
+
+        - `complete` — `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/complete
+
+        - `revert` — `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/revert
+
+        - `cancel` — `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/cancel
+
+        - `reopen` — `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/reopen
+
+
+        ### Filters by
+
+        `id`, `work_type_id`, `season_id`, `status`, `timeliness`, `work_number`, `external_id`
+
+        ### Order by
+
+        `id`, `planned_start_at`, `planned_finish_at`
+
+        ### Important
+
+        - `id` is the ID of the operation, the same as in `/operations`; the ID of the detail is `machine_task.id`, and that is what `machine_task_id` of `/machine_task_shifts` refers to.
+
+        - The status cannot be changed through `update`; it moves only by the additional actions below. On create only, `status` may be `draft` or `planned`.
+
+        - The detail is sent in `machine_task_attributes`: `machine_id`, `equipment_ids` (array, the full list — what is left out is unhitched), `machinery_aggregate_id`, and exactly one basis: `agro_plan_id` or `agro_operation_ids` (array of `agro_operation.id` from `/operations`). The basis must be of the same work type and season as the task.
+
+        - A task cannot carry a target or applications of its own: materials are applied in the agro operations of the basis.
+
+        - With an aggregate, the machine must be of its machine class and the implements of its implement classes; written-off units and stationary equipment are refused.
+
+        - `created_by_id` is set to the token owner automatically.
+
+        - Status flow: `draft` → `confirm` → `planned` → `start` → `in_progress` → `complete` → `done`; `revert` moves `in_progress` or `done` back to `planned`; `reopen` moves `done` back to `in_progress`; `cancel` works from any status except `cancelled`.
+
+
+        ### Additional actions
+
+        #### `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/confirm
+
+        Moves a `draft` task to `planned`.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+
+        #### `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/start
+
+        Moves a `planned` task to `in_progress`.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+
+        #### `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/complete
+
+        Moves an `in_progress` task to `done`. `actual_start_at` and `actual_finish_at` are optional.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+
+        #### `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/revert
+
+        Moves an `in_progress` or `done` task back to `planned`.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+
+        #### `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/cancel
+
+        Cancels the task. `cancel_reason` is optional.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+
+        #### `POST` {{baseUrl}}/api/{{apiVersion}}/machine_tasks/ID/reopen
+
+        Moves a `done` task back to `in_progress` so more shifts can be recorded; `reopen_reason` is required and `reopened_by_id` is set to the token owner. Reopening is a right of its own: a `user` role gets it only through the `reopen` permission on operations.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+
+        ---
+
+        ### Request Format
+
+        - **Method**: GET
+
+        - **URL**: {{baseUrl}}/api/{{apiVersion}}/machine_tasks
+
+
+        ### Response Structure
+
+        The response will contain a JSON object with the following structure:
+
+        - **data**: An array of machine task objects, where each object contains:
+
+            - **id**: VelHerd ID of the Operation the task is.
+
+            - **name**: Name of MachineTask; filled in from the work type when empty.
+
+            - **work_type_id**: ID of WorkType of the `agro` category, the same as the basis has (`/work_types`).
+
+            - **season_id**: ID of Season, the same as the basis has (`/seasons`).
+
+            - **status**: Status of MachineTask. Can be one of `draft`, `planned`, `in_progress`, `done`, `cancelled`.
+
+            - **timeliness**: Was it done on time, set by the system. Can be one of `early`, `on_time`, `late`.
+
+            - **planned_start_at**: Planned start (date and time, ISO 8601).
+
+            - **planned_finish_at**: Planned finish (date and time, ISO 8601).
+
+            - **actual_start_at**: Actual start, set by the events (date and time, ISO 8601).
+
+            - **actual_finish_at**: Actual finish, set by the events (date and time, ISO 8601).
+
+            - **planned_cost**: Planned cost.
+
+            - **actual_cost**: Actual cost.
+
+            - **currency**: Currency. Can be one of `usd`, `eur`, `uah`, `gbp`.
+
+            - **work_number**: Number of the work.
+
+            - **accounting_code**: Accounting code.
+
+            - **data_source**: Where the data came from.
+
+            - **created_by_id**: ID of the VelHerd user who created the record (the token owner).
+
+            - **confirmed_by_id**: ID of the VelHerd user who confirmed it.
+
+            - **confirmed_at**: When it was confirmed (date and time, ISO 8601).
+
+            - **cancelled_by_id**: ID of the VelHerd user who cancelled it.
+
+            - **cancelled_at**: When it was cancelled (date and time, ISO 8601).
+
+            - **cancel_reason**: Reason of the cancellation.
+
+            - **reopened_by_id**: ID of the VelHerd user who reopened it.
+
+            - **reopened_at**: When it was reopened (date and time, ISO 8601).
+
+            - **reopen_reason**: Reason of the reopening.
+
+            - **external_id**: An optional identifier used to reference this resource in an external system.
+
+            - **description**: Description of MachineTask.
+
+            - **created_at**: Created time
+
+            - **updated_at**: Updated time
+
+            - **machine_task**: The machine, the implements and the basis of the task (object), see below.
+
+                - `id` — the ID a shift refers to as `machine_task_id`
+
+                - `machine_id` — the machine (`/machines`)
+
+                - `machinery_aggregate_id` — the aggregate whose norms the task is counted by (`/machinery_aggregates`)
+
+                - `agro_plan_id` — the plan the task serves (`/agro_plans`), or empty
+
+                - `equipment_ids` — array of hitched implements (`/equipments`)
+
+                - `agro_operation_ids` — array of agro operations of the basis when the task serves a list, empty with a plan
+
+                - `external_id`, `description`
+
+
+        - **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.
+
+
+        ### Example Response
+
+        ``` json
+        {
+            "data": [
+                {
+                    "id": "41",
+                    "type": "machine_task",
+                    "attributes": {
+                        "id": 41,
+                        "name": "Sowing — John Deere 8R 370",
+                        "work_type_id": 4,
+                        "season_id": 2,
+                        "status": "in_progress",
+                        "timeliness": null,
+                        "planned_start_at": "2026-04-10T07:00:00.000+03:00",
+                        "planned_finish_at": "2026-04-12T19:00:00.000+03:00",
+                        "actual_start_at": "2026-04-10T07:30:00.000+03:00",
+                        "actual_finish_at": null,
+                        "planned_cost": null,
+                        "actual_cost": null,
+                        "currency": null,
+                        "work_number": null,
+                        "accounting_code": null,
+                        "data_source": "manual",
+                        "created_by_id": 2,
+                        "confirmed_by_id": 2,
+                        "confirmed_at": "2026-04-01T09:00:00.000+03:00",
+                        "cancelled_by_id": null,
+                        "cancelled_at": null,
+                        "cancel_reason": null,
+                        "reopened_by_id": null,
+                        "reopened_at": null,
+                        "reopen_reason": null,
+                        "external_id": null,
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00",
+                        "machine_task": {
+                            "id": 9,
+                            "machine_id": 1,
+                            "machinery_aggregate_id": 1,
+                            "agro_plan_id": 5,
+                            "external_id": null,
+                            "description": null,
+                            "equipment_ids": [
+                                1
+                            ],
+                            "agro_operation_ids": []
+                        }
+                    }
+                }
+            ],
+            "meta": {
+                "page": 1,
+                "per_page": 100,
+                "total_count": 1,
+                "total_pages": 1
+            }
+        }
+
+         ```
+
+        This response provides a structured overview of the machine tasks, enabling clients to easily access and utilize the information.
+    get:
+      summary: get_machine_tasks
+      tags:
+        - API endpoints
+        - Machine Tasks
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_machine_task
+      tags:
+        - API endpoints
+        - Machine Tasks
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    work_type_id:
+                      type: integer
+                    season_id:
+                      type: integer
+                    planned_start_at:
+                      type: string
+                    planned_finish_at:
+                      type: string
+                    machine_task_attributes:
+                      type: object
+                      properties:
+                        machine_id:
+                          type: integer
+                        equipment_ids:
+                          type: array
+                          items:
+                            type: integer
+                        machinery_aggregate_id:
+                          type: integer
+                        agro_plan_id:
+                          type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_tasks/ids:
+    get:
+      summary: get_machine_task_ids
+      tags:
+        - API endpoints
+        - Machine Tasks
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_tasks/1:
+    get:
+      summary: get_machine_task
+      tags:
+        - API endpoints
+        - Machine Tasks
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    put:
+      summary: update_machine_task
+      tags:
+        - API endpoints
+        - Machine Tasks
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    planned_finish_at:
+                      type: string
+                    machine_task_attributes:
+                      type: object
+                      properties:
+                        equipment_ids:
+                          type: array
+                          items:
+                            type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_tasks/1/confirm:
+    post:
+      summary: confirm_machine_task
+      tags:
+        - API endpoints
+        - Machine Tasks
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: |-
+        Moves a `draft` task to `planned`.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_tasks/1/start:
+    post:
+      summary: start_machine_task
+      tags:
+        - API endpoints
+        - Machine Tasks
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: |-
+        Moves a `planned` task to `in_progress`.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_tasks/1/complete:
+    post:
+      summary: complete_machine_task
+      tags:
+        - API endpoints
+        - Machine Tasks
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: |-
+        Moves an `in_progress` task to `done`. `actual_start_at` and `actual_finish_at` are optional.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    actual_start_at:
+                      type: string
+                    actual_finish_at:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_tasks/1/revert:
+    post:
+      summary: revert_machine_task
+      tags:
+        - API endpoints
+        - Machine Tasks
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: |-
+        Moves an `in_progress` or `done` task back to `planned`.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_tasks/1/cancel:
+    post:
+      summary: cancel_machine_task
+      tags:
+        - API endpoints
+        - Machine Tasks
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: |-
+        Cancels the task. `cancel_reason` is optional.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    cancel_reason:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_tasks/1/reopen:
+    post:
+      summary: reopen_machine_task
+      tags:
+        - API endpoints
+        - Machine Tasks
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: |-
+        Moves a `done` task back to `in_progress` so more shifts can be recorded; `reopen_reason` is required and `reopened_by_id` is set to the token owner. Reopening is a right of its own: a `user` role gets it only through the `reopen` permission on operations.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    reopen_reason:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_tasks/3:
+    delete:
+      summary: destroy_machine_task
+      tags:
+        - API endpoints
+        - Machine Tasks
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_task_shifts:
+    head:
+      summary: introduction MachineTaskShift
+      tags:
+        - API endpoints
+        - Machine Task Shifts
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: |-
+        ## API Endpoint: Machine Task Shifts
+
+        ### Purpose
+
+        This endpoint manages the shifts of machine tasks — a driver's spell on the machine with what it did on each agro operation of the basis. The works of a shift are the facts: the agro operation takes the sum of them as its actual area and actual quantities, recounted by the system on every save and delete.
+
+        ---
+
+        ### MachineTaskShift has next parameters
+
+        - (readonly) `id` — VelHerd ID of MachineTaskShift
+
+        - (create only) `machine_task_id` — ID of the task detail — `machine_task.id` from `/machine_tasks`, not the operation ID
+
+        - `driver_id` — ID of Employee who drove (`/employees`)
+
+        - `started_at` — start of the shift
+
+        - `finished_at` — end of the shift, not later than now
+
+        - `engine_hours_start` — engine hours counter at the start
+
+        - `engine_hours_end` — engine hours counter at the end, not lower than at the start
+
+        - `fuel_quantity` — fuel used, in the base volume unit
+
+        - `external_id` — an optional identifier used to reference this resource in an external system
+
+        - `description` — description of MachineTaskShift
+
+        - (readonly) `created_at`
+
+        - (readonly) `updated_at`
+
+        - `shift_works` — array of what the shift did on each agro operation, see below
+
+
+        ### Required on create
+
+        `finished_at`, `machine_task_id`, `started_at`
+
+        ### Acceptable methods
+
+        - `Ids`
+
+        - `Single Resource`
+
+        - `Create Resource`
+
+        - `Update Resource`
+
+        - `Delete Resource`
+
+
+        ### Filters by
+
+        `id`, `machine_task_id`, `driver_id`, `external_id`
+
+        ### Order by
+
+        `id`, `started_at`
+
+        ### Important
+
+        - `worked_area`, `fuel_quantity` and the applied `quantity` are taken and returned in **base units** (the unit with `is_base` = `true` for its unit type, see `/units`), not in the units the user picked in the web interface.
+
+        - Reading needs the right to see operations; creating, changing and deleting a shift need the right to update operations — a shift is part of its task, so a manager may delete one though a manager may not delete a work.
+
+        - A shift is recorded only on a `planned` or `in_progress` task, and only on agro operations of the task's basis that are `planned` or `in_progress`; a closed agro operation keeps its facts until reopened.
+
+        - `machine_task_id` is set on create only and is ignored on update.
+
+        - Works are sent in `shift_works_attributes`, the resources a work applied in `shift_work_applications_attributes` inside it: a row without `id` is added, a row with `id` is changed, a row with `id` and `"_destroy": true` is removed. Rows that are not sent stay as they are. A resource may be reported only on a work type that takes applications.
+
+        - A delete the task or an agro operation refuses answers `422` with `errors` instead of `204`.
+
+
+        ---
+
+        ### Request Format
+
+        - **Method**: GET
+
+        - **URL**: {{baseUrl}}/api/{{apiVersion}}/machine_task_shifts
+
+
+        ### Response Structure
+
+        The response will contain a JSON object with the following structure:
+
+        - **data**: An array of machine task shift objects, where each object contains:
+
+            - **id**: VelHerd ID of MachineTaskShift.
+
+            - **machine_task_id**: ID of the task detail — `machine_task.id` from `/machine_tasks`, not the operation ID.
+
+            - **driver_id**: ID of Employee who drove (`/employees`).
+
+            - **started_at**: Start of the shift (date and time, ISO 8601).
+
+            - **finished_at**: End of the shift, not later than now (date and time, ISO 8601).
+
+            - **engine_hours_start**: Engine hours counter at the start.
+
+            - **engine_hours_end**: Engine hours counter at the end, not lower than at the start.
+
+            - **fuel_quantity**: Fuel used, in the base volume unit.
+
+            - **external_id**: An optional identifier used to reference this resource in an external system.
+
+            - **description**: Description of MachineTaskShift.
+
+            - **created_at**: Created time
+
+            - **updated_at**: Updated time
+
+            - **shift_works**: Array of what the shift did on each agro operation, see below.
+
+                - `id`
+
+                - `agro_operation_id` — the agro operation of the basis (`agro_operation.id` from `/operations`)
+
+                - `worked_area` — area worked on it, base area unit
+
+                - `external_id`, `description`
+
+                - `shift_work_applications` — array of resources applied on it: `id`, `resource_id` (`/resources`), `quantity` in the base unit of the resource, `external_id`, `description`
+
+
+        - **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.
+
+
+        ### Example Response
+
+        ``` json
+        {
+            "data": [
+                {
+                    "id": "3",
+                    "type": "machine_task_shift",
+                    "attributes": {
+                        "id": 3,
+                        "machine_task_id": 9,
+                        "driver_id": 3,
+                        "started_at": "2026-04-10T07:30:00.000+03:00",
+                        "finished_at": "2026-04-10T17:00:00.000+03:00",
+                        "engine_hours_start": "1250.5",
+                        "engine_hours_end": "1259.5",
+                        "fuel_quantity": "180.0",
+                        "external_id": null,
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00",
+                        "shift_works": [
+                            {
+                                "id": 12,
+                                "agro_operation_id": 41,
+                                "worked_area": "420000.0",
+                                "external_id": null,
+                                "description": null,
+                                "shift_work_applications": [
+                                    {
+                                        "id": 4,
+                                        "resource_id": 15,
+                                        "quantity": "2100.0",
+                                        "external_id": null,
+                                        "description": null
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "meta": {
+                "page": 1,
+                "per_page": 100,
+                "total_count": 1,
+                "total_pages": 1
+            }
+        }
+
+         ```
+
+        This response provides a structured overview of the machine task shifts, enabling clients to easily access and utilize the information.
+    get:
+      summary: get_machine_task_shifts
+      tags:
+        - API endpoints
+        - Machine Task Shifts
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_machine_task_shift
+      tags:
+        - API endpoints
+        - Machine Task Shifts
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    machine_task_id:
+                      type: integer
+                    driver_id:
+                      type: integer
+                    started_at:
+                      type: string
+                    finished_at:
+                      type: string
+                    engine_hours_start:
+                      type: number
+                    engine_hours_end:
+                      type: number
+                    fuel_quantity:
+                      type: integer
+                    shift_works_attributes:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          agro_operation_id:
+                            type: integer
+                          worked_area:
+                            type: integer
+                          shift_work_applications_attributes:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                resource_id:
+                                  type: integer
+                                quantity:
+                                  type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_task_shifts/ids:
+    get:
+      summary: get_machine_task_shift_ids
+      tags:
+        - API endpoints
+        - Machine Task Shifts
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_task_shifts/1:
+    get:
+      summary: get_machine_task_shift
+      tags:
+        - API endpoints
+        - Machine Task Shifts
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    put:
+      summary: update_machine_task_shift
+      tags:
+        - API endpoints
+        - Machine Task Shifts
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    fuel_quantity:
+                      type: integer
+                    shift_works_attributes:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          worked_area:
+                            type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machine_task_shifts/3:
+    delete:
+      summary: destroy_machine_task_shift
+      tags:
+        - API endpoints
+        - Machine Task Shifts
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/tech_maps:
+    head:
+      summary: introduction TechMap
+      tags:
+        - API endpoints
+        - Tech Maps
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: |-
+        ## API Endpoint: Tech Maps
+
+        ### Purpose
+
+        This endpoint manages tech maps — how a crop is grown: the ordered works with their machinery norms and recipes, independent of the season. The rows live in `/tech_map_rows`. A map without a crop is a library map: a source of rows for other maps, never deployed itself.
+
+        ---
+
+        ### TechMap has next parameters
+
+        - (readonly) `id` — VelHerd ID of TechMap
+
+        - `name` — name of TechMap, unique for the crop and the predecessor
+
+        - `crop_id` — ID of Crop the map grows (`/crops`); empty for a library map
+
+        - `predecessor_crop_id` — ID of Crop the map follows (`/crops`), not the crop itself
+
+        - (readonly) `status` — status of TechMap
+
+        - (readonly) `approved_by_id` — ID of the VelHerd user who approved it
+
+        - (readonly) `approved_at` — when it was approved
+
+        - `planned_area` — default crop area the map is read for, base area unit
+
+        - `fuel_resource_id` — ID of Resource of the `fuel` category the map is priced by (`/resources`)
+
+        - `external_id` — an optional identifier used to reference this resource in an external system
+
+        - `description` — description of TechMap
+
+        - (readonly) `created_at`
+
+        - (readonly) `updated_at`
+
+
+        ### Required on create
+
+        `name`
+
+        ### Acceptable methods
+
+        - `Ids`
+
+        - `Single Resource`
+
+        - `Create Resource`
+
+        - `Update Resource`
+
+        - `Delete Resource`
+
+        - `approve` — `POST` {{baseUrl}}/api/{{apiVersion}}/tech_maps/ID/approve
+
+        - `archive` — `POST` {{baseUrl}}/api/{{apiVersion}}/tech_maps/ID/archive
+
+        - `compose` — `POST` {{baseUrl}}/api/{{apiVersion}}/tech_maps/ID/compose
+
+
+        ### Filters by
+
+        `id`, `name`, `crop_id`, `predecessor_crop_id`, `status`, `external_id`
+
+        ### Order by
+
+        `id`, `name`
+
+        ### Important
+
+        - `planned_area` are taken and returned in **base units** (the unit with `is_base` = `true` for its unit type, see `/units`), not in the units the user picked in the web interface.
+
+        - The status cannot be changed through `update`; a new map is `draft` and moves only by `approve` and `archive`.
+
+        - Deleting a map deletes its rows.
+
+
+        ### Additional actions
+
+        #### `POST` {{baseUrl}}/api/{{apiVersion}}/tech_maps/ID/approve
+
+        Moves the map to `approved`; `approved_by_id` is set to the token owner. Only an approved map of a crop may give birth to agro plans.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+
+        #### `POST` {{baseUrl}}/api/{{apiVersion}}/tech_maps/ID/archive
+
+        Moves the map to `archived`.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+
+        #### `POST` {{baseUrl}}/api/{{apiVersion}}/tech_maps/ID/compose
+
+        Copies every row of another map (typically a library map of shared works) into this one, with recipes and norms; the copies drop the `base` flag and remember the source map in `source_tech_map_id`. All or nothing: a row that cannot be copied stops the whole copy.
+
+        Response: `200 OK` with the map in the same format as **Single Resource** and `meta.rows_count` — how many rows were added. A map copied into itself or a row that cannot be copied returns `422` with `errors`.
+
+        ---
+
+        ### Request Format
+
+        - **Method**: GET
+
+        - **URL**: {{baseUrl}}/api/{{apiVersion}}/tech_maps
+
+
+        ### Response Structure
+
+        The response will contain a JSON object with the following structure:
+
+        - **data**: An array of tech map objects, where each object contains:
+
+            - **id**: VelHerd ID of TechMap.
+
+            - **name**: Name of TechMap, unique for the crop and the predecessor.
+
+            - **crop_id**: ID of Crop the map grows (`/crops`); empty for a library map.
+
+            - **predecessor_crop_id**: ID of Crop the map follows (`/crops`), not the crop itself.
+
+            - **status**: Status of TechMap. Can be one of `draft`, `approved`, `archived`.
+
+            - **approved_by_id**: ID of the VelHerd user who approved it.
+
+            - **approved_at**: When it was approved (date and time, ISO 8601).
+
+            - **planned_area**: Default crop area the map is read for, base area unit.
+
+            - **fuel_resource_id**: ID of Resource of the `fuel` category the map is priced by (`/resources`).
+
+            - **external_id**: An optional identifier used to reference this resource in an external system.
+
+            - **description**: Description of TechMap.
+
+            - **created_at**: Created time
+
+            - **updated_at**: Updated time
+
+
+        - **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.
+
+
+        ### Example Response
+
+        ``` json
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "tech_map",
+                    "attributes": {
+                        "id": 1,
+                        "name": "Winter wheat after sunflower",
+                        "crop_id": 3,
+                        "predecessor_crop_id": 5,
+                        "status": "approved",
+                        "approved_by_id": 2,
+                        "approved_at": "2026-02-10T11:20:00.000+02:00",
+                        "planned_area": "1200000.0",
+                        "fuel_resource_id": 12,
+                        "external_id": null,
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00"
+                    }
+                },
+                {
+                    "id": "7",
+                    "type": "tech_map",
+                    "attributes": {
+                        "id": 7,
+                        "name": "Shared autumn works",
+                        "crop_id": null,
+                        "predecessor_crop_id": null,
+                        "status": "draft",
+                        "approved_by_id": null,
+                        "approved_at": null,
+                        "planned_area": null,
+                        "fuel_resource_id": null,
+                        "external_id": "LIB-01",
+                        "description": "Library map",
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00"
+                    }
+                }
+            ],
+            "meta": {
+                "page": 1,
+                "per_page": 100,
+                "total_count": 2,
+                "total_pages": 1
+            }
+        }
+
+         ```
+
+        This response provides a structured overview of the tech maps, enabling clients to easily access and utilize the information.
+    get:
+      summary: get_tech_maps
+      tags:
+        - API endpoints
+        - Tech Maps
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_tech_map
+      tags:
+        - API endpoints
+        - Tech Maps
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    crop_id:
+                      type: integer
+                    predecessor_crop_id:
+                      type: integer
+                    planned_area:
+                      type: integer
+                    fuel_resource_id:
+                      type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/tech_maps/ids:
+    get:
+      summary: get_tech_map_ids
+      tags:
+        - API endpoints
+        - Tech Maps
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/tech_maps/1:
+    get:
+      summary: get_tech_map
+      tags:
+        - API endpoints
+        - Tech Maps
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    put:
+      summary: update_tech_map
+      tags:
+        - API endpoints
+        - Tech Maps
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    planned_area:
+                      type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/tech_maps/1/approve:
+    post:
+      summary: approve_tech_map
+      tags:
+        - API endpoints
+        - Tech Maps
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: |-
+        Moves the map to `approved`; `approved_by_id` is set to the token owner. Only an approved map of a crop may give birth to agro plans.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/tech_maps/1/archive:
+    post:
+      summary: archive_tech_map
+      tags:
+        - API endpoints
+        - Tech Maps
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: |-
+        Moves the map to `archived`.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/tech_maps/1/compose:
+    post:
+      summary: compose_tech_map
+      tags:
+        - API endpoints
+        - Tech Maps
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: |-
+        Copies every row of another map (typically a library map of shared works) into this one, with recipes and norms; the copies drop the `base` flag and remember the source map in `source_tech_map_id`. All or nothing: a row that cannot be copied stops the whole copy.
+
+        Response: `200 OK` with the map in the same format as **Single Resource** and `meta.rows_count` — how many rows were added. A map copied into itself or a row that cannot be copied returns `422` with `errors`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    source_tech_map_id:
+                      type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/tech_maps/3:
+    delete:
+      summary: destroy_tech_map
+      tags:
+        - API endpoints
+        - Tech Maps
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/tech_map_rows:
+    head:
+      summary: introduction TechMapRow
+      tags:
+        - API endpoints
+        - Tech Map Rows
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: |-
+        ## API Endpoint: Tech Map Rows
+
+        ### Purpose
+
+        This endpoint manages the rows of tech maps — one work of a map: a snapshot of a template's recipe and of an aggregate's norms, plus what only the map knows: the share of the crop area and the timing relative to the base work. Copies, not references: editing the handbook never rewrites a map somebody has already costed.
+
+        ---
+
+        ### TechMapRow has next parameters
+
+        - (readonly) `id` — VelHerd ID of TechMapRow
+
+        - (create only) `tech_map_id` — ID of TechMap (`/tech_maps`)
+
+        - (readonly) `position` — order of the row in the map; a new row is appended, `move` changes it
+
+        - `name` — name of TechMapRow
+
+        - `work_type_id` — ID of WorkType of the `agro` category (`/work_types`)
+
+        - (readonly) `source_template_id` — ID of AgroOperationTemplate the recipe was taken from (`/agro_operation_templates`)
+
+        - (readonly) `source_tech_map_id` — ID of TechMap the row was composed from (`/tech_maps`)
+
+        - `machinery_aggregate_id` — ID of MachineryAggregate of the same work type (`/machinery_aggregates`); sent alone, it fills the norms below
+
+        - `output_rate` — output norm, units of the rate basis per shift
+
+        - `fuel_rate` — fuel norm, litres per unit of the rate basis
+
+        - `shift_hours` — hours in a shift
+
+        - `operators_count` — operators per shift
+
+        - `auxiliary_workers_count` — auxiliary workers per shift
+
+        - `area_share` — share of the crop area the work covers, percent, `100` by default
+
+        - `base` — is this the base work (sowing) the timing of the others counts from; one per map
+
+        - `day_offset` — days from the base work, negative before it; dropped for the base row
+
+        - `duration_days` — how many days the work takes, `10` by default
+
+        - `planned_spray_rate` — spray rate of the recipe, base volume unit; required with tank-mix positions
+
+        - `external_id` — an optional identifier used to reference this resource in an external system
+
+        - `description` — description of TechMapRow
+
+        - (readonly) `created_at`
+
+        - (readonly) `updated_at`
+
+        - `tech_map_row_applications` — array of recipe positions, see below
+
+
+        ### Required on create
+
+        `name`, `tech_map_id`, `work_type_id`
+
+        ### Acceptable methods
+
+        - `Ids`
+
+        - `Single Resource`
+
+        - `Create Resource`
+
+        - `Update Resource`
+
+        - `Delete Resource`
+
+        - `refresh` — `POST` {{baseUrl}}/api/{{apiVersion}}/tech_map_rows/ID/refresh
+
+        - `move` — `POST` {{baseUrl}}/api/{{apiVersion}}/tech_map_rows/ID/move
+
+
+        ### Filters by
+
+        `id`, `tech_map_id`, `work_type_id`, `machinery_aggregate_id`, `source_template_id`, `base`, `external_id`
+
+        ### Order by
+
+        `id`, `position`
+
+        ### Important
+
+        - `output_rate` and `fuel_rate` are taken and returned in the **planning unit of the work type's rate basis** exactly as stored (hectares, tonnes, kilometres…): `output_rate` is units per shift, `fuel_rate` is litres per unit. They are not converted to the units the user picked in the web interface. `planned_spray_rate` and `planned_quantity` are taken and returned in **base units** (the unit with `is_base` = `true` for its unit type, see `/units`), not in the units the user picked in the web interface.
+
+        - A row may be snapshotted from a template: send `template_id` with `tech_map_id` on create, and the template's name, work type, spray rate and recipe come first, the other attributes sent go on top. Later edits of the template do not touch the row; `refresh` re-takes the snapshot.
+
+        - Recipe positions are sent in `tech_map_row_applications_attributes`: a row without `id` is added, a row with `id` is changed, a row with `id` and `"_destroy": true` is removed. Rows that are not sent stay as they are. Positions are numbered in the order they are sent; `application_basis` is `per_area` or `per_solution`, and `per_solution` needs `in_tank_mix`. A recipe needs a work type that takes applications.
+
+        - `tech_map_id` is set on create only and is ignored on update; `position` is the map's own and moves only by `move`. Deleting a row renumbers the rest.
+
+
+        ### Additional actions
+
+        #### `POST` {{baseUrl}}/api/{{apiVersion}}/tech_map_rows/ID/refresh
+
+        Re-takes the snapshot from the sources: the recipe and the spray rate from `source_template_id`, the norms from `machinery_aggregate_id`. The name, the area share and the timing are left alone. A row without a source returns `422`.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+
+        #### `POST` {{baseUrl}}/api/{{apiVersion}}/tech_map_rows/ID/move
+
+        Swaps places with the neighbour above (`direction` = `up`) or below (`down`); a row already at the edge stays put.
+
+        Response: `200 OK` with the row in the same format as **Single Resource**.
+
+        ---
+
+        ### Request Format
+
+        - **Method**: GET
+
+        - **URL**: {{baseUrl}}/api/{{apiVersion}}/tech_map_rows
+
+
+        ### Response Structure
+
+        The response will contain a JSON object with the following structure:
+
+        - **data**: An array of tech map row objects, where each object contains:
+
+            - **id**: VelHerd ID of TechMapRow.
+
+            - **tech_map_id**: ID of TechMap (`/tech_maps`).
+
+            - **position**: Order of the row in the map; a new row is appended, `move` changes it.
+
+            - **name**: Name of TechMapRow.
+
+            - **work_type_id**: ID of WorkType of the `agro` category (`/work_types`).
+
+            - **source_template_id**: ID of AgroOperationTemplate the recipe was taken from (`/agro_operation_templates`).
+
+            - **source_tech_map_id**: ID of TechMap the row was composed from (`/tech_maps`).
+
+            - **machinery_aggregate_id**: ID of MachineryAggregate of the same work type (`/machinery_aggregates`); sent alone, it fills the norms below.
+
+            - **output_rate**: Output norm, units of the rate basis per shift.
+
+            - **fuel_rate**: Fuel norm, litres per unit of the rate basis.
+
+            - **shift_hours**: Hours in a shift.
+
+            - **operators_count**: Operators per shift.
+
+            - **auxiliary_workers_count**: Auxiliary workers per shift.
+
+            - **area_share**: Share of the crop area the work covers, percent, `100` by default.
+
+            - **base**: Is this the base work (sowing) the timing of the others counts from; one per map.
+
+            - **day_offset**: Days from the base work, negative before it; dropped for the base row.
+
+            - **duration_days**: How many days the work takes, `10` by default.
+
+            - **planned_spray_rate**: Spray rate of the recipe, base volume unit; required with tank-mix positions.
+
+            - **external_id**: An optional identifier used to reference this resource in an external system.
+
+            - **description**: Description of TechMapRow.
+
+            - **created_at**: Created time
+
+            - **updated_at**: Updated time
+
+            - **tech_map_row_applications**: Array of recipe positions, see below.
+
+                - `id`
+
+                - `resource_id` — applied resource (`/resources`)
+
+                - `application_basis` — `per_area` or `per_solution`
+
+                - `in_tank_mix` — is it part of a tank mix
+
+                - `planned_quantity` — in base units, on the reference area of 10 ha
+
+                - `position` — order in the recipe, numbered by the system
+
+                - `external_id`, `description`
+
+
+        - **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.
+
+
+        ### Example Response
+
+        ``` json
+        {
+            "data": [
+                {
+                    "id": "11",
+                    "type": "tech_map_row",
+                    "attributes": {
+                        "id": 11,
+                        "tech_map_id": 1,
+                        "position": 2,
+                        "name": "Pre-sowing cultivation",
+                        "work_type_id": 4,
+                        "source_template_id": null,
+                        "source_tech_map_id": null,
+                        "machinery_aggregate_id": 1,
+                        "output_rate": "60.0",
+                        "fuel_rate": "4.5",
+                        "shift_hours": "10.0",
+                        "operators_count": 1,
+                        "auxiliary_workers_count": 1,
+                        "area_share": "100.0",
+                        "base": false,
+                        "day_offset": -3,
+                        "duration_days": 5,
+                        "planned_spray_rate": "0.2",
+                        "external_id": null,
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00",
+                        "tech_map_row_applications": [
+                            {
+                                "id": 21,
+                                "resource_id": 15,
+                                "application_basis": "per_area",
+                                "in_tank_mix": true,
+                                "planned_quantity": "5.0",
+                                "position": 1,
+                                "external_id": null,
+                                "description": null
+                            }
+                        ]
+                    }
+                }
+            ],
+            "meta": {
+                "page": 1,
+                "per_page": 100,
+                "total_count": 1,
+                "total_pages": 1
+            }
+        }
+
+         ```
+
+        This response provides a structured overview of the tech map rows, enabling clients to easily access and utilize the information.
+    get:
+      summary: get_tech_map_rows
+      tags:
+        - API endpoints
+        - Tech Map Rows
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_tech_map_row
+      tags:
+        - API endpoints
+        - Tech Map Rows
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    tech_map_id:
+                      type: integer
+                    name:
+                      type: string
+                    work_type_id:
+                      type: integer
+                    machinery_aggregate_id:
+                      type: integer
+                    area_share:
+                      type: integer
+                    day_offset:
+                      type: integer
+                    duration_days:
+                      type: integer
+                    planned_spray_rate:
+                      type: number
+                    tech_map_row_applications_attributes:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          resource_id:
+                            type: integer
+                          application_basis:
+                            type: string
+                          in_tank_mix:
+                            type: boolean
+                          planned_quantity:
+                            type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/tech_map_rows/ids:
+    get:
+      summary: get_tech_map_row_ids
+      tags:
+        - API endpoints
+        - Tech Map Rows
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/tech_map_rows/1:
+    get:
+      summary: get_tech_map_row
+      tags:
+        - API endpoints
+        - Tech Map Rows
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    put:
+      summary: update_tech_map_row
+      tags:
+        - API endpoints
+        - Tech Map Rows
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    area_share:
+                      type: integer
+                    tech_map_row_applications_attributes:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          planned_quantity:
+                            type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/tech_map_rows/1/refresh:
+    post:
+      summary: refresh_tech_map_row
+      tags:
+        - API endpoints
+        - Tech Map Rows
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: |-
+        Re-takes the snapshot from the sources: the recipe and the spray rate from `source_template_id`, the norms from `machinery_aggregate_id`. The name, the area share and the timing are left alone. A row without a source returns `422`.
+
+        Response: `200 OK` with the updated record in the same format as **Single Resource**. An action that is not allowed from the current status returns `422` with `errors`.
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/tech_map_rows/1/move:
+    post:
+      summary: move_tech_map_row
+      tags:
+        - API endpoints
+        - Tech Map Rows
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: |-
+        Swaps places with the neighbour above (`direction` = `up`) or below (`down`); a row already at the edge stays put.
+
+        Response: `200 OK` with the row in the same format as **Single Resource**.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    direction:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/tech_map_rows/3:
+    delete:
+      summary: destroy_tech_map_row
+      tags:
+        - API endpoints
+        - Tech Map Rows
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/resource_prices:
+    head:
+      summary: introduction ResourcePrice
+      tags:
+        - API endpoints
+        - Resource Prices
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: |-
+        ## API Endpoint: Resource Prices
+
+        ### Purpose
+
+        This endpoint manages resource prices — the planning price of a resource for one season. Maps and plans keep norms only; this is where the money lives, one price per resource and season.
+
+        ---
+
+        ### ResourcePrice has next parameters
+
+        - (readonly) `id` — VelHerd ID of ResourcePrice
+
+        - `resource_id` — ID of Resource (`/resources`)
+
+        - `season_id` — ID of Season (`/seasons`)
+
+        - `unit_price` — price of one unit of the resource in its own unit
+
+        - `currency` — currency, `uah` by default
+
+        - `external_id` — an optional identifier used to reference this resource in an external system
+
+        - `description` — description of ResourcePrice
+
+        - (readonly) `created_at`
+
+        - (readonly) `updated_at`
+
+
+        ### Required on create
+
+        `resource_id`, `season_id`, `unit_price`
+
+        ### Acceptable methods
+
+        - `Ids`
+
+        - `Single Resource`
+
+        - `Create Resource`
+
+        - `Update Resource`
+
+        - `Delete Resource`
+
+        - `copy` — `POST` {{baseUrl}}/api/{{apiVersion}}/resource_prices/copy
+
+
+        ### Filters by
+
+        `id`, `resource_id`, `season_id`, `currency`, `external_id`
+
+        ### Order by
+
+        `id`, `unit_price`
+
+        ### Important
+
+        - One price per resource and season: a second one is refused with `422`.
+
+
+        ### Additional actions
+
+        #### `POST` {{baseUrl}}/api/{{apiVersion}}/resource_prices/copy
+
+        Fills the empty cells of the price list of `season_id` from `source_season_id`, every price raised by `index_percent` percent (optional, `0` by default). Only resources without a price in the target season are copied: a price somebody already typed stays. Needs the right to create resource prices.
+
+        Response: `200 OK` with `meta.created_count` — how many prices were created. A season named as its own source returns `422` with `errors`; an unknown season `404`.
+
+        ---
+
+        ### Request Format
+
+        - **Method**: GET
+
+        - **URL**: {{baseUrl}}/api/{{apiVersion}}/resource_prices
+
+
+        ### Response Structure
+
+        The response will contain a JSON object with the following structure:
+
+        - **data**: An array of resource price objects, where each object contains:
+
+            - **id**: VelHerd ID of ResourcePrice.
+
+            - **resource_id**: ID of Resource (`/resources`).
+
+            - **season_id**: ID of Season (`/seasons`).
+
+            - **unit_price**: Price of one unit of the resource in its own unit.
+
+            - **currency**: Currency. Can be one of `usd`, `eur`, `uah`, `gbp`.
+
+            - **external_id**: An optional identifier used to reference this resource in an external system.
+
+            - **description**: Description of ResourcePrice.
+
+            - **created_at**: Created time
+
+            - **updated_at**: Updated time
+
+
+        - **meta**: Pagination info — `page`, `per_page`, `total_count`, `total_pages`. Pass `page[number]` and `page[size]` (default 100, max 500) to get other pages.
+
+
+        ### Example Response
+
+        ``` json
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "type": "resource_price",
+                    "attributes": {
+                        "id": 1,
+                        "resource_id": 15,
+                        "season_id": 2,
+                        "unit_price": "1250.5",
+                        "currency": "uah",
+                        "external_id": null,
+                        "description": null,
+                        "created_at": "2026-03-02T09:14:27.512+02:00",
+                        "updated_at": "2026-03-02T09:14:27.512+02:00"
+                    }
+                }
+            ],
+            "meta": {
+                "page": 1,
+                "per_page": 100,
+                "total_count": 1,
+                "total_pages": 1
+            }
+        }
+
+         ```
+
+        This response provides a structured overview of the resource prices, enabling clients to easily access and utilize the information.
+    get:
+      summary: get_resource_prices
+      tags:
+        - API endpoints
+        - Resource Prices
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    post:
+      summary: create_resource_price
+      tags:
+        - API endpoints
+        - Resource Prices
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    resource_id:
+                      type: integer
+                    season_id:
+                      type: integer
+                    unit_price:
+                      type: number
+                    currency:
+                      type: string
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/resource_prices/ids:
+    get:
+      summary: get_resource_price_ids
+      tags:
+        - API endpoints
+        - Resource Prices
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/resource_prices/1:
+    get:
+      summary: get_resource_price
+      tags:
+        - API endpoints
+        - Resource Prices
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    put:
+      summary: update_resource_price
+      tags:
+        - API endpoints
+        - Resource Prices
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    unit_price:
+                      type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/resource_prices/copy:
+    post:
+      summary: copy_resource_prices
+      tags:
+        - API endpoints
+        - Resource Prices
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+      description: |-
+        Fills the empty cells of the price list of `season_id` from `source_season_id`, every price raised by `index_percent` percent (optional, `0` by default). Only resources without a price in the target season are copied: a price somebody already typed stays. Needs the right to create resource prices.
+
+        Response: `200 OK` with `meta.created_count` — how many prices were created. A season named as its own source returns `422` with `errors`; an unknown season `404`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    season_id:
+                      type: integer
+                    source_season_id:
+                      type: integer
+                    index_percent:
+                      type: integer
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/resource_prices/3:
+    delete:
+      summary: destroy_resource_price
+      tags:
+        - API endpoints
+        - Resource Prices
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses: {}
+    parameters:
+      - name: apiVersion
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/v1/machinery_schedule:
+    head:
+      summary: introduction MachinerySchedule
+      tags:
+        - API endpoints
+        - Machinery Schedule
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses: {}
+      description: |-
+        ## API Endpoint: Machinery Schedule
+
+        ### Purpose
+
+        This endpoint reads the machinery schedule of a season — how many machines and implements of each class the season's agro plans need day by day, against the units the fleet has. The schedule is computed from the plans, the tech maps and the fleet, never stored, so it is read only and has no records of its own: there is no `ids`, no single resource, no pagination.
+
+        ---
+
+        ### Request Format
+
+        - **Method**: GET
+
+        - **URL**: {{baseUrl}}/api/{{apiVersion}}/machinery_schedule?season_id=ID
+
+
+        `season_id` is required: without it the response is `422`, for an unknown season `404`.
+
+        ### Acceptable methods
+
+        - `Resources collection` only
+
+
+        ### Important
+
+        - Areas are returned in the **base area unit** (see `/units`), not in the unit the user picked in the web interface.
+
+        - A plan's shifts are spread evenly over the calendar days of its window; an aggregate is split into its classes, so two aggregates pulled by the same tractor class compete for it. The need of a class on a day is rounded up only after the works of the day are summed.
+
+        - A unit under repair still counts as available; only a written-off unit has left the yard.
+
+        - A plan the schedule cannot count stays in `works` with its `reason` instead of its shifts: `no_aggregate`, `no_area`, `basis_not_supported` (the work type is not counted per area), `norm_not_set`.
+
+        - Reading needs the `MachinerySchedule` permission (read), which a company role may grant without granting the fleet or the plans.
+
+
+        ### Response Structure
+
+        The response will contain a JSON object with the following structure:
+
+        - **season**: `id` and `name` of the season.
+
+        - **areaUnitLabel**: Symbol of the base area unit the areas are in.
+
+        - **decades**: The axis — every calendar decade (the 1st–10th, the 11th–20th and the 21st to the month's end) from the first busy day to the last, the empty ones included: `key` (ISO date of the first day), `number` (1–3), `startOn`, `endOn`.
+
+        - **lines**: One row per class of machines and implements the plans need, machines first: `key`, `kind` (`machine_type` or `equipment_type`), `name`, `available` (units in service), `peak` (most units needed on one day of the season), `deficit` (is any day short), `contractArea` (area no own unit can take over the season), `decades` — per decade `key`: `needed` (busiest day of the decade), `deficit` (units short on that day), `contractArea`.
+
+        - **bottlenecks**: The decades a class is short in: `key`, `className`, `available`, `needed`, `deficit`, `contractArea`, `startOn`, `endOn`.
+
+        - **works**: The plans the schedule is built from: `key`, `name`, `source` (`plan`, or `forecast` for a plan still expected from an approved tech map), `planId`, `reason` (why it is not counted, or empty), `techMapId`, `techMapName`, `farmUnitItemName`, `workTypeName`, `aggregateName`, `startOn`, `finishOn`, `area`, `shifts`.
+
+        - **summary**: `worksCount`, `forecastCount`, `gapsCount` (works with a `reason`), `deficitClassesCount`.
+
+
+        ### Example Response
+
+        ``` json
+        {
+            "season": {
+                "id": 2,
+                "name": "2026"
+            },
+            "areaUnitLabel": "m²",
+            "decades": [
+                {
+                    "key": "2026-04-11",
+                    "number": 2,
+                    "startOn": "2026-04-11",
+                    "endOn": "2026-04-20"
+                },
+                {
+                    "key": "2026-04-21",
+                    "number": 3,
+                    "startOn": "2026-04-21",
+                    "endOn": "2026-04-30"
+                }
+            ],
+            "lines": [
+                {
+                    "key": "machine_type-1",
+                    "kind": "machine_type",
+                    "name": "Tractor 1.4",
+                    "available": 1,
+                    "peak": 2,
+                    "deficit": true,
+                    "contractArea": "500000.0",
+                    "decades": {
+                        "2026-04-11": {
+                            "needed": 2,
+                            "deficit": 1,
+                            "contractArea": "500000.0"
+                        },
+                        "2026-04-21": {
+                            "needed": 1,
+                            "deficit": 0,
+                            "contractArea": "0.0"
+                        }
+                    }
+                },
+                {
+                    "key": "equipment_type-3",
+                    "kind": "equipment_type",
+                    "name": "Seeder 12 m",
+                    "available": 2,
+                    "peak": 2,
+                    "deficit": false,
+                    "contractArea": "0.0",
+                    "decades": {
+                        "2026-04-11": {
+                            "needed": 2,
+                            "deficit": 0,
+                            "contractArea": "0.0"
+                        },
+                        "2026-04-21": {
+                            "needed": 1,
+                            "deficit": 0,
+                            "contractArea": "0.0"
+                        }
+                    }
+                }
+            ],
+            "bottlenecks": [
+                {
+                    "key": "machine_type-1-2026-04-11",
+                    "className": "Tractor 1.4",
+                    "available": 1,
+                    "startOn": "2026-04-11",
+                    "endOn": "2026-04-20",
+                    "needed": 2,
+                    "deficit": 1,
+                    "contractArea": "500000.0"
+                }
+            ],
+            "works": [
+                {
+                    "key": 0,
+                    "name": "Sowing of winter wheat",
+                    "source": "plan",
+                    "planId": 5,
+                    "reason": null,
+                    "techMapId": 1,
+                    "techMapName": "Winter wheat after sunflower",
+                    "farmUnitItemName": "North",
+                    "workTypeName": "Sowing",
+                    "aggregateName": "Sowing unit 12 m",
+                    "startOn": "2026-04-20",
+                    "finishOn": "2026-04-21",
+                    "area": "1000000.0",
+                    "shifts": "4.0"
+                },
+                {
+                    "key": 1,
+                    "name": "Rolling",
+                    "source": "plan",
+                    "planId": 6,
+                    "reason": "no_aggregate",
+                    "techMapId": null,
+                    "techMapName": null,
+                    "farmUnitItemName": "North",
+                    "workTypeName": "Rolling",
+                    "aggregateName": null,
+                    "startOn": "2026-04-22",
+                    "finishOn": "2026-04-23",
+                    "area": "1000000.0",
+                    "shifts": null
+                }
+            ],
+            "summary": {
+                "worksCount": 2,
+                "forecastCount": 0,
+                "gapsCount": 1,
+                "deficitClassesCount": 1
+            }
+        }
+
+         ```
+
+        This response provides a structured overview of the machinery schedule, enabling clients to easily access and utilize the information.
+    get:
+      summary: get_machinery_schedule
+      tags:
+        - API endpoints
+        - Machinery Schedule
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+        - name: season_id
+          in: query
+          required: true
+          schema:
+            type: integer
+          example: 2
       responses: {}
     parameters:
       - name: apiVersion
